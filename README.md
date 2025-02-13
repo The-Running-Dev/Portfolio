@@ -10,7 +10,7 @@
   - [PowerShell/Chocolatey/NuGet](#powershellchocolateynuget)
   - [PowerShell/WinGet/DevOps](#powershellwingetdevops)
 
-v2023.11.16
+v2025.02.13
 
 [LinkedIn](http://www.linkedin.com/in/therunningdev)
 
@@ -19,8 +19,8 @@ v2023.11.16
 ## Latest Updates
 
 - [2025.02.12. Added tests to Docker-Webhooks](#nodejstypescript)
-- [2023.02.09. Working Menu Application, with Discord Bot](#angular)
-- [2023.01.23. Working Image Event Processor on AWS Lambda](#cnet)
+- [2025.02.09. Working Menu Application, with Discord Bot](#angular)
+- [2025.01.23. Working Image Event Processor on AWS Lambda](#cnet)
 - [2023.11.14. SideQuest Easy Installer WinGet Package](#powershellwingetdevops)
 - [2023.11.14. XYplorer WinGet Package](#powershellwingetdevops)
 
