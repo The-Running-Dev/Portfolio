@@ -2,13 +2,13 @@
 
 - [Portfolio](#portfolio)
   - [Latest Updates](#latest-updates)
-  - [C#/.NET/.NET Core](#cnetnet-core)
   - [Angular](#angular)
+  - [C#/.NET](#cnet)
+  - [Linux/Bash](#linuxbash)
   - [NodeJS/TypeScript](#nodejstypescript)
   - [PowerShell](#powershell)
   - [PowerShell/Chocolatey/NuGet](#powershellchocolateynuget)
   - [PowerShell/WinGet/DevOps](#powershellwingetdevops)
-  - [Linux/Bash](#linuxbash)
 
 v2023.11.16
 
@@ -18,30 +18,47 @@ v2023.11.16
 
 ## Latest Updates
 
+- [2025.02.12. Added tests to Docker-Webhooks](#nodejstypescript)
+- [2023.02.09. Working Menu Application, with Discord Bot](#angular)
+- [2023.01.23. Working Image Event Processor on AWS Lambda](#cnet)
 - [2023.11.14. SideQuest Easy Installer WinGet Package](#powershellwingetdevops)
 - [2023.11.14. XYplorer WinGet Package](#powershellwingetdevops)
 
-## C#/.NET/.NET Core
+## Angular
 
-- [Thum.io](https://github.com/The-Running-Dev/Thum.io)
+- [BarStrad](https://github.com/The-Running-Dev/BarStrad)
 
-   A package and command line client to interact with the Thum.io screenshot API service.
+   Angular based menu application, with theming, language support, orders, and a Discord notifications and a separate menu Discord bot. Proof of concept.
 
-- [Starter](https://github.com/The-Running-Dev/Starter.Stage7)
+- [Manual Tests](https://github.com/The-Running-Dev/Contec-ManualTests)
 
-   A project containing "Starter Tasks", a project I worked on to get familiar with the technology stack of an employer.
+   A line of business application that provided for recording manually tested equipment.
 
-- [PatientViewer.NET](https://github.com/The-Running-Dev/Demo-PatientVIewer.NET)
+   One of the 2 Angular projects I put in production during my time at Contec. It was part of a bigger ASP.NET WebForms application and is not meant to run by itself.
 
-   A project to showcase my .NET skills. It's a simple ASP.NET MVC/WebAPI application that displays a list of patients. The README in the repository documents the structure and implementation.
+- [NetAssure Client](https://github.com/The-Running-Dev/Demo-NetAssure/tree/master/web-client/src)
 
-- [Menu Creator](https://github.com/The-Running-Dev/Demo-MenuCreator)
+   A project for a network hardware company that aims to manage and expose device data hosted in Zabbix, with the users being managed in Salesforce.
 
-   A simple menu creator on top of .NET Core 2.2. This application is a coding exercise I was given and expected to complete in 60 minutes. The README in the repository documents the structure and implementation.
+   This project used Docker and Docker Compose for managing the app code and infrastructure, and TeamCity as the build server, on top of CentOS.
 
-- [Refactoring Exercise](https://github.com/The-Running-Dev/Demo-RefactoringExercise)
+- [PatientViewer.NG](https://github.com/The-Running-Dev/Demo-PatientVIewer.NG)
 
-   A demo application I was asked to refactor simulating what I would do if I had to review a junior developer’s code. The README in the repository has more details.
+   A project to showcase my Angular skills. It's a simple applications that displays a list of patients. The README in the repository documents the structure and implementation.
+
+- [Repairs](https://github.com/The-Running-Dev/Contec-Repairs)
+
+   Another line of business application for recording repairs to broken equipment. As with the Manual Tests project, part of a bigger ASP.NET WebForm solution.
+
+- [Rock Paper Scissors](https://github.com/The-Running-Dev/Demo-RockPaperScissors)
+
+   An Angular implementation of the classic rock paper scissors game, with a twist.
+
+## C#/.NET
+
+- [AliaSQL](https://github.com/The-Running-Dev/Database-AliaSQL)
+
+   Open source project I contributed to. AliaSQL was aimed at providing versioning for database deployments.
 
 - [Business Intelligence](https://github.com/The-Running-Dev/Contec-BusinessIntelligence)
 
@@ -53,53 +70,51 @@ v2023.11.16
 
    Context: I introduced a team I worked with to Dapper (a micro ORM), and over time I saw a need to generate a lot of classes based in the repository pattern I implemented in Dapper.
 
+- [Image Event Processor](https://github.com/The-Running-Dev/Demo-ImageEventProcessor)
+
+   An .NET WebAPI hosted in AWS Lambda, with an Angular UI, as a demo for processing images.
+
+- [Menu Creator](https://github.com/The-Running-Dev/Demo-MenuCreator)
+
+   A simple menu creator on top of .NET Core 2.2. This application is a coding exercise I was given and expected to complete in 60 minutes. The README in the repository documents the structure and implementation.
+
 - [OctopusDeploy-CruiseControlTray](https://github.com/The-Running-Dev/OctopusDeploy-CruiseControlTray)
 
    I am a CI/CD fanatic! There is a tool called CruiseControlTray initially implemented to be used with CruiseControl.NET. The tool can speak the status of the build based on accessing XML API available in CruiseControl.NET.
 
    While at MxToolbox, we had 50 inch TVs in every room, and the shared dev office had 4! This project translated the OctopusDeploy build status in the XML format that CruiseControlTray understood. That way we would get audio and video notifications of the deployment status.
 
+- [PatientViewer.NET](https://github.com/The-Running-Dev/Demo-PatientVIewer.NET)
+
+   A project to showcase my .NET skills. It's a simple ASP.NET MVC/WebAPI application that displays a list of patients. The README in the repository documents the structure and implementation.
+
+- [Refactoring Exercise](https://github.com/The-Running-Dev/Demo-RefactoringExercise)
+
+   A demo application I was asked to refactor simulating what I would do if I had to review a junior developer’s code. The README in the repository has more details.
+
 - [SnapCrackle](https://github.com/The-Running-Dev/Demo-SnapCrackle)
 
    Who hasn’t done a Fizz/Buzz coding exercise? Here is mine I did in real time during a job interview.
 
-- [AliaSQL](https://github.com/The-Running-Dev/Database-AliaSQL)
+- [Starter](https://github.com/The-Running-Dev/Starter.Stage7)
 
-   Open source project I contributed to. AliaSQL was aimed at providing versioning for database deployments.
+   A project containing "Starter Tasks", a project I worked on to get familiar with the technology stack of an employer.
 
-## Angular
+- [Thum.io](https://github.com/The-Running-Dev/Thum.io)
 
-- [Rock Paper Scissors](https://github.com/The-Running-Dev/Demo-RockPaperScissors)
+   A package and command line client to interact with the Thum.io screenshot API service.
 
-   An Angular implementation of the classic rock paper scissors game, with a twist.
+## Linux/Bash
 
-- [PatientViewer.NG](https://github.com/The-Running-Dev/Demo-PatientVIewer.NG)
+- [Ubuntu Setup](https://github.com/The-Running-Dev/Setup-Ubuntu)
 
-   A project to showcase my Angular skills. It's a simple applications that displays a list of patients. The README in the repository documents the structure and implementation.
-
-- [NetAssure Client](https://github.com/The-Running-Dev/Demo-NetAssure/tree/master/web-client/src)
-
-   A project for a network hardware company that aims to manage and expose device data hosted in Zabbix, with the users being managed in Salesforce.
-
-   This project used Docker and Docker Compose for managing the app code and infrastructure, and TeamCity as the build server, on top of CentOS.
-
-- [Manual Tests](https://github.com/The-Running-Dev/Contec-ManualTests)
-
-   A line of business application that provided for recording manually tested equipment.
-
-   One of the 2 Angular projects I put in production during my time at Contec. It was part of a bigger ASP.NET WebForms application and is not meant to run by itself.
-
-- [Repairs](https://github.com/The-Running-Dev/Contec-Repairs)
-
-   Another line of business application for recording repairs to broken equipment. As with the Manual Tests project, part of a bigger ASP.NET WebForm solution.
+   A set of ```Bash``` scripts that install and configure a new Ubuntu installation.
 
 ## NodeJS/TypeScript
 
-- [Shopping Service](https://github.com/The-Running-Dev/Demo-ShoppingService)
+- [Docker-Webhooks](https://github.com/The-Running-Dev/Docker-Webhooks)
 
-   A demo application as a micro service I created as a take home project for a company I interviewed with.
-
-   It takes the user’s ZIP code, calls an external API to get the weather for that service, and then suggest the appropriate clothing to buy. It comes with a simple Angular UI to be able to test the application locally without constructing the initial API call yourself. The UI demo no longer functions as the underlying weather API has changed.
+   A NodeJS API with Express to manage local docker containers. I created this to expose through Cloudflared, so I can pull and update my local running Docker images based on posting a Webhook from a GitHub workflow. Still in progress.
 
 - [NetAssure API](https://github.com/The-Running-Dev/Demo-NetAssure/tree/master/web-client/server)
 
@@ -112,6 +127,12 @@ v2023.11.16
 - [NetAssure Notification Service](https://github.com/The-Running-Dev/Demo-NetAssure/tree/master/NotificationService)
 
    A project that triggers sending notifications to an user when certain conditions are met. Made to be hosted as a micro-service on AWS Lambda.
+
+- [Shopping Service](https://github.com/The-Running-Dev/Demo-ShoppingService)
+
+   A demo application as a micro service I created as a take home project for a company I interviewed with.
+
+   It takes the user’s ZIP code, calls an external API to get the weather for that service, and then suggest the appropriate clothing to buy. It comes with a simple Angular UI to be able to test the application locally without constructing the initial API call yourself. The UI demo no longer functions as the underlying weather API has changed.
 
 ## PowerShell
 
@@ -158,9 +179,3 @@ v2023.11.16
    <https://github.com/The-Running-Dev/Winget-Updates/actions/workflows/xyplorer.yml>
 
    <https://github.com/The-Running-Dev/Winget-Updates/actions/workflows/xyplorer.portable.yml>
-
-## Linux/Bash
-
-- [Ubuntu Setup](https://github.com/The-Running-Dev/Setup-Ubuntu)
-
-   A set of ```Bash``` scripts that install and configure a new Ubuntu installation.
