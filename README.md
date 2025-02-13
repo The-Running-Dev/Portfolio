@@ -26,6 +26,8 @@ v2025.02.13
 
 ## Angular
 
+[🔝](#portfolio)
+
 - [BarStrad](https://github.com/The-Running-Dev/BarStrad)
 
    Angular based menu application, with theming, language support, orders, and a Discord notifications and a separate menu Discord bot. Proof of concept.
@@ -54,9 +56,9 @@ v2025.02.13
 
    An Angular implementation of the classic rock paper scissors game, with a twist.
 
-[🔝](#portfolio)
-
 ## C#/.NET
+
+[🔝](#portfolio)
 
 - ### [AliaSQL](https://github.com/The-Running-Dev/Database-AliaSQL)
 
@@ -106,17 +108,17 @@ v2025.02.13
 
    A package and command line client to interact with the Thum.io screenshot API service.
 
-[🔝](#portfolio)
-
 ## Linux/Bash
+
+[🔝](#portfolio)
 
 - ### [Ubuntu Setup](https://github.com/The-Running-Dev/Setup-Ubuntu)
 
    A set of ```Bash``` scripts that install and configure a new Ubuntu installation.
 
-[🔝](#portfolio)
-
 ## NodeJS/TypeScript
+
+[🔝](#portfolio)
 
 - ### [Docker-Webhooks](https://github.com/The-Running-Dev/Docker-Webhooks)
 
@@ -140,9 +142,9 @@ v2025.02.13
 
    It takes the user’s ZIP code, calls an external API to get the weather for that service, and then suggest the appropriate clothing to buy. It comes with a simple Angular UI to be able to test the application locally without constructing the initial API call yourself. The UI demo no longer functions as the underlying weather API has changed.
 
-[🔝](#portfolio)
-
 ## PowerShell
+
+[🔝](#portfolio)
 
 - ### [iCloudSync](https://github.com/The-Running-Dev/iCloudSync)
 
@@ -156,9 +158,9 @@ v2025.02.13
 
    PowerShell-Helpers is my personal repository of PowerShell functions. It contains all kinds of helper functions and utilities. I initially built this as a Chocolatey extension in an effort to provide Chocolatey with the ability to install software already downloaded on the machine (instead of always downloading it). This module is now a permanent module in my PowerShell profile.
 
-[🔝](#portfolio)
-
 ## PowerShell/Chocolatey/NuGet
+
+[🔝](#portfolio)
 
 - ### [BoxStarter](https://github.com/The-Running-Dev/BoxStarter)
 
@@ -168,9 +170,9 @@ v2025.02.13
 
    The core repository for Chocolatey packages. I contributed a dozen packages to this repository (like Spotify, JetBrains WebStorm and DataGrip, etc.)
 
-[🔝](#portfolio)
-
 ## PowerShell/WinGet/DevOps
+
+[🔝](#portfolio)
 
 - ### [WinGet-Packages](https://github.com/microsoft/winget-pkgs)
 
@@ -191,5 +193,3 @@ v2025.02.13
    <https://github.com/The-Running-Dev/Winget-Updates/actions/workflows/xyplorer.yml>
 
    <https://github.com/The-Running-Dev/Winget-Updates/actions/workflows/xyplorer.portable.yml>
-
-[🔝](#portfolio)
