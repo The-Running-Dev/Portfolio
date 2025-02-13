@@ -18,11 +18,11 @@ v2025.02.13
 
 ## Latest Updates
 
-- [2025.02.12. Docker API in NodeJS for Managing Local Containers](#nodejstypescript)
-- [2025.02.09. Working Menu Application, with Discord Bot](#angular)
-- [2025.01.23. Working Image Event Processor on AWS Lambda](#cnet)
-- [2023.11.14. SideQuest Easy Installer WinGet Package](#powershellwingetdevops)
-- [2023.11.14. XYplorer WinGet Package](#powershellwingetdevops)
+- [2025.02.12. Docker API in NodeJS for Managing Local Containers](#docker-webhooks)
+- [2025.02.09. Working Menu Application, with Discord Bot](#barstrad)
+- [2025.01.23. Image Event Processor WebAPI on AWS Lambda](#image-event-processor)
+- [2023.11.14. SideQuest Easy Installer WinGet Package](#winget-packages)
+- [2023.11.14. XYplorer WinGet Package](#winget-packages)
 
 ## Angular
 
