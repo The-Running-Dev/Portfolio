@@ -1,9 +1,11 @@
 import {themes as prismThemes} from 'prism-react-renderer';
+import getVersion from './getVersion';
 import type {Config} from '@docusaurus/types';
 import type * as Preset from '@docusaurus/preset-classic';
 
 // This runs in Node.js - Don't use client-side code here (browser APIs, JSX...)
 
+const version = require('./getVersion');
 const config: Config = {
   title: 'Portfolio',
   tagline: 'Technical Projects & Experience',
@@ -17,7 +19,7 @@ const config: Config = {
   // Set the production url of your site here
   url: 'https://portfolio.subzerodev.com',
   // For GitHub pages deployment, it is often '/<projectName>/'
-  baseUrl: '/Portfolio/',
+  baseUrl: '/',
   // Explicitly set trailingSlash to avoid GitHub Pages redirect issues
   trailingSlash: false,
 
@@ -78,11 +80,16 @@ const config: Config = {
           position: 'left',
           label: 'Projects',
         },
-        {to: '/blog', label: 'Blog', position: 'left'},
+        // {to: '/blog', label: 'Blog', position: 'left'},
         {
           label: 'GitHub Profile',
           href: 'https://github.com/The-Running-Dev',
           position: 'left',
+        },
+        {
+          label: `v${version}`,
+          position: 'right',
+          href: '#',
         },
         {
           href: 'https://github.com/The-Running-Dev/Portfolio',
