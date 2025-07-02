@@ -13,8 +13,6 @@
 
 v2025.05.28
 
-[LinkedIn](http://www.linkedin.com/in/therunningdev)
-
 [GitHub](https://github.com/The-Running-Dev)
 
 ## Latest Updates
