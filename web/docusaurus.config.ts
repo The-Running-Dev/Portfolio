@@ -70,7 +70,7 @@ const config: Config = {
     navbar: {
       title: 'Portfolio',
       logo: {
-        alt: 'Portfolio Logo',
+        alt: 'Portfolio',
         src: 'img/logo.svg',
       },
       items: [
