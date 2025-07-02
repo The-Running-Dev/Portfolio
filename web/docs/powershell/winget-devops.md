@@ -1,4 +1,4 @@
-# PowerShell / WinGet / DevOps Projects
+# WinGet / DevOps
 
 - **WinGet-Packages**: Contributions to the Windows package manager community repository. [GitHub](https://github.com/microsoft/winget-pkgs)
   - SideQuest Easy Installer: [PR](https://github.com/microsoft/winget-pkgs/pull/126347)

@@ -1,4 +1,4 @@
-# C# / .NET Projects
+# C# / .NET
 
 A showcase of my .NET and C# work:
 

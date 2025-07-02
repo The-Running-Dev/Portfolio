@@ -1,4 +1,4 @@
-# Angular Projects
+# Angular
 
 A collection of Angular-based applications and demos:
 
