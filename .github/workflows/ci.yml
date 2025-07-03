@@ -6,8 +6,7 @@ on:
       - master
 
 permissions:
-  pages: write
-  id-token: write # to verify the deployment originates from an appropriate source
+  contents: write
 
 jobs:
   Build-and-Deploy:
@@ -35,4 +34,5 @@ jobs:
         run: pwsh ./build-and-deploy.ps1
         env:
           GIT_USER: The-Running-Dev
+          GIT_PASS: ${{ secrets.GITHUB_TOKEN }}
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
