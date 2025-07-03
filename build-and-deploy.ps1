@@ -6,7 +6,7 @@ $ErrorActionPreference = 'Stop'
 $env:NODE_OPTIONS="--max-old-space-size=2048"
 
 # Override origin URL with PAT
-$repoUrl = "https://x-access-token:${env:GITHUB_TOKEN}@github.com/The-Running-Dev/Portfolio.git"
+$repoUrl = "https://x-access-token:$($env:GITHUB_TOKEN)@github.com/The-Running-Dev/Portfolio.git"
 $siteDirectory = (Join-Path $PSScriptRoot 'web')
 
 Set-Location $siteDirectory
