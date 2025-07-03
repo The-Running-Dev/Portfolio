@@ -8,10 +8,6 @@ on:
 permissions:
   contents: write
 
-defaults:
-  run:
-    working-directory: web
-
 jobs:
   Build-and-Deploy:
     runs-on: ubuntu-latest
