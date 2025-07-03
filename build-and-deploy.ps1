@@ -9,19 +9,20 @@ $siteDirectory = (Join-Path $PSScriptRoot 'web')
 
 Set-Location $siteDirectory
 
-# Configure Git
-Write-Host "Configuring Git..."
-& git config --global user.name 'github-actions[bot]'
-& git config --global user.email 'github-actions[bot]@users.noreply.github.com'
+try {
+    # Installing Dependencies
+    Write-Host "Installing Dependencies..."
+    & pnpm install
 
-# Installing Dependencies
-Write-Host "Installing Dependencies..."
-& pnpm install
+    # Building the project
+    Write-Host "Building the Project..."
+    & pnpm run build
 
-# Building the project
-Write-Host "Building the Project..."
-& pnpm run build
+    # Deploy to GitHub Pages
+    Write-Host "Deploying to GitHub Pages..."
+    & npx docusaurus deploy --skip-build
+} catch {
+    Write-Error $_
 
-# Deploy to GitHub Pages
-Write-Host "Deploying to GitHub Pages..."
-& npx docusaurus deploy --skip-build
+    exit 1
+}
