@@ -22,4 +22,5 @@ Write-Host "Building the Project..."
 
 # Deploy to GitHub Pages
 Write-Host "Deploying to GitHub Pages..."
+$env:USE_SSH = 'true'
 & npx docusaurus deploy --skip-build
