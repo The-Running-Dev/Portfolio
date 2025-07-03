@@ -23,7 +23,10 @@ jobs:
         with:
           fetch-depth: 0
 
-      - name: Cache pnpm store
+      - name: Mark as Safe for Git
+        run: git config --global --add safe.directory /__w/Portfolio/Portfolio
+
+      - name: Cache Dependencies
         uses: actions/cache@v4
         with:
           path: ~/.pnpm-store
@@ -31,13 +34,7 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-pnpm-
 
-      - name: Installing Dependencies
-        run: pnpm install
-
-      - name: Building Site
-        run: pnpm run build
-
-      - name: Deploying
+      - name: Build and Deploy
+        run: pwsh ./build-and-deploy.ps1
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        run: npx docusaurus deploy --skip-build
