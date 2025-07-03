@@ -33,5 +33,5 @@ jobs:
       - name: Build and Deploy
         run: pwsh ./build-and-deploy.ps1
         env:
-          GIT_USER: github-actions[bot]
+          GIT_USER: x-access-token
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
