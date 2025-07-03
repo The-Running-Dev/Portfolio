@@ -19,9 +19,6 @@ jobs:
         with:
           fetch-depth: 0
 
-      - name: Mark as Safe for Git
-        run: git config --global --add safe.directory /__w/Portfolio/Portfolio
-
       - name: Cache Dependencies
         uses: actions/cache@v4
         with:

@@ -11,4 +11,4 @@ Welcome to my technical portfolio! Here you'll find a curated selection of my wo
 - [Backend](backend/intro.md)
 - [Infrastructure & DevOps](infrastructure/intro.md)
 - [PowerShell & Automation](powershell/intro.md)
-- [Contributions / Community](contributions.md)
+- [Open Source Contributions](contributions.md)

@@ -1,19 +1,19 @@
-# Contributions
+# Open Source Contributions
 
 - **[Chocolatey Packages](https://github.com/chocolatey-community/chocolatey-packages/pulls?q=is%3Apr+author%3AThe-Running-Dev)**  
-  **Created**: 2025.07.03 12.59.22, **Updated**: 2025.07.03 12.59.22  
   The core repository for Chocolatey packages. I contributed a dozen packages to this repository (like Spotify, JetBrains WebStorm and DataGrip, etc.)
 
 - **[WinGet-Packages](https://github.com/microsoft/winget-pkgs/pulls?q=is%3Apr+author%3AThe-Running-Dev)**  
-  **Created**: 2025.07.03 14.24.26, **Updated**: 2025.07.03 14.24.26  
   Contributions to the Windows package manager community repository. This repository contains the manifest files for the Windows Package Manager default source.  
   
 - **[SideQuest Easy Installer](https://github.com/microsoft/winget-pkgs/pull/126347)**  
-  PR
+  WinGet package for the SideQuest Easy Installer
 
 - **[XYplorer](https://github.com/microsoft/winget-pkgs/pull/126351)**  
+  WinGet package for the XYPlorer file manager
 
 - **[XYplorer Portable](https://github.com/microsoft/winget-pkgs/pull/126622)**  
+  WinGet package for the XYPlorer file manager, portable version
 
 - **[AliaSQL](https://github.com/The-Running-Dev/Database-AliaSQL)**  
   **Created**: 2014.10.30 01.17.34, **Updated**: 2014.10.30 01.17.34  

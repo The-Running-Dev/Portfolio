@@ -13,7 +13,7 @@ export default function Intro() {
         <a className={styles['overview-link']} href="/docs/backend">Backend</a>
         <a className={styles['overview-link']} href="/docs/infrastructure">Infrastructure & DevOps</a>
         <a className={styles['overview-link']} href="/docs/powershell">PowerShell & Automation</a>
-        <a className={styles['overview-link']} href="/docs/contributions">Contributions / Community</a>
+        <a className={styles['overview-link']} href="/docs/contributions">Open Source Contributions</a>
       </div>
     </div>
   );
