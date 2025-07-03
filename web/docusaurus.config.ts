@@ -1,11 +1,10 @@
 import {themes as prismThemes} from 'prism-react-renderer';
-import getVersion from './getVersion';
+import getVersion from './scripts/get-version';
 import type {Config} from '@docusaurus/types';
 import type * as Preset from '@docusaurus/preset-classic';
 
 // This runs in Node.js - Don't use client-side code here (browser APIs, JSX...)
-
-const version = require('./getVersion');
+const version = getVersion();
 const config: Config = {
   title: 'Portfolio',
   tagline: 'Technical Projects & Experience',
@@ -82,19 +81,9 @@ const config: Config = {
         },
         // {to: '/blog', label: 'Blog', position: 'left'},
         {
-          label: 'GitHub Profile',
-          href: 'https://github.com/The-Running-Dev',
-          position: 'left',
-        },
-        {
           label: `v${version}`,
           position: 'right',
           href: '#',
-        },
-        {
-          href: 'https://github.com/The-Running-Dev/Portfolio',
-          label: 'GitHub',
-          position: 'right',
         },
       ],
     },
