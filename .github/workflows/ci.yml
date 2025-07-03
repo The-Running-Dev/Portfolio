@@ -6,11 +6,14 @@ on:
       - master
 
 permissions:
-  packages: write
   contents: write
 
+defaults:
+  run:
+    working-directory: web
+
 jobs:
-  build-deploy:
+  Build-and-Deploy:
     runs-on: ubuntu-latest
     container:
       image: ghcr.io/the-running-dev/build-agent:latest
