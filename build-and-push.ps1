@@ -25,7 +25,6 @@ try {
 
     # Deploy to GitHub Pages
     Write-Host "Deploying to GitHub Pages..."
-    $env:GIT_USER = 'The-Running-Dev'
     & npx docusaurus deploy --skip-build
 } catch {
     Write-Error $_
