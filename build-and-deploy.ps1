@@ -3,7 +3,6 @@
 # Exit immediately if a command exits with a non-zero status.
 $ErrorActionPreference = 'Stop'
 
-$env:GIT_USER = 'The-Running-Dev'
 $siteDirectory = (Join-Path $PSScriptRoot 'web')
 
 Set-Location $siteDirectory

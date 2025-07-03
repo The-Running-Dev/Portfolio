@@ -33,4 +33,5 @@ jobs:
       - name: Build and Deploy
         run: pwsh ./build-and-deploy.ps1
         env:
+          GIT_USER: The-Running-Dev
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
