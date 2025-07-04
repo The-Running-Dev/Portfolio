@@ -16,7 +16,7 @@
   WinGet package for the XYPlorer file manager, portable version
 
 - **[AliaSQL](https://github.com/The-Running-Dev/Database-AliaSQL)**  
-  **Created**: 2014.10.30 01.17.34, **Updated**: 2014.10.30 01.17.34  
+  **Updated**: October 30, 2014 @ 01:17  
   Open source project I contributed to. AliaSQL was aimed at providing versioning for database deployments.
 
 [Back to Overview](intro.md)

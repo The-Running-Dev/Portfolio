@@ -8,12 +8,11 @@ function Update-ProjectDates {
     $i = 0
 
     $projectLine = "- **[$($project.Name)]($($project.Url))**"
-    # Format the dates as YYYY.MM.DD HH.mm.ss
-    $addedFormatted = (Get-Date $project.Added -Format 'yyyy.MM.dd HH.mm.ss')
-    $updatedFormatted = (Get-Date $project.Updated -Format 'yyyy.MM.dd HH.mm.ss')
-    $dateLine = "  **Created**: $addedFormatted, **Updated**: $updatedFormatted  "
-    $projectLinePattern = "^- \*\*\[$([regex]::Escape($project.Name))\]\($([regex]::Escape($project.Url))\)\*\*\s*  *$"
-    $dateLinePattern = '^[ ]*\*\*Created\*\*:.*?,[ ]*\*\*Updated\*\*:.*?\s*  *$'
+    # Format the updated date as 'Month D, YYYY @ HH:mm'
+    $updatedFormatted = (Get-Date $project.Updated -Format 'MMMM d, yyyy @ HH:mm')
+    $dateLine = "  **Updated**: $updatedFormatted  "
+    $projectLinePattern = "^- \\*\\*\\[\$([regex]::Escape($project.Name))\\]\\(\$([regex]::Escape($project.Url))\\)\\*\\*\\s*  *$"
+    $dateLinePattern = '^[ ]*\\*\\*Updated\\*\\*:.*?\\s*  *$'
 
     while ($i -lt $lines.Count) {
         $line = $lines[$i]
@@ -33,8 +32,8 @@ function Update-ProjectDates {
                 $newLines += $dateLine
             }
 
-            # Skip malformed/bare date lines
-            while ($i -lt $lines.Count -and $lines[$i] -match '^[ ]*\d{4}-\d{2}-\d{2}.*\d{2}:\d{2}:\d{2}') {
+            # Skip malformed/bare date lines and any old Created/Updated lines
+            while ($i -lt $lines.Count -and ($lines[$i] -match 'Created:' -or $lines[$i] -match 'Updated:' -or $lines[$i] -match '^[ ]*\d{4}-\d{2}-\d{2}.*\d{2}:\d{2}:\d{2}')) {
                 $i++
             }
 

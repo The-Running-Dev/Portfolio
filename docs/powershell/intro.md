@@ -1,19 +1,19 @@
 # PowerShell & Automation
 
 - **[iCloudSync](https://github.com/The-Running-Dev/iCloudSync)**  
-  **Created**: 2023.06.23 13.15.47, **Updated**: 2023.06.23 13.15.47  
+  **Updated**: June 23, 2023 @ 13:15  
   PowerShell scripts to download and organize iCloud media.
 
 - **[PowerShell-FileButler](https://github.com/The-Running-Dev/PowerShell-FileButler)**  
-  **Created**: 2019.04.17 00.29.35, **Updated**: 2019.04.17 00.29.35  
+  **Updated**: April 17, 2019 @ 00:29  
   Automated downloads folder organizer.
 
 - **[PowerShell-Helpers](https://github.com/The-Running-Dev/PowerShell-Helpers)**  
-  **Created**: 2019.04.16 23.19.13, **Updated**: 2019.04.16 23.19.13  
+  **Updated**: April 16, 2019 @ 23:19  
   Personal repository of PowerShell functions and utilities.
 
 - **[BoxStarter](https://github.com/The-Running-Dev/BoxStarter)**  
-  **Created**: 2018.12.13 15.55.23, **Updated**: 2018.12.13 15.55.23  
+  **Updated**: December 13, 2018 @ 15:55  
   Personal Chocolatey package repository for Windows reinstalls.
 
 - **GitHub Actions for Automatic Updates**  
