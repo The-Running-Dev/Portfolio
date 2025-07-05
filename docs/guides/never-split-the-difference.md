@@ -1,4 +1,6 @@
-# 📘 Never Split the Difference By Chris Voss
+# 📘 Never Split the Difference
+
+## By Chris Voss
 
 ## Chapter-by-Chapter Summary
 
