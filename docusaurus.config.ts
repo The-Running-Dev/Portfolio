@@ -9,35 +9,24 @@ const config: Config = {
   title: 'Portfolio',
   tagline: 'Technical Projects & Experience',
   favicon: 'img/favicon.ico',
-
-  // Future flags, see https://docusaurus.io/docs/api/docusaurus-config#future
-  future: {
-    v4: true, // Improve compatibility with the upcoming Docusaurus v4
+  markdown: {
+    mermaid: true,
   },
-
-  // Set the production url of your site here
+  themes: ['@docusaurus/theme-mermaid'],
+  future: {
+    v4: true,
+  },
   url: 'https://portfolio.subzerodev.com',
-  // For GitHub pages deployment, it is often '/<projectName>/'
   baseUrl: '/',
-  // Explicitly set trailingSlash to avoid GitHub Pages redirect issues
   trailingSlash: false,
-
-  // GitHub pages deployment config.
-  // If you aren't using GitHub pages, you don't need these.
-  organizationName: 'The-Running-Dev', // Your GitHub username
-  projectName: 'Portfolio', // Your repo name
-
+  organizationName: 'The-Running-Dev',
+  projectName: 'Portfolio',
   onBrokenLinks: 'throw',
   onBrokenMarkdownLinks: 'warn',
-
-  // Even if you don't use internationalization, you can use this field to set
-  // useful metadata like html lang. For example, if your site is Chinese, you
-  // may want to replace "en" with "zh-Hans".
   i18n: {
     defaultLocale: 'en',
     locales: ['en'],
   },
-
   presets: [
     [
       'classic',
@@ -51,7 +40,6 @@ const config: Config = {
             type: ['rss', 'atom'],
             xslt: true,
           },
-          // Useful options to enforce blogging best practices
           onInlineTags: 'warn',
           onInlineAuthors: 'warn',
           onUntruncatedBlogPosts: 'warn',
@@ -62,9 +50,7 @@ const config: Config = {
       } satisfies Preset.Options,
     ],
   ],
-
   themeConfig: {
-    // Replace with your project's social card
     image: 'img/docusaurus-social-card.jpg',
     navbar: {
       title: 'Portfolio',
@@ -75,10 +61,34 @@ const config: Config = {
       items: [
         {
           type: 'docSidebar',
-          sidebarId: 'tutorialSidebar',
+          sidebarId: 'projectsSidebar',
           position: 'left',
           label: 'Projects',
         },
+        {
+          type: 'docSidebar',
+          sidebarId: 'guidesSidebar',
+          position: 'left',
+          label: 'Guides',
+        },
+        // {
+        //   type: 'docSidebar',
+        //   sidebarId: 'experienceSidebar',
+        //   position: 'left',
+        //   label: 'Experience',
+        // },
+        // {
+        //   type: 'docSidebar',
+        //   sidebarId: 'aboutSidebar',
+        //   position: 'left',
+        //   label: 'About Me',
+        // },
+        // {
+        //   type: 'docSidebar',
+        //   sidebarId: 'contactSidebar',
+        //   position: 'left',
+        //   label: 'Contact',
+        // },
         // {to: '/blog', label: 'Blog', position: 'left'},
         {
           label: `v${version}`,

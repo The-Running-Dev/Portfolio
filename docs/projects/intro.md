@@ -1,5 +1,5 @@
 ---
-sidebar_label: 'Portfolio'
+sidebar_label: 'Projects'
 sidebar_position: 1
 ---
 

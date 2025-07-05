@@ -64,4 +64,4 @@
   **Updated**: July 19, 2017 @ 00:07  
   A demo application as a micro service I created as a take home project for a company I interviewed with. It takes the user’s ZIP code, calls an external API to get the weather for that service, and then suggest the appropriate clothing to buy. It comes with a simple Angular UI to be able to test the application locally without constructing the initial API call yourself. The UI demo no longer functions as the underlying weather API has changed.
 
-[Back to Overview](intro.md)
+[Back to Top](intro.md)
