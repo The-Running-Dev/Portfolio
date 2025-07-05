@@ -71,6 +71,12 @@ const config: Config = {
           position: 'left',
           label: 'Guides',
         },
+        {
+          type: 'docSidebar',
+          sidebarId: 'booksSidebar',
+          position: 'left',
+          label: 'Books',
+        },
         // {
         //   type: 'docSidebar',
         //   sidebarId: 'experienceSidebar',
