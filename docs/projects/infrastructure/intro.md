@@ -1,6 +1,6 @@
 # Infrastructure & DevOps
 
-- **[AzureDevOps-Templates](https://github.com/your-org/AzureDevOps-Templates)**  
+- **[AzureDevOps-Templates](https://github.com/The-Running-Dev/Demo-AzureDevOps-Templates)**  
   **Updated**: July 6, 2025 @ 13:52
   AzureDevOps-Templates is a comprehensive collection of reusable Azure DevOps pipeline templates and infrastructure-as-code modules. It enables teams to rapidly build, deploy, and manage cloud-native solutions on Azure using modular, production-ready YAML and ARM/Bicep templates. The repository covers a wide range of Azure resources and CI/CD scenarios, with each sub-project providing focused templates and documentation for specific services or deployment patterns. Ideal for DevOps engineers and cloud architects seeking to standardize and accelerate Azure delivery.  
 
