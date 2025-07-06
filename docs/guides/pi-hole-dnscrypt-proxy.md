@@ -187,3 +187,5 @@ sudo apt purge dnscrypt-proxy
 ## ✅ Done!
 
 You now have secure, private DNS with ad/tracker blocking over VPN.
+
+[Back to Top](pi-hole-dnscrypt-proxy.md)

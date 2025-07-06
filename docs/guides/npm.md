@@ -1,5 +1,9 @@
 # 🧭 Nginx Proxy Manager
 
+## Use Case
+
+Easily manage reverse proxy rules, SSL certificates, and secure access for self-hosted web applications and services. Nginx Proxy Manager provides a user-friendly web UI to route traffic to apps running on your server or Docker, automate Let's Encrypt SSL, and simplify exposing services to the internet or your local network.
+
 ## 🗂️ Project Architecture
 
 ```mermaid
