@@ -73,6 +73,12 @@ const config: Config = {
         },
         {
           type: 'docSidebar',
+          sidebarId: 'resourcesSidebar',
+          position: 'left',
+          label: 'Resources',
+        },
+        {
+          type: 'docSidebar',
           sidebarId: 'booksSidebar',
           position: 'left',
           label: 'Books',

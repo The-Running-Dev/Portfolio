@@ -135,7 +135,7 @@
 
 /* --- Highlight active sidebar item with bold color and animated underline --- */
 .theme-doc-sidebar-menu .menu__link--active {
-  color: #9eadf3 !important;
+  color: #9ad2f0 !important;
   font-weight: bold;
   position: relative;
 }
