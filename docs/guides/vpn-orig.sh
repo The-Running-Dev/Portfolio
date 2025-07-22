@@ -28,7 +28,7 @@ echo "[+] Connecting to NordVPN..."
 nordvpn status | grep -q 'Connected' || nordvpn connect
 
 echo "[+] Enabling IP forwarding..."
-grep -q "net.ipv4.ip_forward=1" ca || echo "net.ipv4.ip_forward=1" | sudo tee -a /etc/sysctl.conf
+grep -q "net.ipv4.ip_forward=1" /etc/sysctl.conf || echo "net.ipv4.ip_forward=1" | sudo tee -a /etc/sysctl.conf
 sudo sysctl -p
 
 echo "[+] Checking and applying iptables rules..."
