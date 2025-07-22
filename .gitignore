@@ -24,3 +24,9 @@ yarn-error.log*
 
 web/VERSION.txt
 run-update-dates.ps1
+
+VERSION.txt
+
+scripts/write-version.js
+
+scripts/get-version.js
