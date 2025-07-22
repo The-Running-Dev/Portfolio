@@ -27,7 +27,7 @@ flowchart TD
 ## 🧰 Prerequisites
 
 - Ubuntu 20.04 or later (Desktop or Server)
-- Active NordVPN subscriptn
+- Active NordVPN subscription
 - Administrative sudo access
 - Network not restricted by corporate firewalls that block VPNs
 
