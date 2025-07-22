@@ -43,14 +43,13 @@ sh <(curl -sSf https://downloads.nordcdn.com/apps/linux/install.sh)
 
 This script handles:
 
-- Adding NordVPN repo
 - Installing `nordvpn` CLI
 - Setting up required services
 
 ---
 
-### 2. ✅ Login to NordVPN
 
+### 2. ✅ Login to NordVPN
 
 #### Login to your NordVPN account (headless/remote-friendly):
 
@@ -119,7 +118,6 @@ Optional:
 
 ```bash
 nordvpn connect us
-nordvpn connect uk
 ```
 
 ---
@@ -154,7 +152,7 @@ sudo iptables -F
 # Masquerade all outbound traffic via VPN
 sudo iptables -t nat -A POSTROUTING -o nordlynx -j MASQUERADE
 
-# Allow LAN
+# Allow LAN forwarding through VPN
 sudo iptables -A INPUT -i enp2s0 -s 192.168.1.0/24 -j ACCEPT
 sudo iptables -A FORWARD -i enp2s0 -o nordlynx -j ACCEPT
 sudo iptables -A FORWARD -i nordlynx -o enp2s0 -m state --state RELATED,ESTABLISHED -j ACCEPT
@@ -179,7 +177,6 @@ nordvpn set dns 127.0.0.1 127.0.0.1
 To ensure DNS requests are routed locally and not through the VPN tunnel:
 
 ```bash
-# Make sure DNS requests to 127.0.0.1 (dnscrypt-proxy) go local
 sudo ip rule add from 127.0.0.1 lookup main
 sudo ip rule add to 127.0.0.1 lookup main
 
@@ -196,8 +193,16 @@ This setup is recommended if you want to use local DNS filtering or logging, or 
 Allow DNS requests from your LAN subnet:
 
 ```bash
+# DNS Access for Clients
 sudo iptables -A INPUT -p udp --dport 53 -s 192.168.1.0/24 -j ACCEPT
 sudo iptables -A INPUT -p tcp --dport 53 -s 192.168.1.0/24 -j ACCEPT
+```
+
+### 11. Persist the iptables Rules
+
+```bash
+sudo apt install iptables-persistent
+sudo netfilter-persistent save
 ```
 
 ---

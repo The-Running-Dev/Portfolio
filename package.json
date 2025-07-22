@@ -1,12 +1,12 @@
 {
-  "name": "web",
-  "version": "0.0.0",
-  "private": false,
+  "name": "docusaurus-template",
+  "version": "1.0.0",
+  "private": true,
   "scripts": {
     "docusaurus": "docusaurus",
     "start": "docusaurus start",
-    "prebuild": "node ./scripts/write-version.js",
-    "build": "docusaurus build",
+    "prebuild:prod": "node ./scripts/write-version.js",
+    "build:prod": "docusaurus build",
     "swizzle": "docusaurus swizzle",
     "deploy": "docusaurus deploy",
     "clear": "docusaurus clear",

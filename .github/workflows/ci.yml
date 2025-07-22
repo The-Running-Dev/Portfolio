@@ -1,34 +1,65 @@
+# Docs: Builds and deploys documentation to GitHub Pages when triggered by release or manually.
+#
+# Triggers:
+#   - On workflow_dispatch (manual)
+#   - On repository_dispatch with 'Update-Documentation' event (from Release workflow)
+#
+# Steps:
+#   1. Checks out the repository
+#   2. Builds documentation using node-template-build
+#   3. Uploads the built documentation as an artifact
+#   4. Deploys the documentation to GitHub Pages
+#
 name: CI
 
 on:
+  workflow_dispatch:
   push:
     branches:
       - master
 
 permissions:
   contents: write
+  packages: write
 
 jobs:
-  Build-and-Push:
+  Artifacts:
     runs-on: ubuntu-latest
     container:
       image: ghcr.io/the-running-dev/build-agent:latest
+  
     steps:
       - name: Checkout Repository
         uses: actions/checkout@v4
         with:
           fetch-depth: 0
 
-      - name: Cache Dependencies
-        uses: actions/cache@v4
-        with:
-          path: ~/.pnpm-store
-          key: ${{ runner.os }}-pnpm-${{ hashFiles('**/pnpm-lock.yaml') }}
-          restore-keys: |
-            ${{ runner.os }}-pnpm-
+      - name: Transpile
+        run: node-template-build -appDir '.'
 
-      - name: Build and Push
-        run: pwsh ./build-and-push.ps1
-        env:
-          GIT_USER: The-Running-Dev
-          GIT_PASS: ${{ secrets.GITHUB_TOKEN }}
+      - name: Upload Artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: build
+
+  deploy:
+    name: Deploy to Pages
+    needs: Artifacts
+
+    # Grant GITHUB_TOKEN the permissions
+    permissions:
+      # To deploy to Pages
+      pages: write
+      # To verify the deployment originates from an appropriate source
+      id-token: write
+
+    # Deploy to the github-pages environment
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+
+    runs-on: ubuntu-latest
+    steps:
+      - name: Deploy to Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
