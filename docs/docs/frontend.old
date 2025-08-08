@@ -1,10 +1,13 @@
+---
+sidebar_position: 2
+---
 # Frontend
 
 ## Angular
 
-- **[BarStrad](https://github.com/The-Running-Dev/BarStrad)**  
+- **[BarStrad](https://github.com/The-Running-Dev/BarStrad-UI)**  
   **Updated**: February 9, 2025 @ 23:05  
-  Angular based menu application, with theming, language support, orders, and Discord notifications and a separate menu Discord bot. Proof of concept.
+  Angular based menu application, with theming, language support, orders, and Discord notifications. Proof of concept.
 
 - **[Manual Tests](https://github.com/The-Running-Dev/Contec-ManualTests)**  
   **Updated**: April 16, 2019 @ 23:57  

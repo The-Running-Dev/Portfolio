@@ -1,6 +1,7 @@
 {
   "label": "Frontend",
-  "position": 2,
+  "position": 1,
+  "collapsible": false,
   "link": {
     "type": "generated-index",
     "description": "Learn about the frontend technologies and practices used in web development."

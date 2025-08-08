@@ -1,0 +1,22 @@
+---
+title: Portfolio (Live)
+---
+
+import Portfolio from '@site/src/components/Portfolio';
+import data from '@site/src/data/cvData.json';
+let projects = [];
+
+try {
+  projects = require('@site/src/data/generated/github.json');
+} catch (e) {
+  // If the file doesn't exist (not fetched yet), fall back to runtime fetch via projectsUrl
+}
+
+{/* Ensure CSS is loaded (or import into custom.css) */}
+{/* import '@site/src/css/portfolio.css'; */}
+
+{/* Prefer pre-fetched projects when available */}
+{projects && projects.length
+  ? <Portfolio data={data} projects={projects} />
+  : <Portfolio data={data} projectsUrl="https://api.github.com/users/The-Running-Dev/repos?per_page=6&sort=updated" />
+}

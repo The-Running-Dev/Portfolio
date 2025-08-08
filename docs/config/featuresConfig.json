@@ -1,0 +1,12 @@
+{
+  "enableGiscusComments": false,
+  "enableGitHubLinks": false,
+  "enableBadges": true,
+  "enableThemeSwitcher": true,
+  "enableTextSizeSwitcher": true,
+  "enableReaderMode": true,
+  "enableVersionDisplay": true,
+  "enableCVPage": true,
+  "enablePortfolioPage": true,
+  "usePortfolioPageAsIndex": true
+}

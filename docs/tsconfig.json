@@ -1,0 +1,19 @@
+{
+  "compilerOptions": {
+    "baseUrl": ".",
+    "outDir": "./artifacts",
+    "paths": {
+      "@theme/*": ["node_modules/@docusaurus/theme-classic/lib/theme/*"],
+      "@docusaurus/*": ["node_modules/@docusaurus/*"]
+    },
+    "types": ["node"],
+    "resolveJsonModule": true,
+    "allowSyntheticDefaultImports": true,
+    "esModuleInterop": true,
+    "skipLibCheck": true,
+    "jsx": "react-jsx",
+    "lib": ["ES2017", "DOM", "DOM.Iterable"],
+    "typeRoots": ["./node_modules/@types", "./src/types"]
+  },
+  "include": ["src", "docs", "config", "data/version-config.ts"]
+}

@@ -1,0 +1,8 @@
+{
+  "version": "1.0.0",
+  "href": "https://github.com/your-org/your-repo/releases",
+  "prefix": "v",
+  "badge": true,
+  "className": "",
+  "title": "View release notes and changelog"
+}

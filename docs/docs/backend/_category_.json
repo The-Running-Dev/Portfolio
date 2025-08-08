@@ -1,6 +1,7 @@
 {
   "label": "Backend",
   "position": 2,
+  "collapsible": false,
   "link": {
     "type": "generated-index",
     "description": "Learn about the backend technologies and practices used in web development."

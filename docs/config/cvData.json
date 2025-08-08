@@ -1,0 +1,174 @@
+{
+  "header": {
+    "title": "Software Architect",
+    "email": "ben@subzerodev.com",
+    "phone": "+359 88 927 5757",
+    "links": [
+      {
+        "label": "LinkedIn",
+        "href": "https://linkedin.com/in/therunningdev"
+      },
+      {
+        "label": "GitHub",
+        "href": "https://github.com/The-Running-Dev"
+      },
+      {
+        "label": "Portfolio",
+        "href": "https://github.com/The-Running-Dev/Portfolio"
+      }
+    ]
+  },
+  "about": {
+    "title": "🧠 About",
+    "body": "I am a solution-focused <strong>Software Architect</strong> with over <strong>20 years</strong> designing, building, and scaling high-impact applications. I operate at the intersection of <strong>architecture, engineering, and leadership</strong> to deliver <strong>real business outcomes</strong>."
+  },
+  "badges": [
+    {
+      "alt": "C#",
+      "src": "https://img.shields.io/badge/C%23-239120?logo=csharp&logoColor=white"
+    },
+    {
+      "alt": "JavaScript",
+      "src": "https://img.shields.io/badge/JavaScript-F7DF1E?logo=javascript&logoColor=black"
+    },
+    {
+      "alt": "TypeScript",
+      "src": "https://img.shields.io/badge/TypeScript-3178C6?logo=typescript&logoColor=white"
+    },
+    {
+      "alt": "Python",
+      "src": "https://img.shields.io/badge/Python-3776AB?logo=python&logoColor=white"
+    },
+    {
+      "alt": ".NET",
+      "src": "https://img.shields.io/badge/.NET-512BD4?logo=dotnet&logoColor=white"
+    },
+    {
+      "alt": "React",
+      "src": "https://img.shields.io/badge/React-61DAFB?logo=react&logoColor=000"
+    },
+    {
+      "alt": "Angular",
+      "src": "https://img.shields.io/badge/Angular-DD0031?logo=angular&logoColor=white"
+    },
+    {
+      "alt": "Azure",
+      "src": "https://img.shields.io/badge/Azure-0078D4?logo=microsoftazure&logoColor=white"
+    },
+    {
+      "alt": "AWS",
+      "src": "https://img.shields.io/badge/AWS-232F3E?logo=amazonaws&logoColor=white"
+    },
+    {
+      "alt": "Docker",
+      "src": "https://img.shields.io/badge/Docker-2496ED?logo=docker&logoColor=white"
+    },
+    {
+      "alt": "Kubernetes",
+      "src": "https://img.shields.io/badge/Kubernetes-326CE5?logo=kubernetes&logoColor=white"
+    }
+  ],
+  "chips": [],
+  "timelineTitle": "📅 Career Timeline",
+  "roles": [
+    {
+      "icon": "💳",
+      "company": "Vistaprint",
+      "title": "Technical Lead",
+      "location": "Barcelona, Spain",
+      "period": "2022 – 2023",
+      "website": "https://www.vistaprint.com/",
+      "summary": "Led an Agile payments team, architected <strong>React + .NET</strong> payment flows, and coached developers through reviews, planning, and retros.",
+      "achievements": [
+        "Built new <strong>payment methods & processes</strong> for global rollout.",
+        "Drove quality via <strong>architecture + leadership</strong>."
+      ],
+      "tech": ".NET, WebAPI, React, AWS, SQL Server, MySQL, PowerShell, Bash, Microservices"
+    },
+    {
+      "icon": "⚽",
+      "company": "Derivco Sports",
+      "title": "Team Lead",
+      "location": "Barcelona, Spain",
+      "period": "2019 – 2022",
+      "website": "https://www.derivco.com/",
+      "summary": "Managed and motivated a Trading Division team; modernized CI/CD and engineering practices.",
+      "achievements": [
+        "Introduced <strong>Azure YAML pipelines</strong> for CI/CD.",
+        "Championed <strong>TDD</strong> and Agile best practices."
+      ],
+      "tech": ".NET Core, ASP.NET, Azure, YAML, SQL Server, Microservices, PowerShell"
+    },
+    {
+      "icon": "💡",
+      "company": "Inventive Group",
+      "title": "Principal Engineer",
+      "location": "Austin, TX",
+      "period": "2017 – 2018",
+      "website": "https://inventive.io/",
+      "summary": "Grew team from <strong>0 → 5</strong>, delivered MVPs that unlocked new revenue streams.",
+      "achievements": [
+        "Established <strong>AWS-based CI/CD</strong> with Docker + Octopus Deploy.",
+        "Built cross-platform cloud apps with <strong>Angular + .NET Core</strong>."
+      ],
+      "tech": ".NET, Angular, AWS, Azure, TypeScript, NodeJS, MySQL, Serverless"
+    },
+    {
+      "icon": "🏢",
+      "company": "Contec Holdings",
+      "title": "Senior Architect",
+      "location": "Schenectady, NY",
+      "period": "2016 – 2017",
+      "summary": "Directed <strong>cloud-first internal apps</strong> (AWS EC2/RDS/S3), mentored teams in ASP.NET & Angular.",
+      "achievements": [
+        "Migrated to <strong>GitHub + CI/CD</strong>.",
+        "Implemented <strong>PowerBI analytics</strong> for insights."
+      ],
+      "tech": ".NET, Angular, AWS, Azure, TypeScript, SQL Server, MySQL, PowerShell"
+    },
+    {
+      "icon": "🔧",
+      "company": "MXToolbox",
+      "title": "Technical Architect",
+      "location": "Austin, TX",
+      "period": "2014 – 2016",
+      "website": "https://mxtoolbox.com/",
+      "summary": "Led flagship product development and mentored engineers.",
+      "achievements": [
+        "Built automated <strong>CI/CD</strong> with GitHub + Jenkins + TeamCity."
+      ],
+      "tech": ".NET, Angular, AWS, SQL Server, Bootstrap, Dapper"
+    },
+    {
+      "icon": "🏷",
+      "company": "Revionics",
+      "title": "Software Architect",
+      "location": "Austin, TX",
+      "period": "2013 – 2014",
+      "summary": "Created the company’s <strong>Markdown product</strong> and mission-critical apps; prototyped on SQL Server & VoltDB.",
+      "tech": ".NET, Angular, T-SQL, MVC, WebAPI"
+    },
+    {
+      "icon": "🎥",
+      "company": "Symphony Video",
+      "title": "Director of Software Engineering",
+      "location": "Syracuse, NY",
+      "period": "2007 – 2013",
+      "summary": "Directed product architecture, development, and delivery.",
+      "achievements": [
+        "Automated <strong>installers & upgrades</strong>.",
+        "Implemented <strong>CI/CD</strong> with GitHub + TeamCity."
+      ],
+      "tech": ".NET, MVC, WebAPI, SQL Server, NUnit, WCF"
+    }
+  ],
+  "educationTitle": "🎓 Education & Growth",
+  "education": [
+    {
+      "school": "Alfred University, NY",
+      "degree": "B.S. Computer Science (Cum Laude)",
+      "details": "Minor: Management Information Systems"
+    }
+  ],
+  "quote": "“Great software isn’t just <strong>code</strong> — it’s <strong>collaboration, clarity, and craftsmanship</strong>.”"
+}
