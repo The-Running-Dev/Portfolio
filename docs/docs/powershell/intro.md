@@ -1,4 +1,4 @@
-# PowerShell & Automation
+# Automation
 
 - **[iCloudSync](https://github.com/The-Running-Dev/iCloudSync)**  
   **Updated**: June 23, 2023 @ 13:15  

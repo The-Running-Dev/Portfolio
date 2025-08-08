@@ -1,4 +1,4 @@
-# Infrastructure & DevOps
+# Infrastructure
 
 - **[AzureDevOps-Templates](https://github.com/The-Running-Dev/Demo-AzureDevOps-Templates)**  
   **Updated**: July 6, 2025 @ 15:31  

@@ -1,4 +1,4 @@
-# Open Source Contributions
+# Open Source
 
 - **[Chocolatey Packages](https://github.com/chocolatey-community/chocolatey-packages/pulls?q=is%3Apr+author%3AThe-Running-Dev)**  
   The core repository for Chocolatey packages. I contributed a dozen packages to this repository (like Spotify, JetBrains WebStorm and DataGrip, etc.)
