@@ -22,6 +22,10 @@ permissions:
   contents: write
   packages: write
 
+defaults:
+  run:
+    working-directory: docs
+
 jobs:
   Artifacts:
     runs-on: ubuntu-latest
