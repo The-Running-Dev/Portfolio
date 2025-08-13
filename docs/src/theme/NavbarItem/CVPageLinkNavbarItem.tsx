@@ -1,10 +1,13 @@
 import React from 'react';
 import Link from '@docusaurus/Link';
-import { featuresConfig } from '../../data';
+
+import { useFeaturesConfig } from '../../config/FeaturesConfig';
 
 const CVPageLinkNavbarItem: React.FC = () => {
+  const featuresConfig = useFeaturesConfig();
+
   // Don't render if CV page is disabled
-  if (!featuresConfig.enableCVPage) {
+  if (!featuresConfig.cvPage) {
     return null;
   }
 

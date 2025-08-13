@@ -1,5 +1,18 @@
 import { IconDefinition } from '@fortawesome/fontawesome-svg-core';
 
+export interface BadgeConfig {
+  templateVariables: TemplateVariables;
+  
+  badgeCategories: BadgeCategory[];
+}
+
+export interface TemplateVariables {
+  demoUrl: string;
+  docsUrl: string;
+  user: string;
+  repository: string;
+}
+
 export interface Badge {
   name: string;
   url: string;
@@ -13,19 +26,13 @@ export interface BadgeCategory {
   badges: Badge[];
 }
 
-export interface UseBadgeConfigProps {
-  user?: string;
-  repository?: string;
-  groups?: string[];
-}
-
-export interface UseBadgeConfigResult {
-  badgeCategories: BadgeCategory[];
-  loading: boolean;
-}
-
 export interface BadgesProps {
   user?: string;
   repository?: string;
   groups?: string[]; // Optional array of group IDs to display
+}
+
+export interface BadgesData {
+  badgeCategories: BadgeCategory[];
+  loading: boolean;
 }

@@ -1,6 +1,6 @@
 import React from 'react';
 import Layout from '@theme/Layout';
-import PortfolioPage from '../components/PortfolioPage';
+import PortfolioPage from '../components/Portfolio';
 
 export default function Portfolio(): React.ReactElement {
   return (

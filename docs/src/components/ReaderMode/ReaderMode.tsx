@@ -1,7 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faBook, faBookOpen } from '@fortawesome/free-solid-svg-icons';
-import { featuresConfig } from '../../data';
+
+import FeatureComponent from "../FeatureComponent";
+import { Features } from "../../config/FeaturesConfig";
+
 import './ReaderMode.css';
 
 /**
@@ -15,12 +18,13 @@ import './ReaderMode.css';
  * - Strips unnecessary UI elements and optimizes typography
  */
 const ReaderMode: React.FC = () => {
-  const [isReaderMode, setIsReaderMode] = useState<boolean>(false);
-
-  // Don't render if disabled
-  if (!featuresConfig.enableReaderMode) {
-    return null;
-  }
+  return (
+    <FeatureComponent
+      feature={Features.ReaderMode}
+      configData={{}} // No config data needed for this component
+    >
+      {() => {
+        const [isReaderMode, setIsReaderMode] = useState<boolean>(false);
 
   useEffect(() => {
     // Load saved reader mode preference from localStorage
@@ -71,6 +75,9 @@ const ReaderMode: React.FC = () => {
         />
       </button>
     </div>
+  );
+      }}
+    </FeatureComponent>
   );
 };
 

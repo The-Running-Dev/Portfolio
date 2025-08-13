@@ -1,29 +1,53 @@
-// documentation/src/components/Badges/index.tsx - Badges component
 import React from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { featuresConfig } from "../../data";
+import {
+  faCogs,
+  faBoxOpen,
+  faBook,
+  faShieldAlt,
+  faUsers,
+  faChartLine
+} from '@fortawesome/free-solid-svg-icons';
+
 import { Badge, BadgeCategory, BadgesProps } from "./models";
-import useConfig from "./useConfig";
+import { Badges as configData } from '../../../data';
+import { getData } from "../../data";
 
 const Badges: React.FC<BadgesProps> = () => {
-  // Use custom hook to load badge configuration
-  const { badgeCategories, loading } = useConfig({});
+  // Load badge configuration directly using getData with processor
+  const { badgeCategories } = getData(configData, {
+    processor: (data) => {
+      const iconMap = {
+        faCogs,
+        faBoxOpen,
+        faBook,
+        faShieldAlt,
+        faUsers,
+        faChartLine
+      };
 
-  // Don't render if disabled or no badges
-  if (
-    !featuresConfig.enableBadges ||
-    !badgeCategories ||
-    badgeCategories.length === 0
-  ) {
+      const processedCategories = data.badgeCategories?.map((category: any) => ({
+        ...category,
+        icon: iconMap[category.iconName as keyof typeof iconMap] || iconMap.faCogs,
+        badges: category.badges?.map((badge: any) => {
+          let processedUrl = badge.url;
+          // Process template variables if they exist
+          if (data.templateVariables) {
+            Object.entries(data.templateVariables).forEach(([key, value]) => {
+              processedUrl = processedUrl.replace(new RegExp(`{{${key}}}`, 'g'), value as string);
+            });
+          }
+          return { ...badge, url: processedUrl };
+        })
+      })) || [];
+
+      return { badgeCategories: processedCategories };
+    }
+  });
+
+  // Don't render if no badges
+  if (!badgeCategories || badgeCategories.length === 0) {
     return null;
-  }
-
-  if (loading) {
-    return (
-      <div style={{ padding: "1rem 0", textAlign: "center" }}>
-        <p>Loading Badges...</p>
-      </div>
-    );
   }
 
   const Category: React.FC<BadgeCategory> = ({ title, badges, icon }) => (

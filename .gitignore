@@ -74,3 +74,7 @@ scripts/get-version.js
 /docs/template-setup.ps1
 /docs/template-build.ps1
 artifacts/
+
+.idea/
+/docs/summaries/
+**/data/*.json

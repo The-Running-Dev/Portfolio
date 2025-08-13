@@ -6,15 +6,22 @@
 // Re-export everything from the data loader
 export * from './dataLoader';
 
+// Re-export cache management utilities
+export * from './cacheManager';
+
+// Re-export hooks
+export * from '../hooks';
+
 // Re-export types for convenience  
-export type { CVData } from '../components/CVPage/models';
-export type { PortfolioData } from '../components/PortfolioPage/models';
-export type { Theme } from '../entities/theme';
-export type { NavbarLink } from '../entities/navbarLink';
-export type { FeaturesConfig } from '../entities/featuresConfig';
+export type { CVData } from '../components/CV/models';
+export type { PortfolioData } from '../components/Portfolio/models';
+export type { Theme } from '../components/ThemeSwitcher/models';
+export type { NavBarLink } from '../entities/navBarLink';
+export type { FeaturesConfig } from '../config/FeaturesConfig/models';
 export type {
     BadgeConfigData,
+    GitHubConfigData,
     GiscusConfigData,
     GitHubLinksConfigData,
     VersionConfigData
-} from './dataLoader';
+} from './models';

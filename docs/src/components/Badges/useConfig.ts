@@ -8,14 +8,16 @@ import {
   faUsers,
   faChartLine
 } from '@fortawesome/free-solid-svg-icons';
-import { badgesConfig } from '../../data';
-import { UseBadgeConfigProps, UseBadgeConfigResult } from './models';
+
+import { getData } from "../../data";
+import { BadgesProps, BadgesData, BadgeCategory } from './models';
+import { Badges as configData } from '../../../data'
 
 export default function useConfig({
   user,
   repository,
   groups
-}: UseBadgeConfigProps = {}): UseBadgeConfigResult {
+}: BadgesProps = {}): BadgesData {
   const iconMap: Record<string, IconDefinition> = {
     faCogs,
     faBoxOpen,
@@ -25,20 +27,35 @@ export default function useConfig({
     faChartLine
   };
 
-  // Compute badge sections based on config and props
-  const badgeCategories = useMemo(() => {
-    const replacements: Record<string, string> = {
-      ...badgesConfig.templateVariables,
-      user: user || badgesConfig.templateVariables.user,
-      repository: repository || badgesConfig.templateVariables.repository
-    };
-
-    return badgesConfig.badgeCategories
-      .filter((category) => !groups || groups.includes(category.key))
-      .map((category) => ({
+  const { badgeCategories, templateVariables } = getData(configData, {
+    processor: (data) => {
+      const badgeCategories = data.badgeCategories.map((category) => ({
         key: category.key,
         title: category.title,
-        icon: iconMap[category.icon] || faCogs,
+        icon: iconMap[category.icon as unknown as string] || faCogs,
+        badges: category.badges
+      }));
+
+      const templateVariables = data.templateVariables;
+
+      return { badgeCategories, templateVariables };
+    },
+  });
+
+  // Compute processed badge sections based on config and props
+  const processedBadgeCategories = useMemo(() => {
+    const replacements: Record<string, string> = {
+      ...templateVariables,
+      user: user || templateVariables.user,
+      repository: repository || templateVariables.repository
+    };
+
+    return badgeCategories
+      .filter((category: BadgeCategory) => !groups || groups.includes(category.key))
+      .map((category: BadgeCategory) => ({
+        key: category.key,
+        title: category.title,
+        icon: category.icon,
         badges: category.badges.map((badge) => ({
           name: badge.name,
           url: badge.url.replace(/\{(\w+)\}/g, (_, k) => replacements[k] || ''),
@@ -48,7 +65,7 @@ export default function useConfig({
           )
         }))
       }));
-  }, [user, repository, groups]);
+  }, [badgeCategories, templateVariables, user, repository, groups]);
 
-  return { badgeCategories, loading: false };
+  return { badgeCategories: processedBadgeCategories, loading: false };
 }

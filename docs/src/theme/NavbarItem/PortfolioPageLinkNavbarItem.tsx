@@ -1,15 +1,18 @@
 import React from 'react';
 import Link from '@docusaurus/Link';
-import { featuresConfig } from '../../data';
 
+import { useFeaturesConfig } from '../../config/FeaturesConfig';
+  
 const PortfolioPageLinkNavbarItem: React.FC = () => {
+  const featuresConfig = useFeaturesConfig();
+
   // Don't render if Portfolio page is disabled
-  if (!featuresConfig.enablePortfolioPage) {
+  if (!featuresConfig.portfolioPage) {
     return null;
   }
 
   // Don't render if Portfolio is being used as the index page
-  if (featuresConfig.usePortfolioPageAsIndex) {
+  if (featuresConfig.portfolioPageAsIndex) {
     return null;
   }
 

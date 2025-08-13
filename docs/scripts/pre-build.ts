@@ -1,14 +1,42 @@
 import * as fs from 'fs';
 import * as path from 'path';
-import type { NavbarLink, Theme } from '../src/entities';
-import { PreBuildConfig } from '../config/site-config';
+import * as yaml from 'js-yaml';
+
+import { getData } from '../src/data';
+import { GlobalConfig } from '../src/entities';
+import type { Theme } from '../src/components/ThemeSwitcher';
+import type { CustomNavBarLink } from '../src/components/NavBarLinks';
 
 const THEMES_DIR = path.join(__dirname, '../static/themes');
 const PAGES_DIR = path.join(__dirname, '../src/pages');
-const THEMES_CONFIG: string = path.join(__dirname, '../data/themes.json');
-const NAVBAR_CONFIG: string = path.join(__dirname, '../data/navbarLinks.json');
+const DEMOS_DIR = path.join(__dirname, '../src/pages/demos');
+const CONFIG_DIR = path.join(__dirname, '../config');
+const DATA_DIR = path.join(__dirname, '../data');
+const THEMES_CONFIG: string = path.join(__dirname, '../data/Themes.json');
+const NAVBAR_CONFIG: string = path.join(__dirname, '../data/NavBarLinks.json');
 
 export class PreBuild {
+  private config: GlobalConfig;
+
+  constructor() {
+    this.config = this.loadConfig();
+  }
+  
+  private loadConfig(): GlobalConfig {
+    try {
+      // Read the fresh GlobalConfig.json file directly
+      const globalConfigPath = path.join(DATA_DIR, 'GlobalConfig.json');
+      const globalConfigContent = fs.readFileSync(globalConfigPath, 'utf-8');
+      const configData = JSON.parse(globalConfigContent);
+
+      return getData<GlobalConfig>(configData);
+    } catch (error) {
+      console.error(`❌ Failed to Load Config: ${error instanceof Error ? error.message : String(error)}`);
+      
+      throw error;
+    }
+  }
+
   private getThemeMetadata(file: string): Theme {
     const filePath = path.join(THEMES_DIR, file);
     const name = file.replace(/\.css$/, '');
@@ -18,9 +46,11 @@ export class PreBuild {
 
       // Extract theme-id and theme-name from CSS header comments with improved regex
       // Handle both single-line and multi-line comments, with better whitespace handling
-      const themeIdMatch = content.match(/@theme-id\s*:\s*([^\s\r\n*\/]+)/i);
+      const themeIdMatch = content.match(
+        /@theme-id\s*:\s*([^\s\r\n*/]{1,50})/i
+      );
       const themeNameMatch = content.match(
-        /@theme-name\s*:\s*([^\r\n*]+?)(?=\r?\n|\*\/|$)/i
+        /@theme-name\s*:\s*([^\r\n*]{1,100})/i
       );
 
       // Extract and validate theme ID
@@ -71,6 +101,7 @@ export class PreBuild {
   public generateThemeConfig(): void {
     if (!fs.existsSync(THEMES_DIR)) {
       console.warn(`Themes Directory not Found: ${THEMES_DIR}`);
+
       return;
     }
 
@@ -81,12 +112,12 @@ export class PreBuild {
 
     // Find the default theme
     const defaultTheme =
-      themes.find((t) => t.name === PreBuildConfig.DefaultTheme) || themes[0];
+      themes.find((t) => t.name === this.config.preBuild?.defaultTheme) || themes[0];
 
     // Create the JSON data structure
     const themeData = {
       themes: themes,
-      defaultTheme: defaultTheme?.name || PreBuildConfig.DefaultTheme
+      defaultTheme: defaultTheme?.name || this.config.preBuild?.defaultTheme
     };
 
     // Write the JSON file
@@ -100,24 +131,28 @@ export class PreBuild {
   }
 
   private copyMarkdown(): void {
+    if (!this.config.preBuild?.copyMarkdownFromProjectRoot) {
+      return;
+    }
+
     // Ensure the pages directory exists first
     if (!fs.existsSync(PAGES_DIR)) {
       fs.mkdirSync(PAGES_DIR, { recursive: true });
     }
 
     const mdFiles = fs
-      .readdirSync(PreBuildConfig.ProjectRoot)
+      .readdirSync(this.config.preBuild?.projectRoot)
       .filter((f) => f.endsWith('.md'));
 
     mdFiles.forEach((file) => {
-      const srcPath = path.join(PreBuildConfig.ProjectRoot, file);
+      const srcPath = path.join(this.config.preBuild?.projectRoot, file);
       // Rename README.md to index.md in destination directory
       const destFile = file.toLowerCase() === 'readme.md' ? 'index.md' : file;
       const dstPath = path.join(PAGES_DIR, destFile);
 
       const fileExists = fs.existsSync(dstPath);
 
-      if (!fileExists || PreBuildConfig.OverwriteExistingFiles) {
+      if (!fileExists || this.config.preBuild?.overwriteExistingFiles) {
         fs.copyFileSync(srcPath, dstPath);
 
         const action = fileExists ? 'Overwrote' : 'Copied';
@@ -130,11 +165,15 @@ export class PreBuild {
   }
 
   private generateNavbar(): void {
+    if (!this.config.preBuild?.generateNavBarForPages) {
+      return;
+    }
+
     const mdFiles = fs.readdirSync(PAGES_DIR).filter((f) => f.endsWith('.md'));
     let numberOfLinks = 0;
 
     // Exclude index.md (homepage) from navbar links
-    const links: NavbarLink[] = mdFiles
+    const links: CustomNavBarLink[] = mdFiles
       .filter((file) => path.parse(file).name.toLowerCase() !== 'index')
       .map((file) => {
         const name = path.parse(file).name;
@@ -148,6 +187,7 @@ export class PreBuild {
             .replace(/[-_]/g, ' ')
             .replace(/\b\w/g, (c) => c.toUpperCase()),
           to: toPath,
+          href: toPath,
           position: 'left' as const
         };
       });
@@ -167,10 +207,120 @@ export class PreBuild {
     console.log(`✅ Navbar Config Created with ${numberOfLinks} Entry(s)`);
   }
 
+  static updateNavbarLinks() {
+    const demoFiles = fs.readdirSync(DEMOS_DIR).filter((f) => f.endsWith('.tsx'));
+    const links = demoFiles.map((file) => {
+      const name = file.replace(/\.tsx$/, '');
+      let label = name
+        .replace(/-/g, ' ')
+        .replace(/(^| )\w/g, (s) => s.toUpperCase())
+        .replace('Config', 'Config')
+        .replace('Theme', 'Theme')
+        .replace('Configuration', 'Configuration');
+
+      // Remove 'Demo' suffix if it exists, we'll handle this in the label formatting
+      label = label.replace(/ Demo$/, '');
+
+      return {
+        label,
+        href: `/demos/${name}`,
+        position: "left",
+        title: "",
+        icon: ""
+      };
+    });
+
+    const navbarConfig = {
+      dropdown: false,
+      dropdownLabel: "Demos",
+      className: "",
+      showIcons: true,
+      links: links
+    };
+
+    fs.writeFileSync(NAVBAR_CONFIG, JSON.stringify(navbarConfig, null, 2));
+  }
+
+  private processYamlToJson(): void {
+    // Ensure the data directory exists
+    if (!fs.existsSync(DATA_DIR)) {
+      fs.mkdirSync(DATA_DIR, { recursive: true });
+    }
+
+    if (!fs.existsSync(CONFIG_DIR)) {
+      console.warn(`Config Directory not Found: ${CONFIG_DIR}`);
+
+      return;
+    }
+
+    const yamlFiles = fs
+      .readdirSync(CONFIG_DIR)
+      .filter((f) => f.endsWith('.yml') || f.endsWith('.yaml'));
+
+    let processedCount = 0;
+
+    yamlFiles.forEach((file) => {
+      try {
+        const yamlPath = path.join(CONFIG_DIR, file);
+        const yamlContent = fs.readFileSync(yamlPath, 'utf-8');
+
+        // Parse YAML to JavaScript object
+        const jsonData = yaml.load(yamlContent);
+
+        // Generate JSON filename (replace .yml/.yaml with .json)
+        const jsonFileName = file.replace(/\.(yml|yaml)$/, '.json');
+        const jsonPath = path.join(DATA_DIR, jsonFileName);
+
+        // Write JSON file (overwrite if exists)
+        fs.writeFileSync(jsonPath, JSON.stringify(jsonData, null, 2), 'utf-8');
+
+        console.log(`✅ Converted ${file} --> data/${jsonFileName}`);
+        processedCount++;
+
+      } catch (error) {
+        console.error(`❌ Failed to Process ${file}: ${error instanceof Error ? error.message : String(error)}`);
+      }
+    });
+
+    console.log(`✅ YAML to JSON Conversion Completed: ${processedCount} File(s) Processed`);
+
+    // Reload config after processing YAML files
+    this.loadConfig();
+  }
+
+  private createDataIndex(): void {
+    const indexPath = path.join(DATA_DIR, 'index.ts');
+
+    try {
+      // Get all JSON files from the data directory
+      const jsonFiles = fs
+        .readdirSync(DATA_DIR)
+        .filter((f: string) => f.endsWith('.json'))
+        .sort(); // Sort alphabetically for consistent output
+
+      // Generate export statements for each JSON file
+      const exportStatements = jsonFiles.map((file: string) => {
+        const baseName = path.parse(file).name;
+
+        return `export { default as ${baseName} } from './${file}';`;
+      });
+
+      const indexContent = exportStatements.join('\n') + '\n';
+
+      fs.writeFileSync(indexPath, indexContent, 'utf-8');
+
+      console.log(`✅ Created data/index.ts with ${jsonFiles.length} JSON export(s)`);
+    } catch (error) {
+      console.error(`❌ Failed to Create data/index.ts: ${error instanceof Error ? error.message : String(error)}`);
+    }
+  }
+
   public process(): void {
+    this.processYamlToJson();
     this.copyMarkdown();
     this.generateNavbar();
     this.generateThemeConfig();
+    this.createDataIndex();
 
     console.log('🚀 Pre Build Process Completed');
   }

@@ -2,16 +2,13 @@ import { themes as prismThemes } from 'prism-react-renderer';
 import type { Config } from '@docusaurus/types';
 import type * as Preset from '@docusaurus/preset-classic';
 
-import { SiteConfig, SiteThemeConfig } from './config/site-config';
-import type { NavbarLink } from './src/entities';
-import navbarData from './data/navbarLinks.json';
+import { getData } from './src/data';
+import { GlobalConfig } from './src/entities';
+import { GlobalConfig as configData } from './data/';
 
-const navbarLinks: NavbarLink[] = (navbarData?.links || []) as NavbarLink[];
-
+const globalConfig = getData<GlobalConfig>(configData);
 const config: Config = {
-  // Use base defaults
-  ...SiteConfig,
-  // Add additional configuration
+  ...globalConfig.site,
   trailingSlash: false,
   favicon: 'img/favicon.ico',
   onBrokenLinks: 'throw',
@@ -39,50 +36,42 @@ const config: Config = {
     ]
   ],
   themeConfig: {
-    // Merge base theme config
-    ...SiteThemeConfig,
+    // Merge theme config
+    ...globalConfig.theme,
     // Add additional theme configuration
     image: 'img/docusaurus-social-card.jpg',
     navbar: {
-      ...SiteThemeConfig.navbar,
+      ...globalConfig?.theme?.navbar,
       hideOnScroll: false,
       items: [
-        {
-          type: 'docSidebar',
-          sidebarId: 'docsSidebar',
-          position: 'left',
-          label: 'Projects',
-        },
-         {
-          type: 'custom-CVPage',
-          position: 'left'
-        },
         {
           type: 'custom-PortfolioPage',
           position: 'left'
         },
         {
-          type: 'custom-gitHubLinks',
+          type: 'custom-ProjectsPage',
+          position: 'left'
+        },
+        {
+          type: 'custom-CVPage',
+          position: 'left'
+        },
+        {
+          type: 'custom-VersionDisplay',
           position: 'right'
         },
         {
-          type: 'custom-versionDisplay',
+          type: 'custom-ThemeSwitcher',
           position: 'right'
         },
         {
-          type: 'custom-themeSwitcher',
+          type: 'custom-TextSizeSwitcher',
           position: 'right'
         },
         {
-          type: 'custom-textSizeSwitcher',
+          type: 'custom-ReaderMode',
           position: 'right'
-        },
-        {
-          type: 'custom-readerMode',
-          position: 'right'
-        },
-        // ...auto generated links,
-        ...navbarLinks
+        }
       ]
     },
     colorMode: {

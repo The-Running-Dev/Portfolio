@@ -1,0 +1,11 @@
+export { default as Badges } from './Badges.json';
+export { default as CVData } from './CVData.json';
+export { default as Giscus } from './Giscus.json';
+export { default as GitHub } from './GitHub.json';
+export { default as GitHubLinks } from './GitHubLinks.json';
+export { default as GlobalConfig } from './GlobalConfig.json';
+export { default as NavBarLinks } from './NavBarLinks.json';
+export { default as PortfolioData } from './PortfolioData.json';
+export { default as Projects } from './Projects.json';
+export { default as Themes } from './Themes.json';
+export { default as Version } from './Version.json';

@@ -1,1 +1,1 @@
-& pnpm run start
+& pnpm run dev
