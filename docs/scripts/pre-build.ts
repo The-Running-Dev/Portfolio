@@ -358,7 +358,7 @@ export class PreBuild {
   private loadConfig(): GlobalConfig {
     try {
       // Read the fresh GlobalConfig.json file directly
-      const globalConfigPath = path.join(DATA_DIR, 'GlobalConfig.json');
+      const globalConfigPath = path.join(DATA_DIR, 'globalConfig.json');
       const globalConfigContent = fs.readFileSync(globalConfigPath, 'utf-8');
       const configData = JSON.parse(globalConfigContent);
 
