@@ -9,7 +9,7 @@ import Link from "@docusaurus/Link";
 import FeatureComponent from "../FeatureComponent";
 import { Features } from "../../config/FeaturesConfig";
 import { CustomNavBarLink, NavBarLinksConfig, NavBarLinksProps } from "./models";
-import { NavBarLinks as configData } from '../../../data'
+import { navBarLinks as configData } from '../../../data'
 
 import "./NavBarLinks.css";
 

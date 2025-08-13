@@ -2,7 +2,7 @@ import Timeline from "./CVTimeline";
 
 import FeatureComponent from "../FeatureComponent";
 import { Features } from "../../config/FeaturesConfig";
-import { CVData as configData } from '../../../data'
+import { cvData as configData } from '../../../data'
 
 import "./cv.css";
 import "./cv-reader.css";

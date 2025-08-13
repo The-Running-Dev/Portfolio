@@ -3,7 +3,7 @@ import { useState, useEffect } from "react";
 
 import FeatureComponent from "../FeatureComponent";
 import { Features } from "../../config/FeaturesConfig";
-import { Projects as configData } from "../../../data";
+import { projects as configData } from "../../../data";
 import { type ProcessedCategory, type ProcessedProjectData } from "./models";
 import useConfig from "./hooks/useConfig";
 

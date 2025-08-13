@@ -6,7 +6,7 @@ import { faPalette } from "@fortawesome/free-solid-svg-icons";
 import FeatureComponent from "../FeatureComponent";
 import { Features } from "../../config/FeaturesConfig";
 import { Theme } from "./models";
-import { Themes as configData } from '../../../data';
+import { themes as configData } from '../../../data';
 
 import "./ThemeSwitcher.css";
 

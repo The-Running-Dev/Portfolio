@@ -11,7 +11,7 @@ import {
 
 import { getData } from "../../data";
 import { BadgesProps, BadgesData, BadgeCategory } from './models';
-import { Badges as configData } from '../../../data'
+import { badges as configData } from '../../../data'
 
 export default function useConfig({
   user,

@@ -3,7 +3,7 @@ import React from "react";
 import FeatureComponent from "../FeatureComponent";
 import { Features } from "../../config/FeaturesConfig";
 import NavBarLinks from "../NavBarLinks";
-import { GitHubLinks as configData } from '../../../data'
+import { gitHubLinks as configData } from '../../../data'
 
 /**
  * GitHubLinks Component

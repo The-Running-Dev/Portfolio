@@ -4,7 +4,7 @@ import type * as Preset from '@docusaurus/preset-classic';
 
 import { getData } from './src/data';
 import { GlobalConfig } from './src/entities';
-import { GlobalConfig as configData } from './data/';
+import { globalConfig as configData } from './data/';
 
 const globalConfig = getData<GlobalConfig>(configData);
 const config: Config = {

@@ -5,7 +5,7 @@ import Heading from '@theme/Heading';
 
 import FeatureComponent from "../FeatureComponent";
 import { Features } from "../../config/FeaturesConfig";
-import { PortfolioData as configData } from '../../../data'
+import { portfolioData as configData } from '../../../data'
 
 import './portfolio.css';
 import './portfolio-reader.css';

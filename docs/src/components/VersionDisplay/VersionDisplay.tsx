@@ -3,7 +3,7 @@ import React from "react";
 import FeatureComponent from "../FeatureComponent";
 import { Features } from "../../config/FeaturesConfig";
 import { VersionConfig } from "./models";
-import { Version as configData } from '../../../data'
+import { version as configData } from '../../../data'
 
 import "./VersionDisplay.css";
 

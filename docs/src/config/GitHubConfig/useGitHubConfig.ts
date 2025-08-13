@@ -2,7 +2,7 @@ import { useMemo } from "react";
 
 import { getData } from "../../data/dataLoader";
 import type { GitHubConfig } from "./models";
-import { GitHub as configData } from '../../../data';
+import { gitHub as configData } from '../../../data';
 
 // GitHub configuration hook
 export function useGitHubConfig(): GitHubConfig {
