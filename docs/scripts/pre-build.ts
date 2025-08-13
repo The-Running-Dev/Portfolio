@@ -27,9 +27,9 @@ export class PreBuild {
   }
 
   private createDataIndex(): void {
-    const indexPath = path.join(DATA_DIR, 'index.ts');
-
     try {
+      const indexPath = path.join(DATA_DIR, 'index.ts');
+      
       // Ensure data directory exists
       if (!fs.existsSync(DATA_DIR)) {
         console.log(`📁 Creating Data Directory: ${DATA_DIR}`);
@@ -37,33 +37,13 @@ export class PreBuild {
         fs.mkdirSync(DATA_DIR, { recursive: true });
       }
 
-      // Get all JSON files from the data directory
-      const jsonFiles = fs.existsSync(DATA_DIR) 
-        ? fs.readdirSync(DATA_DIR)
-            .filter((f: string) => f.endsWith('.json'))
-            .sort() // Sort alphabetically for consistent output
-        : [];
-
-      if (jsonFiles.length === 0) {
-        // Create empty placeholder index file if no JSON files exist
+      // Create empty index file if it doesn't exist
+      if (!fs.existsSync(indexPath)) {
         const emptyIndexContent = '// Empty index - will be populated after YAML conversion\n';
         
         fs.writeFileSync(indexPath, emptyIndexContent, 'utf-8');
         
         console.log(`✅ Created Placeholder data/index.ts`);
-      } else {
-        // Generate export statements for each JSON file
-        const exportStatements = jsonFiles.map((file: string) => {
-          const baseName = path.parse(file).name;
-
-          return `export { default as ${baseName} } from './${file}';`;
-        });
-
-        const indexContent = exportStatements.join('\n') + '\n';
-        
-        fs.writeFileSync(indexPath, indexContent, 'utf-8');
-        
-        console.log(`✅ Created data/index.ts with ${jsonFiles.length} JSON export(s)`);
       }
     } catch (error) {
       console.error(`❌ Failed to Create Data Index: ${error instanceof Error ? error.message : String(error)}`);
@@ -366,6 +346,33 @@ export class PreBuild {
       console.error(`❌ Failed to Load Config: ${error instanceof Error ? error.message : String(error)}`);
       
       throw error;
+    }
+  }
+
+  private createDataIndex(): void {
+    const indexPath = path.join(DATA_DIR, 'index.ts');
+
+    try {
+      // Get all JSON files from the data directory
+      const jsonFiles = fs
+        .readdirSync(DATA_DIR)
+        .filter((f: string) => f.endsWith('.json'))
+        .sort(); // Sort alphabetically for consistent output
+
+      // Generate export statements for each JSON file
+      const exportStatements = jsonFiles.map((file: string) => {
+        const baseName = path.parse(file).name;
+
+        return `export { default as ${baseName} } from './${file}';`;
+      });
+
+      const indexContent = exportStatements.join('\n') + '\n';
+
+      fs.writeFileSync(indexPath, indexContent, 'utf-8');
+
+      console.log(`✅ Created data/index.ts with ${jsonFiles.length} JSON export(s)`);
+    } catch (error) {
+      console.error(`❌ Failed to Create data/index.ts: ${error instanceof Error ? error.message : String(error)}`);
     }
   }
 
