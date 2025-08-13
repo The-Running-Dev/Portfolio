@@ -11,8 +11,8 @@ const PAGES_DIR = path.join(__dirname, '../src/pages');
 const DEMOS_DIR = path.join(__dirname, '../src/pages/demos');
 const CONFIG_DIR = path.join(__dirname, '../config');
 const DATA_DIR = path.join(__dirname, '../data');
-const THEMES_CONFIG: string = path.join(__dirname, '../data/Themes.json');
-const NAVBAR_CONFIG: string = path.join(__dirname, '../data/NavBarLinks.json');
+const THEMES_CONFIG: string = path.join(__dirname, '../data/themes.json');
+const NAVBAR_CONFIG: string = path.join(__dirname, '../data/navBarLinks.json');
 
 export class PreBuild {
   private config: GlobalConfig;
@@ -77,7 +77,7 @@ export class PreBuild {
 
       if (!fs.existsSync(yamlConfigPath)) {
         console.warn(`⚠️ GlobalConfig.yml not Found at ${yamlConfigPath}`);
-        
+
         return;
       }
 

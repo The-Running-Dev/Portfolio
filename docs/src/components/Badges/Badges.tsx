@@ -10,7 +10,7 @@ import {
 } from '@fortawesome/free-solid-svg-icons';
 
 import { Badge, BadgeCategory, BadgesProps } from "./models";
-import { Badges as configData } from '../../../data';
+import { badges as configData } from '../../../data';
 import { getData } from "../../data";
 
 const Badges: React.FC<BadgesProps> = () => {

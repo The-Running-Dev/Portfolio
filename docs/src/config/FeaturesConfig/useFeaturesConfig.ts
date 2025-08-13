@@ -2,7 +2,7 @@ import { useMemo } from "react";
 
 import { getData } from "../../data/dataLoader";
 import { Features, FeaturesConfig, validateFeaturesConfig, FeatureToConfigMap } from "./models";
-import { GlobalConfig as configData } from '../../../data';
+import { globalConfig as configData } from '../../../data';
 
 /**
  * Features Configuration Hook
@@ -46,7 +46,7 @@ export function useFeaturesConfig(): FeaturesConfig {
       // Provide helpful error message for developers
       throw new Error(
         `Features Configuration Failed to Load: ${error instanceof Error ? error.message : 'Unknown error'}\n` +
-        'Please Check That GlobalConfig.json features section exists and has all required boolean fields.'
+        'Please Check That globalConfig.json Features Section Exists and Has All Boolean Fields.'
       );
     }
   }, []); // Empty dependency array since config is static

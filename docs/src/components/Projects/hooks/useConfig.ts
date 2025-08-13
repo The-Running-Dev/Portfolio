@@ -8,7 +8,7 @@ import {
   FilterOption,
   ProjectStats
 } from '../models';
-import { Projects as configData } from '../../../../data';
+import { projects as configData } from '../../../../data';
 
 export default function useConfig({
   selectedCategory,
