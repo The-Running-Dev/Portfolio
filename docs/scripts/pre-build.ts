@@ -2,7 +2,6 @@ import * as fs from 'fs';
 import * as path from 'path';
 import * as yaml from 'js-yaml';
 
-import { getData } from '../src/data';
 import { GlobalConfig } from '../src/entities';
 import type { Theme } from '../src/components/ThemeSwitcher';
 import type { CustomNavBarLink } from '../src/components/NavBarLinks';
@@ -19,24 +18,91 @@ export class PreBuild {
   private config: GlobalConfig;
 
   constructor() {
+    // Create data directory and index first to avoid import errors
+    this.createDataIndex();
+
+    this.setupConfig();
+
     this.config = this.loadConfig();
   }
-  
-  private loadConfig(): GlobalConfig {
-    try {
-      // Read the fresh GlobalConfig.json file directly
-      const globalConfigPath = path.join(DATA_DIR, 'GlobalConfig.json');
-      const globalConfigContent = fs.readFileSync(globalConfigPath, 'utf-8');
-      const configData = JSON.parse(globalConfigContent);
 
-      return getData<GlobalConfig>(configData);
+  private createDataIndex(): void {
+    const indexPath = path.join(DATA_DIR, 'index.ts');
+
+    try {
+      // Ensure data directory exists
+      if (!fs.existsSync(DATA_DIR)) {
+        console.log(`📁 Creating Data Directory: ${DATA_DIR}`);
+
+        fs.mkdirSync(DATA_DIR, { recursive: true });
+      }
+
+      // Get all JSON files from the data directory
+      const jsonFiles = fs.existsSync(DATA_DIR) 
+        ? fs.readdirSync(DATA_DIR)
+            .filter((f: string) => f.endsWith('.json'))
+            .sort() // Sort alphabetically for consistent output
+        : [];
+
+      if (jsonFiles.length === 0) {
+        // Create empty placeholder index file if no JSON files exist
+        const emptyIndexContent = '// Empty index - will be populated after YAML conversion\n';
+        
+        fs.writeFileSync(indexPath, emptyIndexContent, 'utf-8');
+        
+        console.log(`✅ Created Placeholder data/index.ts`);
+      } else {
+        // Generate export statements for each JSON file
+        const exportStatements = jsonFiles.map((file: string) => {
+          const baseName = path.parse(file).name;
+
+          return `export { default as ${baseName} } from './${file}';`;
+        });
+
+        const indexContent = exportStatements.join('\n') + '\n';
+        
+        fs.writeFileSync(indexPath, indexContent, 'utf-8');
+        
+        console.log(`✅ Created data/index.ts with ${jsonFiles.length} JSON export(s)`);
+      }
     } catch (error) {
-      console.error(`❌ Failed to Load Config: ${error instanceof Error ? error.message : String(error)}`);
+      console.error(`❌ Failed to Create Data Index: ${error instanceof Error ? error.message : String(error)}`);
+    }
+  }
+
+  private setupConfig(): void {
+    try {
+      const yamlConfigPath = path.join(CONFIG_DIR, 'GlobalConfig.yml');
+      const jsonConfigPath = path.join(DATA_DIR, 'GlobalConfig.json');
+
+      if (!fs.existsSync(yamlConfigPath)) {
+        console.warn(`⚠️ GlobalConfig.yml not Found at ${yamlConfigPath}`);
+        return;
+      }
+
+      // Ensure data directory exists
+      if (!fs.existsSync(DATA_DIR)) {
+        console.log(`📁 Creating Data Directory: ${DATA_DIR}`);
+
+        fs.mkdirSync(DATA_DIR, { recursive: true });
+      }
+
+      // Read and convert YAML to JSON
+      const yamlContent = fs.readFileSync(yamlConfigPath, 'utf-8');
+      const configData = yaml.load(yamlContent) as any;
+      
+      // Write JSON file
+      fs.writeFileSync(jsonConfigPath, JSON.stringify(configData, null, 2), 'utf-8');
+
+      console.log(`✅ Converted GlobalConfig.yml to GlobalConfig.json`);
+      
+    } catch (error) {
+      console.error(`❌ Failed to Convert GlobalConfig.yml: ${error instanceof Error ? error.message : String(error)}`);
       
       throw error;
     }
   }
-
+  
   private getThemeMetadata(file: string): Theme {
     const filePath = path.join(THEMES_DIR, file);
     const name = file.replace(/\.css$/, '');
@@ -284,34 +350,22 @@ export class PreBuild {
 
     console.log(`✅ YAML to JSON Conversion Completed: ${processedCount} File(s) Processed`);
 
-    // Reload config after processing YAML files
-    this.loadConfig();
+    // Create the index.ts file after YAML processing
+    this.createDataIndex();
   }
 
-  private createDataIndex(): void {
-    const indexPath = path.join(DATA_DIR, 'index.ts');
-
+  private loadConfig(): GlobalConfig {
     try {
-      // Get all JSON files from the data directory
-      const jsonFiles = fs
-        .readdirSync(DATA_DIR)
-        .filter((f: string) => f.endsWith('.json'))
-        .sort(); // Sort alphabetically for consistent output
+      // Read the fresh GlobalConfig.json file directly
+      const globalConfigPath = path.join(DATA_DIR, 'GlobalConfig.json');
+      const globalConfigContent = fs.readFileSync(globalConfigPath, 'utf-8');
+      const configData = JSON.parse(globalConfigContent);
 
-      // Generate export statements for each JSON file
-      const exportStatements = jsonFiles.map((file: string) => {
-        const baseName = path.parse(file).name;
-
-        return `export { default as ${baseName} } from './${file}';`;
-      });
-
-      const indexContent = exportStatements.join('\n') + '\n';
-
-      fs.writeFileSync(indexPath, indexContent, 'utf-8');
-
-      console.log(`✅ Created data/index.ts with ${jsonFiles.length} JSON export(s)`);
+      return configData as GlobalConfig;
     } catch (error) {
-      console.error(`❌ Failed to Create data/index.ts: ${error instanceof Error ? error.message : String(error)}`);
+      console.error(`❌ Failed to Load Config: ${error instanceof Error ? error.message : String(error)}`);
+      
+      throw error;
     }
   }
 
@@ -320,7 +374,6 @@ export class PreBuild {
     this.copyMarkdown();
     this.generateNavbar();
     this.generateThemeConfig();
-    this.createDataIndex();
 
     console.log('🚀 Pre Build Process Completed');
   }

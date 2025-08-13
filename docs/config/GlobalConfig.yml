@@ -36,3 +36,4 @@ features:
   portfolioPageAsIndex: true
   projectsPage: true
   dataCaching: false
+  apiDataFetching: false
