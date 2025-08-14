@@ -1,8 +1,7 @@
 {
   "name": "docusaurus-template",
   "version": "1.0.0",
-  "private": true,
-  "type": "module",
+  "private": false,
   "scripts": {
     "docusaurus": "docusaurus",
     "prestart": "tsx ./scripts/pre-build.ts",

@@ -43,10 +43,10 @@ if (-not $SkipTemplateSetup) {
         exit 1
     }
     
-    docker info | Out-Null
-    if ($LASTEXITCODE -ne 0) {
+    try {
+        docker info | Out-Null
+    } catch {
         Write-Host "❌ Docker not Running. Use -SkipTemplateSetup to Bypass." -ForegroundColor Red
-
         exit 1
     }
 
@@ -74,6 +74,10 @@ $appDirPath = if ([System.IO.Path]::IsPathRooted($appDir)) { $appDir } else {
 
 $devCommand = @"
 Set-Location '$appDirPath'
+if (-not (Get-Command pnpm -ErrorAction SilentlyContinue)) {
+  Write-Host '❌ pnpm not found. Please install pnpm (https://pnpm.io/installation).' -ForegroundColor Red
+  exit 1
+}
 Write-Host '📦 Installing Dependencies...' -ForegroundColor Yellow
 pnpm install
 Write-Host '⚙️ Running prebuild:prod...' -ForegroundColor Yellow  

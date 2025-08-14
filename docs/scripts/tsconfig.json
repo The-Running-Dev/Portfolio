@@ -1,5 +1,4 @@
 {
-  "extends": "../tsconfig.json",
   "compilerOptions": {
     // Override settings specific to pre-build script
     "target": "ES2020",
