@@ -27,7 +27,10 @@ export default [
       '@typescript-eslint/no-unused-vars': 'warn',
       '@typescript-eslint/no-explicit-any': 'off',
       '@typescript-eslint/explicit-function-return-type': 'off',
-      '@typescript-eslint/ban-ts-comment': 'off'
+      '@typescript-eslint/ban-ts-comment': 'off',
+      // Disable no-redeclare for TypeScript function overloads
+      'no-redeclare': 'off',
+      '@typescript-eslint/no-redeclare': 'off'
     }
   },
   {

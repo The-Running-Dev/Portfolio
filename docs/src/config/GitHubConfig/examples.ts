@@ -10,11 +10,10 @@ import {
   getRepositoryInfo,
   getGitHubUrls,
   getProjectMetadata,
-  getGitHubUrl,
   getRepositoryUrl,
   getApiUrl
 } from './GitHubConfig';
-import { validateGitHubConfig, generateGitHubUrls } from './validation';
+import { validateGitHubConfig } from './validation';
 
 // =============================================================================
 // Example 1: Badge System Integration
@@ -24,7 +23,7 @@ import { validateGitHubConfig, generateGitHubUrls } from './validation';
  * Generate badge URLs using GitHub configuration
  */
 export function createProjectBadges() {
-  const { repo, organization, project } = getRepositoryInfo();
+  const { repo } = getRepositoryInfo();
   const { repository, releases } = getGitHubUrls();
   const { license, topics } = getProjectMetadata();
 
@@ -95,7 +94,7 @@ export function createNavigationLinks() {
  * Configure Giscus comments system
  */
 export function createGiscusConfig() {
-  const { repo, organization, project } = getRepositoryInfo();
+  const { repo } = getRepositoryInfo();
   
   return {
     repo,

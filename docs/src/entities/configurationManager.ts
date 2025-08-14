@@ -346,7 +346,7 @@ export class ConfigurationManager {
   
   private log(message: string): void {
     if (this.options.enableLogging) {
-      //console.log(`[ConfigurationManager:${this.options.namespace}] ${message}`);
+      console.log(`[ConfigurationManager:${this.options.namespace}] ${message}`);
     }
   }
 }
