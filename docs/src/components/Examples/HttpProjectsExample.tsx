@@ -3,48 +3,13 @@ import { useApi } from '../../hooks/useApi';
 
 /**
  * Example component showing how to use the useApi hook for project data
- * This component demonstrates the API hook that is disabled by default
+ * This component demonstrates the Http hook that is disabled by default
  */
-export const ApiProjectsExample: React.FC = () => {
+export const HttpProjectsExample: React.FC = () => {
   // Using the general useApi hook (disabled by default)
-  const { data, loading, error, enabled, refetch } = useApi({
+  const { data, loading, error, refetch } = useApi({
     endpoint: '/api/projects'
-    // enabled: true, // Uncomment this line to enable API fetching
   });
-
-  if (!enabled) {
-    return (
-      <div
-        style={{
-          padding: '1rem',
-          backgroundColor: '#f5f5f5',
-          borderRadius: '8px',
-          margin: '1rem 0'
-        }}
-      >
-        <h3>API Data Fetching</h3>
-        <p>
-          <strong>Status:</strong> Disabled (by default)
-        </p>
-        <p>
-          The API hook is disabled by default for security and performance
-          reasons. To enable it, you need to:
-        </p>
-        <ol>
-          <li>
-            Set the feature flag <code>apiDataFetching: true</code> in
-            GlobalConfig.json
-          </li>
-          <li>
-            Pass <code>enabled: true</code> to the useApi hook
-          </li>
-        </ol>
-        <p>
-          <em>This demonstrates the disabled state behavior.</em>
-        </p>
-      </div>
-    );
-  }
 
   return (
     <div
@@ -55,11 +20,11 @@ export const ApiProjectsExample: React.FC = () => {
         margin: '1rem 0'
       }}
     >
-      <h3>API Projects Data</h3>
+      <h3>Http Projects Data</h3>
 
       {loading && (
         <div style={{ color: '#0066cc' }}>
-          <p>🔄 Loading Projects from API...</p>
+          <p>🔄 Loading Projects from Http...</p>
         </div>
       )}
 
@@ -112,7 +77,6 @@ export const ApiProjectsExample: React.FC = () => {
           <strong>Hook Configuration:</strong>
         </p>
         <ul>
-          <li>Enabled: {enabled ? '✅ Yes' : '❌ No'}</li>
           <li>
             Endpoint: <code>/api/projects</code>
           </li>
@@ -125,4 +89,4 @@ export const ApiProjectsExample: React.FC = () => {
   );
 };
 
-export default ApiProjectsExample;
+export default HttpProjectsExample;

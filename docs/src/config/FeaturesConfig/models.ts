@@ -16,8 +16,7 @@ export enum Features {
   PortfolioPage,
   ProjectsPage,
   PortfolioPageAsIndex,
-  DataCaching,
-  ApiDataFetching
+  DataCaching
 }
 
 /**
@@ -60,9 +59,6 @@ export interface FeaturesConfig {
 
   /** Whether to enable data caching for improved performance */
   dataCaching: boolean;
-
-  /** Whether to enable API data fetching (disabled by default) */
-  apiDataFetching: boolean;
 }
 
 /**
@@ -80,8 +76,7 @@ export const FeatureToConfigMap: Record<Features, keyof FeaturesConfig> = {
   [Features.PortfolioPage]: 'portfolioPage',
   [Features.ProjectsPage]: 'projectsPage',
   [Features.PortfolioPageAsIndex]: 'portfolioPageAsIndex',
-  [Features.DataCaching]: 'dataCaching',
-  [Features.ApiDataFetching]: 'apiDataFetching'
+  [Features.DataCaching]: 'dataCaching'
 };
 
 /**
@@ -102,8 +97,7 @@ export function validateFeaturesConfig(config: any): config is FeaturesConfig {
     'portfolioPage',
     'portfolioPageAsIndex',
     'projectsPage',
-    'dataCaching',
-    'apiDataFetching'
+    'dataCaching'
   ];
 
   for (const field of requiredBooleanFields) {

@@ -5,13 +5,13 @@
   "scripts": {
     "docusaurus": "docusaurus",
     "prestart": "tsx ./scripts/pre-build.ts",
-    "start": "docusaurus build",
+    "start": "docusaurus build --out-dir ./artifacts",
     "start:docker": "docusaurus start --host 0.0.0.0 --port 3000",
     "prebuild:prod": "cross-env NODE_ENV=production tsx --tsconfig ./scripts/tsconfig.json ./scripts/pre-build.ts",
     "prebuild:dev": "tsx --tsconfig ./scripts/tsconfig.json ./scripts/pre-build.ts",
     "prebuild:check": "tsc --project ./scripts/tsconfig.json --noEmit",
     "prebuild": "tsx ./scripts/pre-build.ts",
-    "build": "docusaurus build",
+    "build": "docusaurus build --out-dir ./artifacts",
     "build:prod": "docusaurus build --out-dir ./artifacts",
     "swizzle": "docusaurus swizzle",
     "deploy": "docusaurus deploy",
@@ -28,6 +28,7 @@
     "format:check": "prettier --check .",
     "check-all": "pnpm run lint && pnpm run typecheck",
     "prepare": "husky",
+    "predev": "tsx ./scripts/pre-build.ts",
     "debug": "docusaurus start",
     "watch:config": "chokidar \"config/**/*.{yml,yaml}\" -c \"tsx ./scripts/pre-build.ts\"",
     "dev": "concurrently \"npm run watch:config\" \"npm run debug\""

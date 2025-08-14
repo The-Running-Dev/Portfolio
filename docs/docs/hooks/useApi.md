@@ -58,19 +58,7 @@ interface UseApiConfig {
 
 ### Enabling API Fetching
 
-To enable the API fetching functionality:
-
-1. **Update GlobalConfig.json:**
-
-```json
-{
-  "features": {
-    "apiDataFetching": true
-  }
-}
-```
-
-1. **Enable in Hook:**
+To enable the API fetching functionality, simply pass `enabled: true` to the hook:
 
 ```tsx
 const { data, loading, error } = useApi({
@@ -117,17 +105,6 @@ const handleFetch = async () => {
 const handleReset = () => {
   reset();
 };
-```
-
-### Specialized Hook for Projects
-
-```tsx
-import { useApiProjects } from '../hooks/useApi';
-
-const { data, loading, error } = useApiProjects({
-  enabled: true
-  // endpoint defaults to '/api/projects'
-});
 ```
 
 ## Return Values

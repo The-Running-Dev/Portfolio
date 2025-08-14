@@ -4,7 +4,6 @@
 
 export {
   useApi,
-  useApiProjects,
   type UseApiConfig,
   type UseApiState
 } from './useApi';

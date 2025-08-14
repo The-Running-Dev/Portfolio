@@ -29,29 +29,9 @@ const { data, loading, error, enabled } = useApi({
 
 **See:** [Documentation](../docs/hooks/useApi.md)
 
-### useApiProjects
-
-A specialized version of `useApi` pre-configured for project data fetching.
-
-```tsx
-import { useApiProjects } from '../hooks/useApi';
-
-const { data, loading, error } = useApiProjects({
-  enabled: true
-});
-```
-
 ## Configuration
 
-All API-related hooks require the `apiDataFetching` feature flag to be enabled in `GlobalConfig.json`:
-
-```json
-{
-  "features": {
-    "apiDataFetching": true
-  }
-}
-```
+All API-related hooks are available by default. To use them, simply pass `enabled: true` in the hook configuration.
 
 ## Example Component
 

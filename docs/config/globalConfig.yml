@@ -1,26 +1,26 @@
 # Pre-build configuration settings
 preBuild:
   # Project root directory, relative to the main docs directory
-  projectRoot: '../'
+  projectRoot: ../
   overwriteExistingFiles: true
   copyMarkdownFromProjectRoot: false
   generateNavBarForPages: true
-  defaultTheme: 'blue'
+  defaultTheme: blue
 
 site:
-  title: 'Portfolio'
-  tagline: 'Technical Projects & Experience'
-  url: 'https://portfolio.subzerodev.com'
-  baseUrl: '/'
-  organizationName: 'The-Running-Dev'
-  projectName: 'Portfolio'
+  title: Portfolio
+  tagline: Technical Projects & Experience
+  url: https://portfolio.subzerodev.com
+  baseUrl: /
+  organizationName: The-Running-Dev
+  projectName: Portfolio
 
 theme:
   navbar:
-    title: 'Portfolio'
+    title: Portfolio
     logo:
-      alt: 'Portfolio'
-      src: 'img/logo.svg'
+      alt: Portfolio
+      src: img/logo.svg
 
 features:
   giscusComments: false
@@ -35,5 +35,12 @@ features:
   portfolioPage: true
   portfolioPageAsIndex: true
   projectsPage: true
-  dataCaching: false
-  apiDataFetching: false
+  dataCaching: true
+
+projects:
+  provider: http
+  location: http://localhost:3001/api/v1/projects
+
+# projects:
+#   provider: json # JSON file provider, or 'http' for API
+#   location: ./data/projects.json # or URL: 'https://api.subzerodev.com/projects'

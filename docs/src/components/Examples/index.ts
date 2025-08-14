@@ -2,4 +2,4 @@
  * Barrel export for example components
  */
 
-export { default as ApiProjectsExample } from './ApiProjectsExample';
+export { default as ApiProjectsExample } from './HttpProjectsExample';

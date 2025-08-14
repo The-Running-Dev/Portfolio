@@ -5,7 +5,10 @@ import FeatureComponent from '../FeatureComponent';
 import { Features } from '../../config/FeaturesConfig';
 import { projects as configData } from '../../../data';
 import { type ProcessedCategory, type ProcessedProjectData } from './models';
-import useConfig from './hooks/useConfig';
+
+// Import new hooks instead of useConfig
+import { useDataContext } from '../../context';
+import { useProcessor } from './hooks';
 
 // Import custom hooks, components, and utilities
 import { useUrlFilter, useSearch, useScrollRefs } from './hooks';
@@ -20,6 +23,10 @@ import { calculateCategoryResults, calculateTechnologyResults } from './utils';
 import './projects.css';
 import './projects-reader.css';
 
+/**
+ * Enhanced Projects component using the new data provider architecture
+ * This component can work with any data provider (JSON or API)
+ */
 export default function Projects(): ReactNode {
   const [selectedFilter, setSelectedFilter] = useUrlFilter();
   const [selectedDateRange, setSelectedDateRange] = useState('most-recent');
@@ -28,6 +35,22 @@ export default function Projects(): ReactNode {
     useSearch();
   const { filtersRef, projectsRef, scrollToProjects, scrollToFilters } =
     useScrollRefs();
+
+  // Get raw data from data context
+  const { data: rawData, loadingState, meta } = useDataContext();
+
+  // Process data using the processor hook
+  const { processedData, loading: processingLoading, error: processingError } = useProcessor(rawData, {
+    selectedCategory: selectedFilter,
+    selectedDateRange: selectedDateRange,
+    searchTerm: searchTerm
+  });
+
+  // Combine loading states
+  const isLoading = loadingState.loading || processingLoading;
+
+  // Combine error states
+  const hasError = loadingState.error || processingError;
 
   // Auto-set date range to "all-dates" when searching
   useEffect(() => {
@@ -59,8 +82,6 @@ export default function Projects(): ReactNode {
 
   // Function to toggle filter selection
   const handleFilterToggle = (filterKey: string) => {
-    console.log('Filter toggled:', filterKey);
-
     if (selectedFilter === filterKey) {
       // If clicking the same filter, toggle it off by setting to most-recent default
       setSelectedFilter('most-recent');
@@ -69,13 +90,6 @@ export default function Projects(): ReactNode {
       setSelectedFilter(filterKey);
     }
   };
-
-  // Use the new useConfig hook
-  const { processedData, loading } = useConfig({
-    selectedCategory: selectedFilter,
-    selectedDateRange: selectedDateRange,
-    searchTerm: searchTerm
-  });
 
   // Correct the filter case once processedData is available
   useEffect(() => {
@@ -91,10 +105,51 @@ export default function Projects(): ReactNode {
     }
   }, [processedData, selectedFilter]);
 
-  if (loading) {
+  // Handle error state
+  if (hasError) {
+    const errorMessage = loadingState.error?.message || processingError?.message || 'Unknown error';
+    const isDataError = !!loadingState.error;
+    const isProcessingError = !!processingError;
+
     return (
       <div className="portfolio-wrap">
-        <p className="portfolio-muted">Loading Projects...</p>
+        <div style={{ padding: '2rem', textAlign: 'center' }}>
+          <p className="portfolio-muted" style={{ color: '#d32f2f' }}>
+            ❌ {isDataError ? 'Data Loading Error' : 'Data Processing Error'}
+          </p>
+          <p style={{ fontSize: '0.9rem', color: '#666', marginTop: '0.5rem' }}>
+            {errorMessage}
+          </p>
+          {isDataError && (
+            <p style={{ fontSize: '0.8rem', color: '#888', marginTop: '1rem' }}>
+              Please check your data source configuration or try refreshing the page.
+            </p>
+          )}
+          {isProcessingError && (
+            <p style={{ fontSize: '0.8rem', color: '#888', marginTop: '1rem' }}>
+              There was an issue processing the project data. Please try refreshing the page.
+            </p>
+          )}
+        </div>
+      </div>
+    );
+  }
+
+  // Handle loading states with detailed messaging
+  if (isLoading) {
+    let loadingMessage = '🔄 Loading Projects...';
+    let loadingDetails = 'Fetching data and processing filters...';
+
+    return (
+      <div className="portfolio-wrap">
+        <div style={{ padding: '2rem', textAlign: 'center' }}>
+          <p className="portfolio-muted">{loadingMessage}</p>
+          {loadingDetails && (
+            <p style={{ fontSize: '0.9rem', color: '#666', marginTop: '0.5rem' }}>
+              {loadingDetails}
+            </p>
+          )}
+        </div>
       </div>
     );
   }
@@ -106,6 +161,17 @@ export default function Projects(): ReactNode {
           return (
             <div className="portfolio-wrap">
               <p className="portfolio-muted">No Projects Found.</p>
+            </div>
+          );
+        }
+
+        // Ensure processedData is available before rendering
+        if (!processedData) {
+          return (
+            <div className="portfolio-wrap">
+              <div style={{ padding: '2rem', textAlign: 'center' }}>
+                <p className="portfolio-muted">🔄 Processing Data...</p>
+              </div>
             </div>
           );
         }
@@ -133,6 +199,23 @@ export default function Projects(): ReactNode {
                 scrollToFilters={scrollToFilters}
               />
             </main>
+            {/* Performance/Debug info for development */}
+            {process.env.NODE_ENV === 'development' && (
+              <div style={{ 
+                position: 'fixed', 
+                bottom: '10px', 
+                right: '10px', 
+                background: 'rgba(0,0,0,0.8)', 
+                color: 'white', 
+                padding: '8px', 
+                borderRadius: '4px',
+                fontSize: '12px',
+                zIndex: 1000
+              }}>
+                🔧 Data: {meta?.provider?.toUpperCase() || 'Unknown'}
+                📊 Projects: {processedData.stats.totalProjects}
+              </div>
+            )}
           </>
         );
       }}

@@ -1,7 +1,8 @@
 import { FeaturesConfig } from 'src/config/FeaturesConfig';
 
 /**
- 
+ * Global Configuration Interface
+ * Main configuration object for the entire application
  */
 export interface GlobalConfig {
   /** Pre-build configuration (optional) */
@@ -13,7 +14,11 @@ export interface GlobalConfig {
   /** Theme configuration (optional) */
   theme?: ThemeConfig;
 
+  /** Features configuration (optional) */
   features?: FeaturesConfig;
+
+  /** Projects configuration (optional) */
+  projects?: ProjectsConfig;
 }
 
 /**
@@ -92,4 +97,16 @@ export interface NavbarConfig {
 
   /** Logo configuration for the navbar */
   logo: LogoConfig;
+}
+
+/**
+ * Projects Configuration
+ * Defines how projects data is loaded and accessed
+ */
+export interface ProjectsConfig {
+  /** Data provider type - 'json' for static JSON files, 'http' for API */
+  provider: 'json' | 'http';
+
+  /** Location of the data - file path for 'json', URL for 'http' */
+  location: string;
 }

@@ -1,5 +1,5 @@
 /**
- * # Pre-Build Script for Docusaurus Portfolio Site
+ * # Pre-Build Script for Docusaurus Site
  *
  * This script performs essential setup tasks before the main Docusaurus build process.
  * It handles configuration conversion, theme management, navigation generation, and
@@ -57,7 +57,7 @@
  * - Add comprehensive unit tests
  * - Consider file watching for development mode
  *
- * @author Portfolio Build System
+ * @author Template Build System
  * @version 1.0.0
  */
 
@@ -68,6 +68,7 @@ import * as yaml from 'js-yaml';
 import { GlobalConfig } from '../src/entities';
 import type { Theme } from '../src/components/ThemeSwitcher';
 import type { CustomNavBarLink } from '../src/components/NavBarLinks';
+import { DEFAULT_PROJECTS_CONFIG } from '../src/components/Projects/constants';
 
 const THEMES_DIR = path.join(__dirname, '../static/themes');
 const PAGES_DIR = path.join(__dirname, '../src/pages');
@@ -681,6 +682,13 @@ export class PreBuild {
         configData.preBuild = this.getDefaultConfig().preBuild;
       }
 
+      // Add default values for missing Projects properties
+      if (!configData.projects) {
+        console.warn('[WARN] Projects Configuration Missing, Using Defaults');
+
+        configData.projects = this.getDefaultConfig().projects;
+      }
+
       return configData as GlobalConfig;
     } catch (error) {
       console.error(
@@ -706,7 +714,8 @@ export class PreBuild {
         overwriteExistingFiles: false,
         projectRoot: '',
         defaultTheme: 'default'
-      }
+      },
+      projects: DEFAULT_PROJECTS_CONFIG
     } as GlobalConfig;
   }
 

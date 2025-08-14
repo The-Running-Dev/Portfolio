@@ -1,21 +1,21 @@
 import { useState, useEffect, useCallback } from 'react';
-import { useFeatureFlag } from '../config/FeaturesConfig';
-import { Features } from '../config/FeaturesConfig';
 
 /**
  * API Hook Configuration
  */
-export interface UseApiConfig {
-  /** Whether to enable API data fetching (disabled by default) */
-  enabled?: boolean;
+export interface UseApiConfig {    
   /** API endpoint URL */
   endpoint?: string;
+  
   /** Request options */
   options?: RequestInit;
+  
   /** Auto-fetch on mount */
   autoFetch?: boolean;
+  
   /** Retry attempts on failure */
   retryAttempts?: number;
+  
   /** Retry delay in milliseconds */
   retryDelay?: number;
 }
@@ -26,14 +26,16 @@ export interface UseApiConfig {
 export interface UseApiState<T = any> {
   /** API response data */
   data: T | null;
+  
   /** Loading state */
   loading: boolean;
+  
   /** Error state */
   error: Error | null;
-  /** Whether API is enabled */
-  enabled: boolean;
+    
   /** Manually trigger fetch */
   refetch: () => Promise<void>;
+  
   /** Reset state */
   reset: () => void;
 }
@@ -42,7 +44,6 @@ export interface UseApiState<T = any> {
  * Default API configuration
  */
 const DEFAULT_CONFIG: Required<UseApiConfig> = {
-  enabled: false, // Disabled by default
   endpoint: '',
   options: {
     method: 'GET',
@@ -65,20 +66,12 @@ const DEFAULT_CONFIG: Required<UseApiConfig> = {
  * @example
  * ```tsx
  * // Basic usage (disabled by default)
- * const { data, loading, error, enabled } = useApi({
+ * const { data, loading, error } = useApi({
  *   endpoint: '/api/projects'
- * });
- *
- * // Explicitly enabled
- * const { data, loading, error, refetch } = useApi({
- *   enabled: true,
- *   endpoint: '/api/projects',
- *   autoFetch: true
  * });
  *
  * // Manual fetch with retry
  * const { data, refetch, reset } = useApi({
- *   enabled: true,
  *   endpoint: '/api/projects',
  *   autoFetch: false,
  *   retryAttempts: 5,
@@ -87,14 +80,8 @@ const DEFAULT_CONFIG: Required<UseApiConfig> = {
  * ```
  */
 export function useApi<T = any>(config: UseApiConfig = {}): UseApiState<T> {
-  // Check if API data fetching feature is enabled globally
-  const isApiFeatureEnabled = useFeatureFlag(Features.ApiDataFetching);
-
   // Merge config with defaults
   const mergedConfig = { ...DEFAULT_CONFIG, ...config };
-
-  // Determine if API should be enabled (both feature flag and config must be true)
-  const isEnabled = isApiFeatureEnabled && mergedConfig.enabled;
 
   // State management
   const [data, setData] = useState<T | null>(null);
@@ -106,7 +93,7 @@ export function useApi<T = any>(config: UseApiConfig = {}): UseApiState<T> {
    */
   const fetchData = useCallback(
     async (attempt: number = 1): Promise<void> => {
-      if (!isEnabled || !mergedConfig.endpoint) {
+      if (!mergedConfig.endpoint) {
         return;
       }
 
@@ -124,15 +111,16 @@ export function useApi<T = any>(config: UseApiConfig = {}): UseApiState<T> {
         }
 
         const jsonData = await response.json();
+
         setData(jsonData);
       } catch (err) {
         const error =
-          err instanceof Error ? err : new Error('Unknown API error');
+          err instanceof Error ? err : new Error('Unknown API Error');
 
         // Retry logic
         if (attempt < mergedConfig.retryAttempts) {
           console.warn(
-            `API fetch attempt ${attempt} failed, retrying in ${mergedConfig.retryDelay}ms...`,
+            `API Fetch Attempt ${attempt} Failed, Retrying in ${mergedConfig.retryDelay}ms...`,
             error.message
           );
 
@@ -145,16 +133,16 @@ export function useApi<T = any>(config: UseApiConfig = {}): UseApiState<T> {
 
         // Max retries reached
         console.error(
-          'API fetch failed after all retry attempts:',
+          'API Fetch Failed After All Retry Attempts:',
           error.message
         );
+
         setError(error);
       } finally {
         setLoading(false);
       }
     },
     [
-      isEnabled,
       mergedConfig.endpoint,
       mergedConfig.options,
       mergedConfig.retryAttempts,
@@ -180,32 +168,18 @@ export function useApi<T = any>(config: UseApiConfig = {}): UseApiState<T> {
 
   // Auto-fetch on mount and when dependencies change
   useEffect(() => {
-    if (isEnabled && mergedConfig.autoFetch && mergedConfig.endpoint) {
+    if (mergedConfig.autoFetch && mergedConfig.endpoint) {
       fetchData(1);
     }
-  }, [isEnabled, mergedConfig.autoFetch, mergedConfig.endpoint, fetchData]);
+  }, [mergedConfig.autoFetch, mergedConfig.endpoint, fetchData]);
 
   return {
     data,
     loading,
     error,
-    enabled: isEnabled,
     refetch,
     reset
   };
-}
-
-/**
- * Hook specifically for fetching project data from an API
- * Pre-configured for project data structure
- */
-export function useApiProjects(
-  config: Omit<UseApiConfig, 'endpoint'> & { endpoint?: string } = {}
-) {
-  return useApi({
-    endpoint: '/api/projects',
-    ...config
-  });
 }
 
 export default useApi;
