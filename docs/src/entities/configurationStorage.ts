@@ -40,11 +40,11 @@ export class LocalStorageConfigurationStorage implements ConfigurationStorage {
 
   async clear(): Promise<void> {
     try {
-      const keys = Object.keys(localStorage).filter(key => 
+      const keys = Object.keys(localStorage).filter((key) =>
         key.startsWith(this.prefix)
       );
-      
-      keys.forEach(key => localStorage.removeItem(key));
+
+      keys.forEach((key) => localStorage.removeItem(key));
     } catch (error) {
       console.error('Failed to clear configuration storage:', error);
       throw error;

@@ -1,14 +1,14 @@
-import { SearchBoxProps } from "../models";
+import { SearchBoxProps } from '../models';
 
 /**
  * SearchBox component for project filtering
  * Includes search input field and clear button functionality
  */
-export function SearchBox({ 
-  searchTerm, 
-  setSearchTerm, 
-  searchInputRef, 
-  handleClearSearch 
+export function SearchBox({
+  searchTerm,
+  setSearchTerm,
+  searchInputRef,
+  handleClearSearch
 }: SearchBoxProps) {
   return (
     <div className="searchBox">

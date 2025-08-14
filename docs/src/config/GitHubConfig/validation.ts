@@ -1,6 +1,6 @@
 /**
  * GitHub Configuration Validation Utilities
- * 
+ *
  * Provides validation and loading utilities for the GitHub configuration system.
  * Ensures configuration integrity and provides helpful error messages.
  */
@@ -31,12 +31,19 @@ const GitHubUrlsSchema = z.object({
 const GitHubMetadataSchema = z.object({
   defaultBranch: z.string().min(1, 'Default branch cannot be empty'),
   license: z.string().min(1, 'License cannot be empty'),
-  topics: z.array(z.string().min(1, 'Topic cannot be empty')).min(1, 'At least one topic required'),
+  topics: z
+    .array(z.string().min(1, 'Topic cannot be empty'))
+    .min(1, 'At least one topic required'),
   description: z.string().min(1, 'Description cannot be empty')
 });
 
 const GitHubConfigSchema = z.object({
-  repo: z.string().regex(/^[a-zA-Z0-9_.-]+\/[a-zA-Z0-9_.-]+$/, 'Repo must be in owner/repo format'),
+  repo: z
+    .string()
+    .regex(
+      /^[a-zA-Z0-9_.-]+\/[a-zA-Z0-9_.-]+$/,
+      'Repo must be in owner/repo format'
+    ),
   organization: z.string().min(1, 'Organization cannot be empty'),
   project: z.string().min(1, 'Project cannot be empty'),
   urls: GitHubUrlsSchema,
@@ -48,16 +55,26 @@ const GitHubConfigSchema = z.object({
  * @param config - Configuration object to validate
  * @returns Validation result with success/error information
  */
-export function validateGitHubConfig(config: unknown): { success: true; data: GitHubConfig } | { success: false; error: string } {
+export function validateGitHubConfig(
+  config: unknown
+): { success: true; data: GitHubConfig } | { success: false; error: string } {
   try {
     const validatedConfig = GitHubConfigSchema.parse(config);
     return { success: true, data: validatedConfig as GitHubConfig };
   } catch (error) {
     if (error instanceof z.ZodError) {
-      const errorMessages = error.issues.map(err => `${err.path.join('.')}: ${err.message}`).join(', ');
-      return { success: false, error: `GitHub configuration validation failed: ${errorMessages}` };
+      const errorMessages = error.issues
+        .map((err) => `${err.path.join('.')}: ${err.message}`)
+        .join(', ');
+      return {
+        success: false,
+        error: `GitHub configuration validation failed: ${errorMessages}`
+      };
     }
-    return { success: false, error: `Unexpected validation error: ${String(error)}` };
+    return {
+      success: false,
+      error: `Unexpected validation error: ${String(error)}`
+    };
   }
 }
 
@@ -66,7 +83,9 @@ export function validateGitHubConfig(config: unknown): { success: true; data: Gi
  * @param config - GitHub configuration to validate
  * @returns Promise resolving to validation results
  */
-export async function validateGitHubUrls(config: GitHubConfig): Promise<{ valid: string[]; invalid: string[] }> {
+export async function validateGitHubUrls(
+  config: GitHubConfig
+): Promise<{ valid: string[]; invalid: string[] }> {
   const valid: string[] = [];
   const invalid: string[] = [];
 
@@ -77,7 +96,11 @@ export async function validateGitHubUrls(config: GitHubConfig): Promise<{ valid:
       const urlString = String(url);
       new URL(urlString);
       // Additional GitHub-specific validation
-      if (urlString.includes('github.com') || urlString.includes('api.github.com') || key === 'pages') {
+      if (
+        urlString.includes('github.com') ||
+        urlString.includes('api.github.com') ||
+        key === 'pages'
+      ) {
         valid.push(key);
       } else {
         invalid.push(`${key}: Not a GitHub URL`);
@@ -92,7 +115,7 @@ export async function validateGitHubUrls(config: GitHubConfig): Promise<{ valid:
 
 /**
  * Check if repository format is valid
- * @param repo - Repository string to validate  
+ * @param repo - Repository string to validate
  * @returns True if valid owner/repo format
  */
 export function isValidRepoFormat(repo: string): boolean {
@@ -104,11 +127,13 @@ export function isValidRepoFormat(repo: string): boolean {
  * @param repo - Repository in owner/repo format
  * @returns Object with organization and project, or null if invalid
  */
-export function parseRepoString(repo: string): { organization: string; project: string } | null {
+export function parseRepoString(
+  repo: string
+): { organization: string; project: string } | null {
   if (!isValidRepoFormat(repo)) {
     return null;
   }
-  
+
   const [organization, project] = repo.split('/');
   return { organization, project };
 }
@@ -120,14 +145,18 @@ export function parseRepoString(repo: string): { organization: string; project: 
  * @returns Generated URLs object
  */
 export function generateGitHubUrls(
-  repo: string, 
-  options: { 
-    pagesUrl?: string; 
+  repo: string,
+  options: {
+    pagesUrl?: string;
     defaultBranch?: string;
     packagesPath?: string;
   } = {}
 ): GitHubConfig['urls'] {
-  const { pagesUrl, defaultBranch = 'main', packagesPath = '/packages' } = options;
+  const {
+    pagesUrl,
+    defaultBranch = 'main',
+    packagesPath = '/packages'
+  } = options;
   const baseUrl = `https://github.com/${repo}`;
   const apiUrl = `https://api.github.com/repos/${repo}`;
   const [organization] = repo.split('/');
@@ -137,7 +166,9 @@ export function generateGitHubUrls(
     issues: `${baseUrl}/issues`,
     discussions: `${baseUrl}/discussions`,
     docs: `${baseUrl}#readme`,
-    pages: pagesUrl || `https://${organization.toLowerCase()}.github.io/${repo.split('/')[1]}`,
+    pages:
+      pagesUrl ||
+      `https://${organization.toLowerCase()}.github.io/${repo.split('/')[1]}`,
     packages: `${baseUrl}${packagesPath}`,
     api: apiUrl,
     contributors: `${baseUrl}/contributors`,
@@ -197,7 +228,9 @@ export function createGitHubConfigTemplate(
  * @param config - Configuration to validate
  * @throws Error if validation fails
  */
-export function assertValidGitHubConfig(config: unknown): asserts config is GitHubConfig {
+export function assertValidGitHubConfig(
+  config: unknown
+): asserts config is GitHubConfig {
   const result = validateGitHubConfig(config);
   if (!result.success) {
     throw new Error((result as { success: false; error: string }).error);

@@ -23,7 +23,7 @@ import { useApi } from '../hooks/useApi';
 
 const { data, loading, error, enabled } = useApi({
   endpoint: '/api/projects',
-  enabled: true, // Must explicitly enable
+  enabled: true // Must explicitly enable
 });
 ```
 
@@ -37,7 +37,7 @@ A specialized version of `useApi` pre-configured for project data fetching.
 import { useApiProjects } from '../hooks/useApi';
 
 const { data, loading, error } = useApiProjects({
-  enabled: true,
+  enabled: true
 });
 ```
 

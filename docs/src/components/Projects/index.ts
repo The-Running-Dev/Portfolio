@@ -1,8 +1,8 @@
 /**
  * Projects Module
- * 
+ *
  * A comprehensive project showcase component with filtering, searching, and categorization
- * 
+ *
  * Structure:
  * - components/: Reusable UI components (FilterButton, SearchBox, etc.)
  * - hooks/: Custom React hooks for state management
@@ -13,16 +13,21 @@
  */
 
 // Main component
-export { default } from "./Projects";
+export { default } from './Projects';
 
 // Models and configuration
-export * from "./models";
+export * from './models';
 
 // Hooks (for external use if needed)
-export { useUrlFilter, useSearch, useScrollRefs } from "./hooks";
+export { useUrlFilter, useSearch, useScrollRefs } from './hooks';
 
 // Components (for external use if needed)
-export { FilterButton, SearchBox, ProjectHeader, ProjectStats } from "./components";
+export {
+  FilterButton,
+  SearchBox,
+  ProjectHeader,
+  ProjectStats
+} from './components';
 
 // Utils (for external use if needed)
-export { calculateCategoryResults, calculateTechnologyResults } from "./utils";
+export { calculateCategoryResults, calculateTechnologyResults } from './utils';

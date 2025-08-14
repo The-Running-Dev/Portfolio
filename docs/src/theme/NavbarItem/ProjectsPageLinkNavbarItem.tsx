@@ -2,7 +2,7 @@ import React from 'react';
 import Link from '@docusaurus/Link';
 
 import { useFeaturesConfig } from '../../config/FeaturesConfig';
-  
+
 const ProjectsPageLinkNavbarItem: React.FC = () => {
   const featuresConfig = useFeaturesConfig();
 
@@ -12,7 +12,7 @@ const ProjectsPageLinkNavbarItem: React.FC = () => {
   }
 
   return (
-    <Link 
+    <Link
       to="/projects"
       className="navbar__item navbar__link"
       activeClassName="navbar__link--active"

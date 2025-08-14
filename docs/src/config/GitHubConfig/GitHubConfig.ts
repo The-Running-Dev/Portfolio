@@ -1,17 +1,17 @@
 /**
  * @deprecated This file is deprecated. Use configLoader.ts instead.
- * 
+ *
  * GitHub Project Configuration System
- * 
+ *
  * This module has been replaced by the unified configuration loader to consolidate
  * parallel config systems and ensure single source of truth from YAML→JSON.
- * 
+ *
  * @fileoverview Legacy configuration module. All exports now delegate to
  * the unified configuration loader (configLoader.ts) for consistency.
  */
 
 import { GitHubConfig } from './models';
-import { 
+import {
   getGitHubConfig as getUnifiedConfig,
   getRepositoryInfo as getUnifiedRepositoryInfo,
   getGitHubUrls as getUnifiedGitHubUrls,
@@ -74,9 +74,9 @@ export function getGitHubUrl(key: keyof GitHubConfig['urls']): string {
 export function getRepositoryUrl(path?: string): string {
   const urls = getUnifiedGitHubUrls();
   const baseUrl = urls.repository;
-  
+
   if (!path) return baseUrl;
-  
+
   // Handle different path formats
   const cleanPath = path.startsWith('/') ? path : `/${path}`;
   return `${baseUrl}${cleanPath}`;
@@ -91,9 +91,9 @@ export function getRepositoryUrl(path?: string): string {
 export function getApiUrl(endpoint?: string): string {
   const urls = getUnifiedGitHubUrls();
   const baseUrl = urls.api;
-  
+
   if (!endpoint) return baseUrl;
-  
+
   // Handle different endpoint formats
   const cleanEndpoint = endpoint.startsWith('/') ? endpoint : `/${endpoint}`;
   return `${baseUrl}${cleanEndpoint}`;

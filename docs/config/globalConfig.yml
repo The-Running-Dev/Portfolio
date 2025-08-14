@@ -1,26 +1,26 @@
 # Pre-build configuration settings
 preBuild:
   # Project root directory, relative to the main docs directory
-  projectRoot: "../"
+  projectRoot: '../'
   overwriteExistingFiles: true
   copyMarkdownFromProjectRoot: false
   generateNavBarForPages: true
-  defaultTheme: "blue"
+  defaultTheme: 'blue'
 
 site:
-  title: "Portfolio"
-  tagline: "Technical Projects & Experience"
-  url: "https://portfolio.subzerodev.com"
-  baseUrl: "/"
-  organizationName: "The-Running-Dev"
-  projectName: "Portfolio"
+  title: 'Portfolio'
+  tagline: 'Technical Projects & Experience'
+  url: 'https://portfolio.subzerodev.com'
+  baseUrl: '/'
+  organizationName: 'The-Running-Dev'
+  projectName: 'Portfolio'
 
 theme:
   navbar:
-    title: "Portfolio"
+    title: 'Portfolio'
     logo:
-      alt: "Portfolio"
-      src: "img/logo.svg"
+      alt: 'Portfolio'
+      src: 'img/logo.svg'
 
 features:
   giscusComments: false

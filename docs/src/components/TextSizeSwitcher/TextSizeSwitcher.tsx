@@ -1,10 +1,10 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect } from 'react';
 
-import FeatureComponent from "../FeatureComponent";
-import { Features } from "../../config/FeaturesConfig";
+import FeatureComponent from '../FeatureComponent';
+import { Features } from '../../config/FeaturesConfig';
 
-import "./TextSizeSwitcher.css";
-import "./text-size-switcher-reader.css";
+import './TextSizeSwitcher.css';
+import './text-size-switcher-reader.css';
 
 interface TextSize {
   name: string;
@@ -15,29 +15,29 @@ interface TextSize {
 
 const textSizes: TextSize[] = [
   {
-    name: "small",
-    displayName: "Small",
+    name: 'small',
+    displayName: 'Small',
     scale: 0.9,
-    className: "text-size-small",
+    className: 'text-size-small'
   },
   {
-    name: "medium",
-    displayName: "Medium",
+    name: 'medium',
+    displayName: 'Medium',
     scale: 1.0,
-    className: "text-size-medium",
+    className: 'text-size-medium'
   },
   {
-    name: "large",
-    displayName: "Large",
+    name: 'large',
+    displayName: 'Large',
     scale: 1.1,
-    className: "text-size-large",
+    className: 'text-size-large'
   },
   {
-    name: "extra-large",
-    displayName: "Extra Large",
+    name: 'extra-large',
+    displayName: 'Extra Large',
     scale: 1.2,
-    className: "text-size-extra-large",
-  },
+    className: 'text-size-extra-large'
+  }
 ];
 
 const defaultTextSize: TextSize = textSizes[1]; // Medium
@@ -71,7 +71,7 @@ const TextSizeSwitcher: React.FC = () => {
             let savedSize: string;
             try {
               savedSize =
-                localStorage.getItem("docusaurus-text-size") ||
+                localStorage.getItem('docusaurus-text-size') ||
                 defaultTextSize.name;
 
               // Validate that the saved size exists in our textSizes array
@@ -82,7 +82,7 @@ const TextSizeSwitcher: React.FC = () => {
                 savedSize = defaultTextSize.name;
               }
             } catch (error) {
-              console.warn("Failed to load text size preference:", error);
+              console.warn('Failed to load text size preference:', error);
               savedSize = defaultTextSize.name;
             }
 
@@ -92,26 +92,26 @@ const TextSizeSwitcher: React.FC = () => {
 
           // Run immediately if DOM is ready, otherwise wait for it
           if (
-            document.readyState === "complete" ||
-            document.readyState === "interactive"
+            document.readyState === 'complete' ||
+            document.readyState === 'interactive'
           ) {
             initializeTextSize();
           } else {
             const handleDOMContentLoaded = () => {
               initializeTextSize();
               document.removeEventListener(
-                "DOMContentLoaded",
+                'DOMContentLoaded',
                 handleDOMContentLoaded
               );
             };
             document.addEventListener(
-              "DOMContentLoaded",
+              'DOMContentLoaded',
               handleDOMContentLoaded
             );
 
             return () => {
               document.removeEventListener(
-                "DOMContentLoaded",
+                'DOMContentLoaded',
                 handleDOMContentLoaded
               );
             };
@@ -153,11 +153,11 @@ const TextSizeSwitcher: React.FC = () => {
           };
 
           // Listen for hashchange (anchor navigation)
-          window.addEventListener("popstate", handleNavigation);
-          window.addEventListener("hashchange", reapplyTextSize);
+          window.addEventListener('popstate', handleNavigation);
+          window.addEventListener('hashchange', reapplyTextSize);
 
           // Also listen for focus events (when returning to tab)
-          window.addEventListener("focus", reapplyTextSize);
+          window.addEventListener('focus', reapplyTextSize);
 
           // Re-apply immediately and periodically check
           reapplyTextSize();
@@ -169,9 +169,9 @@ const TextSizeSwitcher: React.FC = () => {
             history.replaceState = originalReplaceState;
 
             // Remove event listeners
-            window.removeEventListener("popstate", handleNavigation);
-            window.removeEventListener("hashchange", reapplyTextSize);
-            window.removeEventListener("focus", reapplyTextSize);
+            window.removeEventListener('popstate', handleNavigation);
+            window.removeEventListener('hashchange', reapplyTextSize);
+            window.removeEventListener('focus', reapplyTextSize);
             clearInterval(intervalId);
           };
         }, [currentSize]);
@@ -196,7 +196,7 @@ const TextSizeSwitcher: React.FC = () => {
 
             // Also set CSS custom properties as backup
             document.documentElement.style.setProperty(
-              "--text-size-scale",
+              '--text-size-scale',
               textSize.scale.toString()
             );
 
@@ -215,11 +215,11 @@ const TextSizeSwitcher: React.FC = () => {
             }, 50);
 
             // Save to localStorage (consistent with ThemeSwitcher)
-            localStorage.setItem("docusaurus-text-size", sizeName);
+            localStorage.setItem('docusaurus-text-size', sizeName);
 
             setCurrentSize(sizeName);
           } catch (error) {
-            console.error("Failed to apply text size:", error);
+            console.error('Failed to apply text size:', error);
           }
         };
 
@@ -260,8 +260,8 @@ const TextSizeSwitcher: React.FC = () => {
                     key={textSize.name}
                     className={`text-size-switcher__option ${
                       currentSize === textSize.name
-                        ? "text-size-switcher__option--active"
-                        : ""
+                        ? 'text-size-switcher__option--active'
+                        : ''
                     }`}
                     onClick={() => handleTextSizeChange(textSize.name)}
                   >

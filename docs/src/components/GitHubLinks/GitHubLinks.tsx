@@ -1,9 +1,9 @@
-import React from "react";
+import React from 'react';
 
-import FeatureComponent from "../FeatureComponent";
-import { Features } from "../../config/FeaturesConfig";
-import NavBarLinks from "../NavBarLinks";
-import { gitHubLinks as configData } from '../../../data'
+import FeatureComponent from '../FeatureComponent';
+import { Features } from '../../config/FeaturesConfig';
+import NavBarLinks from '../NavBarLinks';
+import { gitHubLinks as configData } from '../../../data';
 
 /**
  * GitHubLinks Component
@@ -19,16 +19,8 @@ import { gitHubLinks as configData } from '../../../data'
  */
 const GitHubLinks: React.FC = () => {
   return (
-    <FeatureComponent
-      feature={Features.GitHubLinks}
-      configData={configData}
-    >
-      {(gitHubConfig) => (
-        <NavBarLinks
-          config={gitHubConfig}
-          enabled={true}
-        />
-      )}
+    <FeatureComponent feature={Features.GitHubLinks} configData={configData}>
+      {(gitHubConfig) => <NavBarLinks config={gitHubConfig} enabled={true} />}
     </FeatureComponent>
   );
 };

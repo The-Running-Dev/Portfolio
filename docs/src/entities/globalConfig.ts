@@ -1,4 +1,4 @@
-import { FeaturesConfig } from "src/config/FeaturesConfig";
+import { FeaturesConfig } from 'src/config/FeaturesConfig';
 
 /**
  
@@ -6,7 +6,7 @@ import { FeaturesConfig } from "src/config/FeaturesConfig";
 export interface GlobalConfig {
   /** Pre-build configuration (optional) */
   preBuild: PreBuildConfig;
-  
+
   /** Site configuration (optional) */
   site: SiteConfig;
 
@@ -23,7 +23,7 @@ export interface GlobalConfig {
 export interface PreBuildConfig {
   /** Project root directory path (relative or absolute) */
   projectRoot: string;
-  
+
   /** Whether to overwrite existing files during build */
   overwriteExistingFiles: boolean;
 
@@ -44,19 +44,19 @@ export interface PreBuildConfig {
 export interface SiteConfig {
   /** Site title */
   title: string;
-  
+
   /** Site tagline or description */
   tagline: string;
-  
+
   /** Site URL (production URL) */
   url: string;
-  
+
   /** Base URL path (usually '/') */
   baseUrl: string;
-  
+
   /** GitHub organization or user name */
   organizationName: string;
-  
+
   /** GitHub project/repository name */
   projectName: string;
 }
@@ -77,7 +77,7 @@ export interface ThemeConfig {
 export interface LogoConfig {
   /** Alt text for the logo image */
   alt: string;
-  
+
   /** Source path for the logo image */
   src: string;
 }
@@ -89,7 +89,7 @@ export interface LogoConfig {
 export interface NavbarConfig {
   /** Title displayed in the navbar */
   title: string;
-  
+
   /** Logo configuration for the navbar */
   logo: LogoConfig;
 }

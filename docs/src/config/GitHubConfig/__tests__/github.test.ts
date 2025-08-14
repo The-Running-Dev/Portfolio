@@ -1,6 +1,6 @@
 /**
  * Integration Tests for GitHub Configuration System
- * 
+ *
  * Tests for configuration loading, validation, and utility functions.
  * Uses the unified configuration loader to ensure consistency.
  */
@@ -16,11 +16,7 @@ import {
 } from '../configLoader';
 
 // Import legacy functions for backward compatibility testing
-import {
-  getGitHubUrl,
-  getRepositoryUrl,
-  getApiUrl
-} from '../GitHubConfig';
+import { getGitHubUrl, getRepositoryUrl, getApiUrl } from '../GitHubConfig';
 
 // For type annotations, we need to get the return type
 type GitHubConfig = ReturnType<typeof getGitHubConfig>;
@@ -65,9 +61,15 @@ describe('GitHub Configuration System', () => {
 
     it('should provide GitHub URLs', () => {
       const urls = getGitHubUrls();
-      expect(urls.repository).toBe('https://github.com/The-Running-Dev/Portfolio');
-      expect(urls.issues).toBe('https://github.com/The-Running-Dev/Portfolio/issues');
-      expect(urls.api).toBe('https://api.github.com/repos/The-Running-Dev/Portfolio');
+      expect(urls.repository).toBe(
+        'https://github.com/The-Running-Dev/Portfolio'
+      );
+      expect(urls.issues).toBe(
+        'https://github.com/The-Running-Dev/Portfolio/issues'
+      );
+      expect(urls.api).toBe(
+        'https://api.github.com/repos/The-Running-Dev/Portfolio'
+      );
     });
 
     it('should provide project metadata', () => {
@@ -82,11 +84,11 @@ describe('GitHub Configuration System', () => {
       // Reset cache and verify it's not cached
       resetGitHubConfigCache();
       expect(isGitHubConfigCached()).toBe(false);
-      
+
       // Load configuration and verify caching
       const config1 = getGitHubConfig();
       expect(isGitHubConfigCached()).toBe(true);
-      
+
       // Subsequent calls should return the same cached object
       const config2 = getGitHubConfig();
       expect(config1).toBe(config2); // Same reference due to caching
@@ -95,21 +97,39 @@ describe('GitHub Configuration System', () => {
 
   describe('URL Utilities', () => {
     it('should get specific URLs by key', () => {
-      expect(getGitHubUrl('repository')).toBe('https://github.com/The-Running-Dev/Portfolio');
-      expect(getGitHubUrl('issues')).toBe('https://github.com/The-Running-Dev/Portfolio/issues');
-      expect(getGitHubUrl('api')).toBe('https://api.github.com/repos/The-Running-Dev/Portfolio');
+      expect(getGitHubUrl('repository')).toBe(
+        'https://github.com/The-Running-Dev/Portfolio'
+      );
+      expect(getGitHubUrl('issues')).toBe(
+        'https://github.com/The-Running-Dev/Portfolio/issues'
+      );
+      expect(getGitHubUrl('api')).toBe(
+        'https://api.github.com/repos/The-Running-Dev/Portfolio'
+      );
     });
 
     it('should build repository URLs with optional paths', () => {
-      expect(getRepositoryUrl()).toBe('https://github.com/The-Running-Dev/Portfolio');
-      expect(getRepositoryUrl('/blob/main/README.md')).toBe('https://github.com/The-Running-Dev/Portfolio/blob/main/README.md');
-      expect(getRepositoryUrl('issues')).toBe('https://github.com/The-Running-Dev/Portfolio/issues');
+      expect(getRepositoryUrl()).toBe(
+        'https://github.com/The-Running-Dev/Portfolio'
+      );
+      expect(getRepositoryUrl('/blob/main/README.md')).toBe(
+        'https://github.com/The-Running-Dev/Portfolio/blob/main/README.md'
+      );
+      expect(getRepositoryUrl('issues')).toBe(
+        'https://github.com/The-Running-Dev/Portfolio/issues'
+      );
     });
 
     it('should build API URLs with optional endpoints', () => {
-      expect(getApiUrl()).toBe('https://api.github.com/repos/The-Running-Dev/Portfolio');
-      expect(getApiUrl('/releases')).toBe('https://api.github.com/repos/The-Running-Dev/Portfolio/releases');
-      expect(getApiUrl('contributors')).toBe('https://api.github.com/repos/The-Running-Dev/Portfolio/contributors');
+      expect(getApiUrl()).toBe(
+        'https://api.github.com/repos/The-Running-Dev/Portfolio'
+      );
+      expect(getApiUrl('/releases')).toBe(
+        'https://api.github.com/repos/The-Running-Dev/Portfolio/releases'
+      );
+      expect(getApiUrl('contributors')).toBe(
+        'https://api.github.com/repos/The-Running-Dev/Portfolio/contributors'
+      );
     });
   });
 
@@ -134,7 +154,9 @@ describe('GitHub Configuration System', () => {
       const result = validateGitHubConfig(invalidConfig);
       expect(result.success).toBe(false);
       if (!result.success) {
-        expect((result as { success: false; error: string }).error).toContain('validation failed');
+        expect((result as { success: false; error: string }).error).toContain(
+          'validation failed'
+        );
       }
     });
 
@@ -197,15 +219,19 @@ describe('GitHub Configuration System', () => {
       });
 
       expect(urls.pages).toBe('https://custom-pages.com');
-      expect(urls.readme).toBe('https://github.com/test-user/test-repo/blob/develop/README.md');
-      expect(urls.packages).toBe('https://github.com/test-user/test-repo/custom-packages');
+      expect(urls.readme).toBe(
+        'https://github.com/test-user/test-repo/blob/develop/README.md'
+      );
+      expect(urls.packages).toBe(
+        'https://github.com/test-user/test-repo/custom-packages'
+      );
     });
   });
 
   describe('Configuration Template Creation', () => {
     it('should create configuration template with defaults', () => {
       const template = createGitHubConfigTemplate('test-org/test-project');
-      
+
       expect(template.repo).toBe('test-org/test-project');
       expect(template.organization).toBe('test-org');
       expect(template.project).toBe('test-project');
@@ -231,14 +257,16 @@ describe('GitHub Configuration System', () => {
     });
 
     it('should throw for invalid repository format', () => {
-      expect(() => createGitHubConfigTemplate('invalid')).toThrow('Invalid repository format');
+      expect(() => createGitHubConfigTemplate('invalid')).toThrow(
+        'Invalid repository format'
+      );
     });
   });
 
   describe('Configuration Immutability', () => {
     it('should provide immutable configuration', () => {
       const config = getGitHubConfig();
-      
+
       // Test that configuration objects are frozen
       expect(Object.isFrozen(config)).toBe(true);
       expect(Object.isFrozen(config.urls)).toBe(true);

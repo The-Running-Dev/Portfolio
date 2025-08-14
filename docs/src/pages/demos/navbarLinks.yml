@@ -1,15 +1,15 @@
 dropdown: false
-dropdownLabel: "Demos"
-className: ""
+dropdownLabel: 'Demos'
+className: ''
 showIcons: true
 links:
-  - label: "GitHubConfig"
-    href: "/demos/GitHubConfig"
-    position: "left"
-    title: ""
-    icon: ""
-  - label: "Themes"
-    href: "/demos/Themes"
-    position: "left"
-    title: ""
-    icon: ""
+  - label: 'GitHubConfig'
+    href: '/demos/GitHubConfig'
+    position: 'left'
+    title: ''
+    icon: ''
+  - label: 'Themes'
+    href: '/demos/Themes'
+    position: 'left'
+    title: ''
+    icon: ''

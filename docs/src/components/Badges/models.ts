@@ -2,7 +2,7 @@ import { IconDefinition } from '@fortawesome/fontawesome-svg-core';
 
 export interface BadgeConfig {
   templateVariables: TemplateVariables;
-  
+
   badgeCategories: BadgeCategory[];
 }
 

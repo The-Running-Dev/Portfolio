@@ -1,14 +1,14 @@
-import React, { useState, useEffect } from "react";
-import useBaseUrl from "@docusaurus/core/lib/client/exports/useBaseUrl";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faPalette } from "@fortawesome/free-solid-svg-icons";
+import React, { useState, useEffect } from 'react';
+import useBaseUrl from '@docusaurus/core/lib/client/exports/useBaseUrl';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faPalette } from '@fortawesome/free-solid-svg-icons';
 
-import FeatureComponent from "../FeatureComponent";
-import { Features } from "../../config/FeaturesConfig";
-import { Theme } from "./models";
+import FeatureComponent from '../FeatureComponent';
+import { Features } from '../../config/FeaturesConfig';
+import { Theme } from './models';
 import { themes as configData } from '../../../data';
 
-import "./ThemeSwitcher.css";
+import './ThemeSwitcher.css';
 
 /**
  * Theme Switcher Component
@@ -26,9 +26,9 @@ const ThemeSwitcher: React.FC = () => {
           (themes.length > 0
             ? themes[0]
             : {
-                name: "fallback",
-                displayName: "Default",
-                cssFile: "themes/default.css",
+                name: 'fallback',
+                displayName: 'Default',
+                cssFile: 'themes/default.css'
               });
 
         return { themes, defaultTheme };
@@ -59,13 +59,13 @@ const ThemeSwitcherContent: React.FC<{
   // Pre-compute resolved URLs for all themes
   const themesWithResolvedUrls = themes.map((theme) => ({
     ...theme,
-    resolvedCssUrl: useBaseUrl(theme.cssFile),
+    resolvedCssUrl: useBaseUrl(theme.cssFile)
   }));
 
   useEffect(() => {
     // Load saved theme from localStorage, fallback to defaultTheme
     const savedTheme =
-      localStorage.getItem("docusaurus-theme-color") || defaultTheme.name;
+      localStorage.getItem('docusaurus-theme-color') || defaultTheme.name;
 
     setCurrentTheme(savedTheme);
     applyTheme(savedTheme);
@@ -74,7 +74,7 @@ const ThemeSwitcherContent: React.FC<{
   const applyTheme = (themeName: string) => {
     // Remove existing theme links
     const existingLinks = document.querySelectorAll(
-      "link[data-theme-switcher]"
+      'link[data-theme-switcher]'
     );
     existingLinks.forEach((link) => link.remove());
 
@@ -84,15 +84,15 @@ const ThemeSwitcherContent: React.FC<{
     if (!theme) return;
 
     // Add new theme link
-    const link = document.createElement("link");
-    link.rel = "stylesheet";
+    const link = document.createElement('link');
+    link.rel = 'stylesheet';
     link.href = theme.resolvedCssUrl;
-    link.setAttribute("data-theme-switcher", "true");
+    link.setAttribute('data-theme-switcher', 'true');
 
     document.head.appendChild(link);
 
     // Save to localStorage
-    localStorage.setItem("docusaurus-theme-color", themeName);
+    localStorage.setItem('docusaurus-theme-color', themeName);
 
     setCurrentTheme(themeName);
   };
@@ -125,8 +125,8 @@ const ThemeSwitcherContent: React.FC<{
               key={theme.name}
               className={`theme-switcher__option ${
                 currentTheme === theme.name
-                  ? "theme-switcher__option--active"
-                  : ""
+                  ? 'theme-switcher__option--active'
+                  : ''
               }`}
               onClick={() => handleThemeChange(theme.name)}
             >

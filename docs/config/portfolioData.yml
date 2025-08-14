@@ -30,33 +30,33 @@ projects:
   - title: Backend Projects
     description: C# .NET, Node.js, TypeScript applications including APIs, microservices, and system integrations
     link: /projects?filter=backend
-    icon: "🔧"
+    icon: '🔧'
   - title: Frontend Applications
     description: React, Angular, and modern web applications with responsive design and user experience focus
     link: /projects?filter=frontend
-    icon: "🎨"
+    icon: '🎨'
   - title: Infrastructure & DevOps
     description: Docker containerization, CI/CD pipelines, cloud deployments, and automation solutions
     link: /projects?filter=infrastructure
-    icon: "☁️"
+    icon: '☁️'
   - title: Automation & Tooling
     description: PowerShell scripts, build tools, deployment automation, and developer productivity enhancements
     link: /projects?filter=automation
-    icon: "⚡"
+    icon: '⚡'
   - title: Open Source
     description: Package manager contributions, community projects, and collaborative development efforts
     link: /projects?filter=open%20source
-    icon: "🤝"
+    icon: '🤝'
 stats:
-  - number: "20+"
+  - number: '20+'
     label: Years Experience
-  - number: "12+"
+  - number: '12+'
     label: Technologies
-  - number: "50+"
+  - number: '50+'
     label: Projects
-  - number: "5+"
+  - number: '5+'
     label: Cloud Platforms
-  - number: "100+"
+  - number: '100+'
     label: Deployments
   - number: Open Source
     label: Contributor

@@ -89,7 +89,7 @@ Run locally before pushing:
 cd docs
 pnpm run check-all          # All quality checks
 pnpm run format:check       # Code formatting
-pnpm run lint              # ESLint validation  
+pnpm run lint              # ESLint validation
 pnpm run typecheck         # TypeScript compilation
 pnpm run build:prod        # Production build
 ```

@@ -13,7 +13,9 @@ function parsePeriod(period: string): { start: number; end: number } {
     return { start: year || 0, end: year || 0 };
   }
   const start = Number(m[1]);
-  const end = /present|now/i.test(m[2]) ? new Date().getFullYear() : Number(m[2]);
+  const end = /present|now/i.test(m[2])
+    ? new Date().getFullYear()
+    : Number(m[2]);
   return { start, end };
 }
 
@@ -27,7 +29,13 @@ function sortByRecent(roles: Role[]): Role[] {
   });
 }
 
-export default function Timeline({ title, roles }: { title: string; roles: Role[] }) {
+export default function Timeline({
+  title,
+  roles
+}: {
+  title: string;
+  roles: Role[];
+}) {
   const items = useMemo(() => sortByRecent(roles), [roles]);
 
   return (
@@ -38,14 +46,18 @@ export default function Timeline({ title, roles }: { title: string; roles: Role[
         <ol style={{ listStyle: 'none', margin: 0, padding: 0 }}>
           {items.map((r, i) => {
             const { start, end } = parsePeriod(r.period);
-            const displayYear = end === new Date().getFullYear() ? 
-              start.toString() : 
-              start === end ? 
-                start.toString() : 
-                `${start}–${end}`;
-            
+            const displayYear =
+              end === new Date().getFullYear()
+                ? start.toString()
+                : start === end
+                  ? start.toString()
+                  : `${start}–${end}`;
+
             return (
-              <li className="timeline-item" key={`${r.company}-${r.title}-${i}`}>
+              <li
+                className="timeline-item"
+                key={`${r.company}-${r.title}-${i}`}
+              >
                 {/* Year badge */}
                 <div className="timeline-year">{displayYear}</div>
 
@@ -56,31 +68,43 @@ export default function Timeline({ title, roles }: { title: string; roles: Role[
 
                 {/* Card */}
                 <article className="timeline-content">
-                  <h3>{r.company} — {r.title}</h3>
+                  <h3>
+                    {r.company} — {r.title}
+                  </h3>
 
-                <div className="timeline-meta">
-                  {r.period}
-                  {r.location ? <> · {r.location}</> : null}
-                  {r.website ? <> · <a href={r.website} target="_blank" rel="noreferrer">Company Site</a></> : null}
-                </div>
+                  <div className="timeline-meta">
+                    {r.period}
+                    {r.location ? <> · {r.location}</> : null}
+                    {r.website ? (
+                      <>
+                        {' '}
+                        ·{' '}
+                        <a href={r.website} target="_blank" rel="noreferrer">
+                          Company Site
+                        </a>
+                      </>
+                    ) : null}
+                  </div>
 
-                {r.summary ? (
-                  <p dangerouslySetInnerHTML={{ __html: r.summary }} />
-                ) : null}
+                  {r.summary ? (
+                    <p dangerouslySetInnerHTML={{ __html: r.summary }} />
+                  ) : null}
 
-                {r.achievements?.length ? (
-                  <ul>
-                    {r.achievements.map((a, j) => (
-                      <li key={j} dangerouslySetInnerHTML={{ __html: a }} />
-                    ))}
-                  </ul>
-                ) : null}
+                  {r.achievements?.length ? (
+                    <ul>
+                      {r.achievements.map((a, j) => (
+                        <li key={j} dangerouslySetInnerHTML={{ __html: a }} />
+                      ))}
+                    </ul>
+                  ) : null}
 
-                {r.tech ? (
-                  <p className="timeline-tech"><strong>Tech</strong> {r.tech}</p>
-                ) : null}
-              </article>
-            </li>
+                  {r.tech ? (
+                    <p className="timeline-tech">
+                      <strong>Tech</strong> {r.tech}
+                    </p>
+                  ) : null}
+                </article>
+              </li>
             );
           })}
         </ol>

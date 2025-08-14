@@ -1,27 +1,27 @@
 /**
  * GitHub Configuration Types
- * 
+ *
  * TypeScript interfaces for the dynamic GitHub configuration loaded from YAML/JSON
  */
 export interface GitHubConfig {
   /** Repository in owner/repo format */
   repo: string;
-  
+
   /** GitHub organization/user */
   organization: string;
-  
+
   /** Repository name */
   project: string;
-  
+
   /** All GitHub URLs */
   urls: GitHubUrls;
-  
+
   /** Project metadata */
   metadata: GitHubMetadata;
-  
+
   /** Optional feature flags */
   features?: GitHubFeatures;
-  
+
   /** Optional integration settings */
   integrations?: GitHubIntegrations;
 }

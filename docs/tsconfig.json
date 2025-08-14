@@ -17,9 +17,15 @@
     "paths": {
       "@theme/*": ["node_modules/@docusaurus/theme-classic/lib/theme/*"],
       "@docusaurus/*": ["node_modules/@docusaurus/*"],
-      "@docusaurus/Link": ["node_modules/@docusaurus/core/lib/client/exports/Link"],
-      "@docusaurus/useDocusaurusContext": ["node_modules/@docusaurus/core/lib/client/exports/useDocusaurusContext"],
-      "@docusaurus/useBaseUrl": ["node_modules/@docusaurus/core/lib/client/exports/useBaseUrl"]
+      "@docusaurus/Link": [
+        "node_modules/@docusaurus/core/lib/client/exports/Link"
+      ],
+      "@docusaurus/useDocusaurusContext": [
+        "node_modules/@docusaurus/core/lib/client/exports/useDocusaurusContext"
+      ],
+      "@docusaurus/useBaseUrl": [
+        "node_modules/@docusaurus/core/lib/client/exports/useBaseUrl"
+      ]
     },
     "types": ["node"],
     "typeRoots": ["./node_modules/@types", "./src/types"]

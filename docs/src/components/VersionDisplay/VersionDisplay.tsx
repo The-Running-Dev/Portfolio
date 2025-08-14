@@ -1,11 +1,11 @@
-import React from "react";
+import React from 'react';
 
-import FeatureComponent from "../FeatureComponent";
-import { Features } from "../../config/FeaturesConfig";
-import { VersionConfig } from "./models";
-import { version as configData } from '../../../data'
+import FeatureComponent from '../FeatureComponent';
+import { Features } from '../../config/FeaturesConfig';
+import { VersionConfig } from './models';
+import { version as configData } from '../../../data';
 
-import "./VersionDisplay.css";
+import './VersionDisplay.css';
 
 /**
  * Version Display Component
@@ -17,12 +17,12 @@ const VersionDisplay: React.FC = () => {
     try {
       const now = new Date();
       const year = now.getFullYear();
-      const month = String(now.getMonth() + 1).padStart(2, "0");
-      const day = String(now.getDate()).padStart(2, "0");
+      const month = String(now.getMonth() + 1).padStart(2, '0');
+      const day = String(now.getDate()).padStart(2, '0');
 
       return `${year}.${month}.${day}`;
     } catch {
-      return "1.0.0";
+      return '1.0.0';
     }
   };
 
@@ -33,11 +33,11 @@ const VersionDisplay: React.FC = () => {
     >
       {(config) => {
         const version = config.version || getDefaultVersion();
-        const prefix = config.prefix || "v";
+        const prefix = config.prefix || 'v';
         const displayText = `${prefix}${version}`;
         const className =
-          `version-display ${config.badge ? "version-display--badge" : ""} ${
-            config.className || ""
+          `version-display ${config.badge ? 'version-display--badge' : ''} ${
+            config.className || ''
           }`.trim();
 
         // Render as link if href is provided
@@ -57,7 +57,10 @@ const VersionDisplay: React.FC = () => {
 
         // Render as span if no href
         return (
-          <span className={className} title={config.title || `Version ${version}`}>
+          <span
+            className={className}
+            title={config.title || `Version ${version}`}
+          >
             {displayText}
           </span>
         );

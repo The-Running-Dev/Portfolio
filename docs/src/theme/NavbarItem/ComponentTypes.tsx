@@ -1,4 +1,3 @@
-
 import ComponentTypesObject from '@theme/NavbarItem/ComponentTypes';
 import DefaultNavbarItem from '@theme/NavbarItem/DefaultNavbarItem';
 import DropdownNavbarItem from '@theme/NavbarItem/DropdownNavbarItem';

@@ -1,9 +1,9 @@
 import { ConfigurationManager } from './configurationManager';
-import type { 
-  FeatureFlag, 
-  FeatureFlagState, 
+import type {
+  FeatureFlag,
+  FeatureFlagState,
   ConfigValue,
-  ConfigurationSchema 
+  ConfigurationSchema
 } from '../types/configuration';
 import type { FeaturesConfig } from '../config/FeaturesConfig/models';
 
@@ -23,7 +23,9 @@ export class FeatureFlagManager {
   /**
    * Initialize feature flags from existing FeaturesConfig
    */
-  async initializeFromFeaturesConfig(featuresConfig: FeaturesConfig): Promise<void> {
+  async initializeFromFeaturesConfig(
+    featuresConfig: FeaturesConfig
+  ): Promise<void> {
     const featureSchemas: ConfigurationSchema<boolean>[] = [
       {
         key: 'feature.giscus-comments',
@@ -107,8 +109,8 @@ export class FeatureFlagManager {
    * Define a new feature flag
    */
   async defineFlag(
-    key: string, 
-    defaultEnabled: boolean, 
+    key: string,
+    defaultEnabled: boolean,
     options: Partial<FeatureFlag> = {}
   ): Promise<void> {
     const schema: ConfigurationSchema<FeatureFlag> = {
@@ -136,7 +138,7 @@ export class FeatureFlagManager {
     // Check for legacy feature config format first
     const legacyKey = `feature.${key.replace(/^feature\./, '')}`;
     const legacyValue = await this.configManager.getValue<boolean>(legacyKey);
-    
+
     if (legacyValue !== null) {
       return legacyValue;
     }
@@ -144,7 +146,7 @@ export class FeatureFlagManager {
     // Check for new feature flag format
     const flagKey = `flag.${key.replace(/^flag\./, '')}`;
     const flag = await this.configManager.getValue<FeatureFlag>(flagKey);
-    
+
     if (!flag) {
       return false;
     }
@@ -158,8 +160,9 @@ export class FeatureFlagManager {
   async setFeatureEnabled(key: string, enabled: boolean): Promise<boolean> {
     // Try legacy format first
     const legacyKey = `feature.${key.replace(/^feature\./, '')}`;
-    const legacyExists = await this.configManager.getValue<boolean>(legacyKey) !== null;
-    
+    const legacyExists =
+      (await this.configManager.getValue<boolean>(legacyKey)) !== null;
+
     if (legacyExists) {
       return await this.configManager.setValue(legacyKey, enabled);
     }
@@ -167,7 +170,7 @@ export class FeatureFlagManager {
     // Handle flag format
     const flagKey = `flag.${key.replace(/^flag\./, '')}`;
     const flag = await this.configManager.getValue<FeatureFlag>(flagKey);
-    
+
     if (flag) {
       const updatedFlag: FeatureFlag = { ...flag, enabled };
       return await this.configManager.setValue(flagKey, updatedFlag);
@@ -185,7 +188,11 @@ export class FeatureFlagManager {
 
     // Extract feature flags and convert legacy features
     for (const [key, value] of Object.entries(allValues)) {
-      if (key.startsWith('flag.') && typeof value === 'object' && value !== null) {
+      if (
+        key.startsWith('flag.') &&
+        typeof value === 'object' &&
+        value !== null
+      ) {
         const flagKey = key.replace('flag.', '');
         flags[flagKey] = value as FeatureFlag;
       } else if (key.startsWith('feature.') && typeof value === 'boolean') {
@@ -222,11 +229,14 @@ export class FeatureFlagManager {
     const legacyKey = `feature.${key.replace(/^feature\./, '')}`;
     const flagKey = `flag.${key.replace(/^flag\./, '')}`;
 
-    const unsubscribeLegacy = this.configManager.subscribe(legacyKey, (event) => {
-      if (typeof event.newValue === 'boolean') {
-        callback(event.newValue);
+    const unsubscribeLegacy = this.configManager.subscribe(
+      legacyKey,
+      (event) => {
+        if (typeof event.newValue === 'boolean') {
+          callback(event.newValue);
+        }
       }
-    });
+    );
 
     const unsubscribeFlag = this.configManager.subscribe(flagKey, (event) => {
       if (typeof event.newValue === 'object' && event.newValue !== null) {
@@ -260,7 +270,9 @@ export class FeatureFlagManager {
 
     // Evaluate conditions
     if (flag.conditions && Object.keys(flag.conditions).length > 0) {
-      for (const [conditionKey, expectedValue] of Object.entries(flag.conditions)) {
+      for (const [conditionKey, expectedValue] of Object.entries(
+        flag.conditions
+      )) {
         const contextValue = this.evaluationContext.get(conditionKey);
         if (contextValue !== expectedValue) {
           return false;
@@ -275,7 +287,7 @@ export class FeatureFlagManager {
     let hash = 0;
     for (let i = 0; i < str.length; i++) {
       const char = str.charCodeAt(i);
-      hash = ((hash << 5) - hash) + char;
+      hash = (hash << 5) - hash + char;
       hash = hash & hash; // Convert to 32-bit integer
     }
     return Math.abs(hash);

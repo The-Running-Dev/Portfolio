@@ -1,16 +1,16 @@
 /**
  * GitHub Configuration Loader
- * 
+ *
  * Single source of truth for GitHub configuration that loads from YAML→JSON
  * and provides validation for both application and test environments.
- * 
+ *
  * This consolidates the parallel config systems into one authoritative path:
  * YAML (config/gitHub.yml) → JSON (data/gitHub.json) → Validated Config
  */
 
-import { getData } from "../../data/dataLoader";
-import type { GitHubConfig } from "./models";
-import { validateGitHubConfig } from "./validation";
+import { getData } from '../../data/dataLoader';
+import type { GitHubConfig } from './models';
+import { validateGitHubConfig } from './validation';
 import { gitHub as configData } from '../../../data';
 
 // Cache for validated configuration
@@ -19,10 +19,10 @@ let configError: string | null = null;
 
 /**
  * Get the GitHub configuration with validation and caching
- * 
+ *
  * This is the single authoritative source for GitHub configuration
  * that both the app and tests should use.
- * 
+ *
  * @returns {GitHubConfig} Validated and immutable GitHub configuration
  * @throws {Error} If configuration is invalid or cannot be loaded
  */
@@ -46,7 +46,10 @@ export function getGitHubConfig(): GitHubConfig {
 
     if (!validationResult.success) {
       // Type assertion is safe here because we checked !success
-      const failureResult = validationResult as { success: false; error: string };
+      const failureResult = validationResult as {
+        success: false;
+        error: string;
+      };
       configError = `GitHub configuration validation failed: ${failureResult.error}`;
       throw new Error(configError);
     }
@@ -60,32 +63,32 @@ export function getGitHubConfig(): GitHubConfig {
       urls: Object.freeze(validatedData.urls),
       metadata: Object.freeze({
         ...validatedData.metadata,
-        topics: Object.freeze(validatedData.metadata.topics),
+        topics: Object.freeze(validatedData.metadata.topics)
       }),
-      features: validatedData.features 
-        ? Object.freeze(validatedData.features) 
+      features: validatedData.features
+        ? Object.freeze(validatedData.features)
         : undefined,
       integrations: validatedData.integrations
         ? Object.freeze(validatedData.integrations)
-        : undefined,
+        : undefined
     });
 
     // Cache the validated configuration
     validatedConfig = config;
     return config;
-
   } catch (error) {
-    configError = error instanceof Error 
-      ? `Failed to load GitHub configuration: ${error.message}`
-      : `Failed to load GitHub configuration: ${String(error)}`;
-    
+    configError =
+      error instanceof Error
+        ? `Failed to load GitHub configuration: ${error.message}`
+        : `Failed to load GitHub configuration: ${String(error)}`;
+
     throw new Error(configError);
   }
 }
 
 /**
  * Reset the configuration cache
- * 
+ *
  * Useful for testing environments where you need to reload configuration
  * or when configuration files have been updated.
  */
@@ -96,7 +99,7 @@ export function resetGitHubConfigCache(): void {
 
 /**
  * Check if configuration is currently cached
- * 
+ *
  * @returns {boolean} True if configuration is cached and valid
  */
 export function isGitHubConfigCached(): boolean {
@@ -105,7 +108,7 @@ export function isGitHubConfigCached(): boolean {
 
 /**
  * Get repository information from configuration
- * 
+ *
  * @returns {object} Repository information
  */
 export function getRepositoryInfo() {
@@ -120,7 +123,7 @@ export function getRepositoryInfo() {
 
 /**
  * Get all GitHub URLs from configuration
- * 
+ *
  * @returns {object} All GitHub URLs
  */
 export function getGitHubUrls() {
@@ -130,7 +133,7 @@ export function getGitHubUrls() {
 
 /**
  * Get project metadata from configuration
- * 
+ *
  * @returns {object} Project metadata
  */
 export function getProjectMetadata() {

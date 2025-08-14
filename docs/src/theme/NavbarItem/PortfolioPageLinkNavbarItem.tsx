@@ -2,7 +2,7 @@ import React from 'react';
 import Link from '@docusaurus/Link';
 
 import { useFeaturesConfig } from '../../config/FeaturesConfig';
-  
+
 const PortfolioPageLinkNavbarItem: React.FC = () => {
   const featuresConfig = useFeaturesConfig();
 
@@ -17,7 +17,7 @@ const PortfolioPageLinkNavbarItem: React.FC = () => {
   }
 
   return (
-    <Link 
+    <Link
       to="/portfolio"
       className="navbar__item navbar__link"
       activeClassName="navbar__link--active"

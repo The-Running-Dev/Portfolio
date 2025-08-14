@@ -31,7 +31,8 @@ html.reader-mode-active .heroBanner {
 }
 
 html.reader-mode-active .hero__title {
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif !important;
+  font-family:
+    -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif !important;
   font-weight: 700 !important;
   color: var(--ifm-font-color-base) !important;
   margin-bottom: 1rem !important;
@@ -87,7 +88,8 @@ html.reader-mode-active .projectCardHeader {
 }
 
 html.reader-mode-active .projectCardTitle {
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif !important;
+  font-family:
+    -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif !important;
   font-weight: 600 !important;
   color: var(--ifm-font-color-base) !important;
   margin: 0 !important;

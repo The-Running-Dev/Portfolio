@@ -1,6 +1,6 @@
 /**
  * GitHub Configuration Usage Examples
- * 
+ *
  * This file demonstrates common usage patterns for the GitHub Configuration System.
  * Use these examples as reference for integrating the configuration into your components.
  */
@@ -34,23 +34,23 @@ export function createProjectBadges() {
       src: `https://img.shields.io/badge/license-${license}-blue.svg`,
       link: `${repository}/blob/main/LICENSE`
     },
-    
+
     // GitHub repo badge
     github: {
       alt: 'GitHub Repository',
       src: `https://img.shields.io/github/stars/${repo}?style=social`,
       link: repository
     },
-    
+
     // Release badge
     version: {
       alt: 'Latest Release',
       src: `https://img.shields.io/github/v/release/${repo}`,
       link: releases
     },
-    
+
     // Topics badges
-    topics: topics.map(topic => ({
+    topics: topics.map((topic) => ({
       alt: topic,
       src: `https://img.shields.io/badge/topic-${topic}-lightgrey.svg`,
       link: `https://github.com/topics/${topic}`
@@ -67,7 +67,7 @@ export function createProjectBadges() {
  */
 export function createNavigationLinks() {
   const urls = getGitHubUrls();
-  
+
   return {
     primary: [
       { href: urls.repository, label: 'Source Code', external: true },
@@ -95,7 +95,7 @@ export function createNavigationLinks() {
  */
 export function createGiscusConfig() {
   const { repo } = getRepositoryInfo();
-  
+
   return {
     repo,
     repoId: 'YOUR_REPO_ID', // This would be fetched from GitHub API
@@ -119,11 +119,11 @@ export function createGiscusConfig() {
  */
 export async function fetchRepositoryData() {
   const apiUrl = getApiUrl();
-  
+
   try {
     const response = await fetch(apiUrl);
     const data = await response.json();
-    
+
     return {
       name: data.name,
       description: data.description,
@@ -144,11 +144,11 @@ export async function fetchRepositoryData() {
  */
 export async function fetchLatestRelease() {
   const apiUrl = getApiUrl('/releases/latest');
-  
+
   try {
     const response = await fetch(apiUrl);
     const data = await response.json();
-    
+
     return {
       tagName: data.tag_name,
       name: data.name,
@@ -172,7 +172,7 @@ export function createSEOMetaTags() {
   const { repository, pages } = getGitHubUrls();
   const { description, topics } = getProjectMetadata();
   const { organization, project } = getRepositoryInfo();
-  
+
   return {
     title: `${project} - ${description}`,
     description,
@@ -208,13 +208,13 @@ export function createSEOMetaTags() {
 export function validateConfigurationAtBuildTime() {
   const config = getGitHubConfig();
   const validation = validateGitHubConfig(config);
-  
+
   if (!validation.success) {
     console.error('❌ GitHub configuration validation failed!');
     console.error((validation as { success: false; error: string }).error);
     process.exit(1);
   }
-  
+
   console.log('✅ GitHub configuration is valid');
   return validation.data;
 }
@@ -227,23 +227,23 @@ export function validateConfigurationAtBuildTime() {
  * Generate URLs for different file paths in the repository
  */
 export function createFileUrls() {
-  const getFileUrl = (path: string, branch = 'main') => 
+  const getFileUrl = (path: string, branch = 'main') =>
     getRepositoryUrl(`/blob/${branch}/${path}`);
-  
-  const getRawUrl = (path: string, branch = 'main') => 
+
+  const getRawUrl = (path: string, branch = 'main') =>
     `https://raw.githubusercontent.com/${getRepositoryInfo().repo}/${branch}/${path}`;
-  
+
   return {
     // Common file URLs
     readme: getFileUrl('README.md'),
     license: getFileUrl('LICENSE'),
     changelog: getFileUrl('CHANGELOG.md'),
     contributing: getFileUrl('CONTRIBUTING.md'),
-    
+
     // Raw file URLs (for direct access)
     rawReadme: getRawUrl('README.md'),
     rawLicense: getRawUrl('LICENSE'),
-    
+
     // Directory URLs
     docs: getRepositoryUrl('/tree/main/docs'),
     src: getRepositoryUrl('/tree/main/src'),
@@ -261,27 +261,27 @@ export function createFileUrls() {
 export function createIntegrationUrls() {
   const { repo } = getRepositoryInfo();
   const { repository } = getGitHubUrls();
-  
+
   return {
     // GitHub Pages deployment
     pagesDeployment: `${repository}/deployments`,
-    
+
     // Webhook endpoints
     webhook: `${repository}/settings/hooks`,
-    
+
     // Security
     security: `${repository}/security`,
     advisories: `${repository}/security/advisories`,
-    
+
     // Insights
     insights: `${repository}/pulse`,
     traffic: `${repository}/graphs/traffic`,
     commits: `${repository}/graphs/commit-activity`,
-    
+
     // Project management
     projects: `${repository}/projects`,
     milestones: `${repository}/milestones`,
-    
+
     // CI/CD integration URLs
     ciStatus: `https://img.shields.io/github/actions/workflow/status/${repo}/ci.yml`,
     ciWorkflow: `${repository}/actions/workflows/ci.yml`
@@ -297,7 +297,7 @@ export function createIntegrationUrls() {
  */
 export function createEnvironmentConfigs() {
   const baseConfig = getGitHubConfig();
-  
+
   return {
     development: {
       ...baseConfig,
@@ -306,7 +306,7 @@ export function createEnvironmentConfigs() {
         pages: 'http://localhost:3000'
       }
     },
-    
+
     staging: {
       ...baseConfig,
       urls: {
@@ -314,7 +314,7 @@ export function createEnvironmentConfigs() {
         pages: 'https://staging.portfolio.subzerodev.com'
       }
     },
-    
+
     production: baseConfig
   };
 }
@@ -328,7 +328,7 @@ export function createEnvironmentConfigs() {
  */
 export function createComponentProps() {
   const config = getGitHubConfig();
-  
+
   return {
     GitHubButton: {
       href: config.urls.repository,
@@ -336,20 +336,20 @@ export function createComponentProps() {
       target: '_blank',
       rel: 'noopener noreferrer'
     },
-    
+
     StarButton: {
       href: config.urls.repository,
       count: '⭐', // This would be fetched from API
       'aria-label': `Star ${config.repo} on GitHub`
     },
-    
+
     IssueReportButton: {
       href: config.urls.issues,
       'aria-label': 'Report an issue',
       target: '_blank',
       rel: 'noopener noreferrer'
     },
-    
+
     ContributorsList: {
       apiUrl: config.urls.api + '/contributors',
       repoUrl: config.urls.repository

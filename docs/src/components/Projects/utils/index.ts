@@ -2,4 +2,7 @@
  * Barrel export for Projects utilities
  */
 
-export { calculateCategoryResults, calculateTechnologyResults } from "./searchCalculations";
+export {
+  calculateCategoryResults,
+  calculateTechnologyResults
+} from './searchCalculations';

@@ -1,6 +1,6 @@
 /**
  * Features Configuration Models
- * 
+ *
  * Defines the structure and validation for application feature flags.
  */
 
@@ -108,7 +108,9 @@ export function validateFeaturesConfig(config: any): config is FeaturesConfig {
 
   for (const field of requiredBooleanFields) {
     if (typeof config[field] !== 'boolean') {
-      throw new Error(`FeaturesConfig Validation Failed: ${field} Must be a Boolean, Got ${typeof config[field]}`);
+      throw new Error(
+        `FeaturesConfig Validation Failed: ${field} Must be a Boolean, Got ${typeof config[field]}`
+      );
     }
   }
 

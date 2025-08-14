@@ -27,7 +27,8 @@ html.reader-mode-active .heroSubtitle {
 }
 
 html.reader-mode-active .sectionTitle {
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif !important;
+  font-family:
+    -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif !important;
   font-weight: 700 !important;
   margin: 2rem 0 1rem !important;
   color: var(--ifm-font-color-base) !important;
@@ -76,7 +77,8 @@ html.reader-mode-active .techItem:hover {
 html.reader-mode-active .projectTitle,
 html.reader-mode-active .techName,
 html.reader-mode-active .statNumber {
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif !important;
+  font-family:
+    -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif !important;
   font-weight: 600 !important;
   color: var(--ifm-font-color-base) !important;
   margin-bottom: 1rem !important;

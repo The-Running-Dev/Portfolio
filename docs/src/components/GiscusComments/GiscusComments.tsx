@@ -1,10 +1,10 @@
-import React from "react";
-import Giscus from "@giscus/react";
-import { useColorMode } from "@docusaurus/theme-common";
+import React from 'react';
+import Giscus from '@giscus/react';
+import { useColorMode } from '@docusaurus/theme-common';
 
-import FeatureComponent from "../FeatureComponent";
-import { Features } from "../../config/FeaturesConfig";
-import { giscus as configData } from '../../../data'
+import FeatureComponent from '../FeatureComponent';
+import { Features } from '../../config/FeaturesConfig';
+import { giscus as configData } from '../../../data';
 
 /**
  * GiscusComments Component
@@ -19,10 +19,7 @@ import { giscus as configData } from '../../../data'
  */
 const GiscusComments: React.FC = () => {
   return (
-    <FeatureComponent
-      feature={Features.GiscusComments}
-      configData={configData}
-    >
+    <FeatureComponent feature={Features.GiscusComments} configData={configData}>
       {(config) => {
         const { colorMode } = useColorMode();
 
@@ -34,18 +31,20 @@ const GiscusComments: React.FC = () => {
           !config.categoryId
         ) {
           return (
-            <div style={{ padding: "20px", textAlign: "center", color: "#666" }}>
+            <div
+              style={{ padding: '20px', textAlign: 'center', color: '#666' }}
+            >
               <p>💬 Comments are not configured yet.</p>
               <p>
-                Configure Giscus settings in <code>src/config/giscus-config.ts</code>{" "}
-                to enable comments.
+                Configure Giscus settings in{' '}
+                <code>src/config/giscus-config.ts</code> to enable comments.
               </p>
               <p>
                 <a
                   href="https://giscus.app"
                   target="_blank"
                   rel="noopener noreferrer"
-                  style={{ color: "#0969da" }}
+                  style={{ color: '#0969da' }}
                 >
                   Configure Giscus →
                 </a>
@@ -63,18 +62,18 @@ const GiscusComments: React.FC = () => {
             categoryId={config.categoryId}
             mapping={
               config.mapping as
-                | "pathname"
-                | "url"
-                | "title"
-                | "og:title"
-                | "specific"
-                | "number"
+                | 'pathname'
+                | 'url'
+                | 'title'
+                | 'og:title'
+                | 'specific'
+                | 'number'
             }
             term={config.term}
-            reactionsEnabled={config.reactionsEnabled ? "1" : "0"}
-            emitMetadata={config.emitMetadata ? "1" : "0"}
-            inputPosition={config.inputPosition as "top" | "bottom"}
-            theme={colorMode === "dark" ? "dark" : "light"}
+            reactionsEnabled={config.reactionsEnabled ? '1' : '0'}
+            emitMetadata={config.emitMetadata ? '1' : '0'}
+            inputPosition={config.inputPosition as 'top' | 'bottom'}
+            theme={colorMode === 'dark' ? 'dark' : 'light'}
             lang={config.lang}
             loading="lazy"
           />

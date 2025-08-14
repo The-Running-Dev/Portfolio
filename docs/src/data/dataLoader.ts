@@ -23,7 +23,7 @@ export const DataCacheConfig: IDataCacheConfig = {
   },
   isEnabled(): boolean {
     const isDevelopment = process.env.NODE_ENV === 'development';
-    
+
     return this.enabled && !isDevelopment;
   }
 };
@@ -46,23 +46,23 @@ const dataCache = new Map<any, any>();
 
 /**
  * Process raw data on-demand with optional caching and transformation
- * 
+ *
  * @param rawData - Raw JSON data to process
  * @param options - Processing options (cache, processor)
  * @returns Typed and processed data
- * 
+ *
  * @example
  * // Basic usage with imported data
  * const config = getData<VersionConfig>(versionConfigJson);
- * 
+ *
  * // With custom processor
- * const processedData = getData(rawData, { 
- *   processor: (data) => transformToSpecialFormat(data) 
+ * const processedData = getData(rawData, {
+ *   processor: (data) => transformToSpecialFormat(data)
  * });
- * 
+ *
  * // Force caching even when globally disabled
  * const cachedData = getData(rawData, { cache: true });
- * 
+ *
  * // Force no caching even when globally enabled
  * const freshData = getData(rawData, { cache: false });
  */
@@ -70,9 +70,8 @@ export function getData<T = any>(
   rawData: any,
   options: GetDataOptions<T> = {}
 ): T {
-  const shouldCache = options.cache !== undefined 
-    ? options.cache 
-    : DataCacheConfig.isEnabled();
+  const shouldCache =
+    options.cache !== undefined ? options.cache : DataCacheConfig.isEnabled();
 
   const { processor } = options;
 
@@ -90,9 +89,10 @@ export function getData<T = any>(
 
   if (shouldCache && cacheKey) {
     // Freeze to avoid accidental external mutation of cached value
-    const frozen = (typeof result === 'object' && result !== null)
-      ? Object.freeze(result as object)
-      : result;
+    const frozen =
+      typeof result === 'object' && result !== null
+        ? Object.freeze(result as object)
+        : result;
     dataCache.set(cacheKey, frozen);
     return frozen as T;
   }

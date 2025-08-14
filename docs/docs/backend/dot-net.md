@@ -1,6 +1,7 @@
 ---
 sidebar_position: 1
 ---
+
 # .NET
 
 ## [Business Intelligence](https://github.com/The-Running-Dev/Contec-BusinessIntelligence)
@@ -17,7 +18,7 @@ This project uses Razor as the template engine, and given source templates, and 
 
 Context: I introduced a team I worked with to Dapper (a micro ORM), and over time I saw a need to generate a lot of classes based in the repository pattern I implemented in Dapper.
 
-## [Image Event Processor](https://github.com/The-Running-Dev/Demo-ImageEventProcessor) 
+## [Image Event Processor](https://github.com/The-Running-Dev/Demo-ImageEventProcessor)
 
 **Updated**: January 23, 2025 @ 14:23
 
@@ -34,7 +35,7 @@ A simple menu creator on top of .NET Core 2.2. This application is a coding exer
 **Updated**: August 1, 2016 @ 00:19
 
 I am a CI/CD fanatic! There is a tool called CruiseControlTray initially implemented to be used with CruiseControl.NET. The tool can speak the status of the build based on accessing XML API available in CruiseControl.NET.
-  
+
 While at MxToolbox, we had 50 inch TVs in every room, and the shared dev office had 4! This project translated the OctopusDeploy build status in the XML format that CruiseControlTray understood. That way we would get audio and video notifications of the deployment status.
 
 ## [PatientViewer.NET](https://github.com/The-Running-Dev/Demo-PatientVIewer.NET)

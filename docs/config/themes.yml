@@ -1,11 +1,11 @@
-defaultTheme: "night-owl"
+defaultTheme: 'night-owl'
 themes:
-  - name: "light"
-    displayName: "Light"
-    cssFile: "themes/light.css"
-  - name: "night-owl"
-    displayName: "Night Owl"
-    cssFile: "themes/night-owl.css"
-  - name: "blue"
-    displayName: "Blue"
-    cssFile: "themes/blue.css"
+  - name: 'light'
+    displayName: 'Light'
+    cssFile: 'themes/light.css'
+  - name: 'night-owl'
+    displayName: 'Night Owl'
+    cssFile: 'themes/night-owl.css'
+  - name: 'blue'
+    displayName: 'Blue'
+    cssFile: 'themes/blue.css'

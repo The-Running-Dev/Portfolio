@@ -1,6 +1,6 @@
 dropdown: false
-className: ""
-dropdownLabel: "GitHub"
+className: ''
+dropdownLabel: 'GitHub'
 showIcons: true
 links:
   - href: https://github.com/The-Running-Dev/Docusaurus-Template

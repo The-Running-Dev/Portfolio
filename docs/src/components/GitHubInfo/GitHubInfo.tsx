@@ -1,13 +1,13 @@
-import React from "react";
+import React from 'react';
 
-import { useGitHubConfig } from "../../config/GitHubConfig/useGitHubConfig";
-import { GitHubInfoProps } from "../../config/GitHubConfig/models";
+import { useGitHubConfig } from '../../config/GitHubConfig/useGitHubConfig';
+import { GitHubInfoProps } from '../../config/GitHubConfig/models';
 
 const GitHubInfo: React.FC<GitHubInfoProps> = ({ className }) => {
   const config = useGitHubConfig();
 
   return (
-    <div className={`github-info ${className || ""}`}>
+    <div className={`github-info ${className || ''}`}>
       <h3>📱 GitHub Configuration</h3>
 
       <div className="config-section">
@@ -39,11 +39,11 @@ const GitHubInfo: React.FC<GitHubInfoProps> = ({ className }) => {
               key={index}
               className="topic-badge"
               style={{
-                background: "var(--ifm-color-primary-lighter)",
-                padding: "2px 6px",
-                borderRadius: "4px",
-                fontSize: "0.8em",
-                margin: "2px",
+                background: 'var(--ifm-color-primary-lighter)',
+                padding: '2px 6px',
+                borderRadius: '4px',
+                fontSize: '0.8em',
+                margin: '2px'
               }}
             >
               {topic}
@@ -99,16 +99,16 @@ const GitHubInfo: React.FC<GitHubInfoProps> = ({ className }) => {
           <h4>Feature Flags</h4>
           <ul>
             <li>
-              Issue Links: {config.features.enableIssueLinks ? "✅" : "❌"}
+              Issue Links: {config.features.enableIssueLinks ? '✅' : '❌'}
             </li>
             <li>
-              Contributor Links:{" "}
-              {config.features.enableContributorLinks ? "✅" : "❌"}
+              Contributor Links:{' '}
+              {config.features.enableContributorLinks ? '✅' : '❌'}
             </li>
             <li>
-              Release Notes: {config.features.enableReleaseNotes ? "✅" : "❌"}
+              Release Notes: {config.features.enableReleaseNotes ? '✅' : '❌'}
             </li>
-            <li>Branch Info: {config.features.showBranchInfo ? "✅" : "❌"}</li>
+            <li>Branch Info: {config.features.showBranchInfo ? '✅' : '❌'}</li>
           </ul>
         </div>
       )}
@@ -118,12 +118,12 @@ const GitHubInfo: React.FC<GitHubInfoProps> = ({ className }) => {
           <h4>GitHub Actions</h4>
           <ul>
             <li>
-              Enabled: {config.integrations.githubActions.enabled ? "✅" : "❌"}
+              Enabled: {config.integrations.githubActions.enabled ? '✅' : '❌'}
             </li>
             {config.integrations.githubActions.workflows && (
               <li>
-                Workflows:{" "}
-                {config.integrations.githubActions.workflows.join(", ")}
+                Workflows:{' '}
+                {config.integrations.githubActions.workflows.join(', ')}
               </li>
             )}
           </ul>

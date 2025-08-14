@@ -1,13 +1,13 @@
-import type { ReactNode } from "react";
-import clsx from "clsx";
-import useDocusaurusContext from "@docusaurus/core/lib/client/exports/useDocusaurusContext";
-import Layout from "@theme/Layout";
-import Heading from "@theme/Heading";
+import type { ReactNode } from 'react';
+import clsx from 'clsx';
+import useDocusaurusContext from '@docusaurus/core/lib/client/exports/useDocusaurusContext';
+import Layout from '@theme/Layout';
+import Heading from '@theme/Heading';
 
-import { Features, useFeatureFlag } from "../config/FeaturesConfig";
-import PortfolioPage from "../components/Portfolio";
+import { Features, useFeatureFlag } from '../config/FeaturesConfig';
+import PortfolioPage from '../components/Portfolio';
 
-import styles from "./index.module.css";
+import styles from './index.module.css';
 
 function HomepageHeader() {
   const { siteConfig } = useDocusaurusContext();
@@ -15,13 +15,13 @@ function HomepageHeader() {
   const enablePortfolioPage = useFeatureFlag(Features.PortfolioPage);
 
   return (
-    <header className={clsx("hero hero--primary", styles.heroBanner)}>
+    <header className={clsx('hero hero--primary', styles.heroBanner)}>
       <div className="container">
         <Heading as="h1" className="hero__title">
           {siteConfig.title}
         </Heading>
         <p className={styles.heroSubtitle}>Welcome to my technical portfolio</p>
-        <div style={{ marginTop: "2rem" }}>
+        <div style={{ marginTop: '2rem' }}>
           {enablePortfolioPage && (
             <a
               className="button button--secondary button--lg"
@@ -34,7 +34,7 @@ function HomepageHeader() {
             <a
               className="button button--secondary button--lg"
               href="/cv"
-              style={{ marginLeft: enablePortfolioPage ? "1rem" : "0" }}
+              style={{ marginLeft: enablePortfolioPage ? '1rem' : '0' }}
             >
               View CV/Resume
             </a>

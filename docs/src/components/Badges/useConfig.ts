@@ -9,9 +9,9 @@ import {
   faChartLine
 } from '@fortawesome/free-solid-svg-icons';
 
-import { getData } from "../../data";
+import { getData } from '../../data';
 import { BadgesProps, BadgesData, BadgeCategory } from './models';
-import { badges as configData } from '../../../data'
+import { badges as configData } from '../../../data';
 
 export default function useConfig({
   user,
@@ -39,7 +39,7 @@ export default function useConfig({
       const templateVariables = data.templateVariables;
 
       return { badgeCategories, templateVariables };
-    },
+    }
   });
 
   // Compute processed badge sections based on config and props
@@ -51,7 +51,9 @@ export default function useConfig({
     };
 
     return badgeCategories
-      .filter((category: BadgeCategory) => !groups || groups.includes(category.key))
+      .filter(
+        (category: BadgeCategory) => !groups || groups.includes(category.key)
+      )
       .map((category: BadgeCategory) => ({
         key: category.key,
         title: category.title,

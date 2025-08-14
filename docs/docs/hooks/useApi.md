@@ -21,7 +21,7 @@ import { useApi } from '../hooks/useApi';
 const ProjectsComponent: React.FC = () => {
   const { data, loading, error, enabled, refetch } = useApi({
     endpoint: '/api/projects',
-    enabled: true, // Must explicitly enable
+    enabled: true // Must explicitly enable
   });
 
   if (!enabled) {
@@ -30,7 +30,7 @@ const ProjectsComponent: React.FC = () => {
 
   if (loading) return <div>Loading...</div>;
   if (error) return <div>Error: {error.message}</div>;
-  
+
   return (
     <div>
       <h2>Projects</h2>
@@ -47,12 +47,12 @@ const ProjectsComponent: React.FC = () => {
 
 ```tsx
 interface UseApiConfig {
-  enabled?: boolean;        // Disabled by default
-  endpoint?: string;        // API endpoint URL
-  options?: RequestInit;    // Fetch options
-  autoFetch?: boolean;      // Auto-fetch on mount (default: true)
-  retryAttempts?: number;   // Retry attempts (default: 3)
-  retryDelay?: number;      // Retry delay in ms (default: 1000)
+  enabled?: boolean; // Disabled by default
+  endpoint?: string; // API endpoint URL
+  options?: RequestInit; // Fetch options
+  autoFetch?: boolean; // Auto-fetch on mount (default: true)
+  retryAttempts?: number; // Retry attempts (default: 3)
+  retryDelay?: number; // Retry delay in ms (default: 1000)
 }
 ```
 
@@ -90,8 +90,8 @@ const { data, loading, error } = useApi({
   options: {
     method: 'POST',
     headers: {
-      'Authorization': 'Bearer token',
-      'Content-Type': 'application/json',
+      Authorization: 'Bearer token',
+      'Content-Type': 'application/json'
     },
     body: JSON.stringify({ filter: 'active' })
   },
@@ -106,7 +106,7 @@ const { data, loading, error } = useApi({
 const { data, loading, refetch, reset } = useApi({
   enabled: true,
   endpoint: '/api/projects',
-  autoFetch: false, // Don't fetch automatically
+  autoFetch: false // Don't fetch automatically
 });
 
 // Later in your component
@@ -125,7 +125,7 @@ const handleReset = () => {
 import { useApiProjects } from '../hooks/useApi';
 
 const { data, loading, error } = useApiProjects({
-  enabled: true,
+  enabled: true
   // endpoint defaults to '/api/projects'
 });
 ```
@@ -134,12 +134,12 @@ const { data, loading, error } = useApiProjects({
 
 ```tsx
 interface UseApiState<T = any> {
-  data: T | null;           // API response data
-  loading: boolean;         // Loading state
-  error: Error | null;      // Error state
-  enabled: boolean;         // Whether API is enabled
-  refetch: () => Promise<void>;  // Manual refetch function
-  reset: () => void;        // Reset state function
+  data: T | null; // API response data
+  loading: boolean; // Loading state
+  error: Error | null; // Error state
+  enabled: boolean; // Whether API is enabled
+  refetch: () => Promise<void>; // Manual refetch function
+  reset: () => void; // Reset state function
 }
 ```
 

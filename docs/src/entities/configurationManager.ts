@@ -18,7 +18,8 @@ export class ConfigurationManager {
   private readonly storage: ConfigurationStorage;
   private readonly options: Required<ConfigurationManagerOptions>;
   private readonly state: ConfigurationState;
-  private readonly subscribers: Map<string, Set<ConfigurationSubscription>> = new Map();
+  private readonly subscribers: Map<string, Set<ConfigurationSubscription>> =
+    new Map();
   private readonly mutexLock: Map<string, Promise<void>> = new Map();
 
   constructor(options: ConfigurationManagerOptions = {}) {
@@ -29,9 +30,9 @@ export class ConfigurationManager {
       validationMode: options.validationMode || 'lenient',
       namespace: options.namespace || 'default'
     };
-    
+
     this.storage = this.options.storage;
-    
+
     this.state = {
       values: {},
       schemas: {},
@@ -55,7 +56,7 @@ export class ConfigurationManager {
         this.state.schemas = parsed.schemas || {};
         this.state.version = parsed.version || this.state.version;
       }
-      
+
       this.log('Configuration manager initialized');
     } catch (error) {
       console.error('Failed to initialize configuration manager:', error);
@@ -65,23 +66,25 @@ export class ConfigurationManager {
   /**
    * Register a configuration schema
    */
-  async registerSchema<T extends ConfigValue>(schema: ConfigurationSchema<T>): Promise<void> {
+  async registerSchema<T extends ConfigValue>(
+    schema: ConfigurationSchema<T>
+  ): Promise<void> {
     await this.withLock(`schema:${schema.key}`, async () => {
       this.state.schemas[schema.key] = schema;
-      
+
       // Set default value if not already set
       if (!(schema.key in this.state.values)) {
         this.state.values[schema.key] = schema.defaultValue;
-        
+
         if (this.options.enablePersistence) {
           await this.persistValue(schema.key, schema.defaultValue);
         }
       }
-      
+
       this.state.lastModified = new Date();
       await this.persistState();
     });
-    
+
     this.log(`Schema registered: ${schema.key}`);
   }
 
@@ -91,11 +94,11 @@ export class ConfigurationManager {
   async getValue<T extends ConfigValue>(key: string): Promise<T | null> {
     const schema = this.state.schemas[key];
     const value = this.state.values[key];
-    
+
     if (value === undefined) {
-      return schema?.defaultValue as T || null;
+      return (schema?.defaultValue as T) || null;
     }
-    
+
     return value as T;
   }
 
@@ -103,14 +106,14 @@ export class ConfigurationManager {
    * Set configuration value with validation
    */
   async setValue<T extends ConfigValue>(
-    key: string, 
-    value: T, 
+    key: string,
+    value: T,
     source: 'user' | 'system' | 'external' = 'user'
   ): Promise<boolean> {
     return await this.withLock(key, async () => {
       const schema = this.state.schemas[key];
       const oldValue = this.state.values[key];
-      
+
       // Validate if schema exists
       if (schema) {
         const validation = this.validateValue(value, schema);
@@ -119,17 +122,17 @@ export class ConfigurationManager {
           return false;
         }
       }
-      
+
       // Set the value
       this.state.values[key] = value;
       this.state.lastModified = new Date();
-      
+
       // Persist if enabled
       if (this.options.enablePersistence) {
         await this.persistValue(key, value);
         await this.persistState();
       }
-      
+
       // Notify subscribers
       const event: ConfigurationChangeEvent<T> = {
         key,
@@ -138,11 +141,11 @@ export class ConfigurationManager {
         timestamp: new Date(),
         source
       };
-      
+
       this.notifySubscribers(key, event);
-      
+
       this.log(`Configuration updated: ${key} = ${JSON.stringify(value)}`);
-      
+
       return true;
     });
   }
@@ -151,16 +154,16 @@ export class ConfigurationManager {
    * Subscribe to configuration changes
    */
   subscribe<T extends ConfigValue>(
-    key: string, 
+    key: string,
     callback: ConfigurationSubscription<T>
   ): () => void {
     if (!this.subscribers.has(key)) {
       this.subscribers.set(key, new Set());
     }
-    
+
     const keySubscribers = this.subscribers.get(key)!;
     keySubscribers.add(callback as ConfigurationSubscription);
-    
+
     // Return unsubscribe function
     return () => {
       keySubscribers.delete(callback as ConfigurationSubscription);
@@ -183,14 +186,14 @@ export class ConfigurationManager {
   async reset(): Promise<void> {
     await this.withLock('__reset', async () => {
       const defaultValues: Record<string, ConfigValue> = {};
-      
+
       for (const [key, schema] of Object.entries(this.state.schemas)) {
         defaultValues[key] = schema.defaultValue;
       }
-      
+
       this.state.values = defaultValues;
       this.state.lastModified = new Date();
-      
+
       if (this.options.enablePersistence) {
         await this.storage.clear();
         for (const [key, value] of Object.entries(defaultValues)) {
@@ -198,7 +201,7 @@ export class ConfigurationManager {
         }
         await this.persistState();
       }
-      
+
       // Notify all subscribers
       for (const [key, value] of Object.entries(defaultValues)) {
         const event: ConfigurationChangeEvent = {
@@ -208,11 +211,11 @@ export class ConfigurationManager {
           timestamp: new Date(),
           source: 'system'
         };
-        
+
         this.notifySubscribers(key, event);
       }
     });
-    
+
     this.log('Configuration reset to defaults');
   }
 
@@ -221,18 +224,21 @@ export class ConfigurationManager {
    */
   async reload(): Promise<void> {
     if (!this.options.enablePersistence) return;
-    
+
     await this.withLock('__reload', async () => {
       try {
         const persistedState = await this.storage.getItem('__state');
         if (persistedState) {
           const parsed = JSON.parse(persistedState) as ConfigurationState;
-          
+
           const oldValues = { ...this.state.values };
           this.state.values = parsed.values || {};
-          this.state.schemas = { ...this.state.schemas, ...(parsed.schemas || {}) };
+          this.state.schemas = {
+            ...this.state.schemas,
+            ...(parsed.schemas || {})
+          };
           this.state.version = parsed.version || this.state.version;
-          
+
           // Notify subscribers of changes
           for (const [key, newValue] of Object.entries(this.state.values)) {
             if (oldValues[key] !== newValue) {
@@ -243,7 +249,7 @@ export class ConfigurationManager {
                 timestamp: new Date(),
                 source: 'external'
               };
-              
+
               this.notifySubscribers(key, event);
             }
           }
@@ -252,50 +258,56 @@ export class ConfigurationManager {
         console.error('Failed to reload configuration:', error);
       }
     });
-    
+
     this.log('Configuration reloaded');
   }
 
   // Private methods
-  
+
   private validateValue<T extends ConfigValue>(
-    value: T, 
+    value: T,
     schema: ConfigurationSchema<T>
   ): ValidationResult {
     const errors: string[] = [];
-    
+
     // Type validation
     if (typeof value !== schema.type && value !== null) {
       errors.push(`Expected ${schema.type}, got ${typeof value}`);
     }
-    
+
     // Required validation
     if (schema.required && (value === null || value === undefined)) {
       errors.push('Value is required');
     }
-    
+
     // Custom validator
     if (schema.validator && errors.length === 0) {
       const customValidation = schema.validator(value);
       errors.push(...customValidation.errors);
     }
-    
+
     return {
       isValid: errors.length === 0,
       errors
     };
   }
-  
-  private async withLock<T>(key: string, operation: () => Promise<T>): Promise<T> {
+
+  private async withLock<T>(
+    key: string,
+    operation: () => Promise<T>
+  ): Promise<T> {
     // Wait for any existing lock on this key
     while (this.mutexLock.has(key)) {
       await this.mutexLock.get(key);
     }
-    
+
     // Create new lock
     const lockPromise = operation();
-    this.mutexLock.set(key, lockPromise.then(() => {}).catch(() => {}));
-    
+    this.mutexLock.set(
+      key,
+      lockPromise.then(() => {}).catch(() => {})
+    );
+
     try {
       const result = await lockPromise;
       return result;
@@ -304,7 +316,7 @@ export class ConfigurationManager {
       this.mutexLock.delete(key);
     }
   }
-  
+
   private async persistValue(key: string, value: ConfigValue): Promise<void> {
     try {
       await this.storage.setItem(key, JSON.stringify(value));
@@ -312,7 +324,7 @@ export class ConfigurationManager {
       console.error(`Failed to persist value for ${key}:`, error);
     }
   }
-  
+
   private async persistState(): Promise<void> {
     try {
       const stateToSave = {
@@ -321,20 +333,20 @@ export class ConfigurationManager {
         lastModified: this.state.lastModified,
         version: this.state.version
       };
-      
+
       await this.storage.setItem('__state', JSON.stringify(stateToSave));
     } catch (error) {
       console.error('Failed to persist configuration state:', error);
     }
   }
-  
+
   private notifySubscribers<T extends ConfigValue>(
-    key: string, 
+    key: string,
     event: ConfigurationChangeEvent<T>
   ): void {
     const keySubscribers = this.subscribers.get(key);
     if (keySubscribers) {
-      keySubscribers.forEach(callback => {
+      keySubscribers.forEach((callback) => {
         try {
           callback(event);
         } catch (error) {
@@ -343,10 +355,12 @@ export class ConfigurationManager {
       });
     }
   }
-  
+
   private log(message: string): void {
     if (this.options.enableLogging) {
-      console.log(`[ConfigurationManager:${this.options.namespace}] ${message}`);
+      console.log(
+        `[ConfigurationManager:${this.options.namespace}] ${message}`
+      );
     }
   }
 }

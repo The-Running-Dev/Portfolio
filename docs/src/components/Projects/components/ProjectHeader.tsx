@@ -1,6 +1,6 @@
-import clsx from "clsx";
-import Heading from "@theme/Heading";
-import { ProjectHeaderProps } from "../models";
+import clsx from 'clsx';
+import Heading from '@theme/Heading';
+import { ProjectHeaderProps } from '../models';
 
 /**
  * ProjectHeader component
@@ -8,7 +8,7 @@ import { ProjectHeaderProps } from "../models";
  */
 export function ProjectHeader({ categoryText }: ProjectHeaderProps) {
   return (
-    <header className={clsx("hero hero--primary", "heroBanner")}>
+    <header className={clsx('hero hero--primary', 'heroBanner')}>
       <div className="container">
         <Heading as="h1" className="hero__title">
           Projects

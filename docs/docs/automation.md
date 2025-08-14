@@ -1,6 +1,7 @@
 ---
 sidebar_position: 5
 ---
+
 # Automation
 
 ## [iCloudSync](https://github.com/The-Running-Dev/iCloudSync)
@@ -9,7 +10,7 @@ sidebar_position: 5
 
 PowerShell scripts to download and organize iCloud media.
 
-## [PowerShell-FileButler](https://github.com/The-Running-Dev/PowerShell-FileButler)  
+## [PowerShell-FileButler](https://github.com/The-Running-Dev/PowerShell-FileButler)
 
 **Updated**: April 17, 2019 @ 00:29
 

@@ -24,24 +24,27 @@
   --ifm-color-primary-lightest: #94a3b8;
   --ifm-code-font-size: 95%;
   --docusaurus-highlighted-code-line-bg: rgba(71, 85, 105, 0.1);
-  --ifm-font-family-base: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-  --ifm-heading-font-family: 'JetBrains Mono', Monaco, 'Cascadia Code', 'Roboto Mono', monospace;
+  --ifm-font-family-base:
+    'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  --ifm-heading-font-family:
+    'JetBrains Mono', Monaco, 'Cascadia Code', 'Roboto Mono', monospace;
   --ifm-font-weight-semibold: 600;
   --ifm-font-weight-bold: 700;
-  
+
   /* Professional light theme background */
   --ifm-background-color: #e5eef8;
   --ifm-card-background-color: #fafafa;
   --ifm-navbar-background-color: #e5e6e8;
-  --ifm-navbar-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06);
-  
+  --ifm-navbar-shadow:
+    0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06);
+
   /* Custom sidebar colors for light theme */
   --sidebar-bg: linear-gradient(135deg, #d4e2f0 0%, #e2e8f0 70%, #cbd5e1 100%);
   --sidebar-text-color: #475569;
   --sidebar-text-hover: #1e293b;
   --sidebar-bg-hover: rgba(71, 85, 105, 0.08);
   --sidebar-icon-color: #64748b;
-  
+
   /* Enhanced link colors for better contrast */
   --content-link-color: #1e40af;
   --content-link-hover-color: #1e293b;
@@ -60,7 +63,12 @@
   left: 0;
   right: 0;
   height: 1px;
-  background: linear-gradient(90deg, transparent, var(--ifm-color-primary-lightest), transparent);
+  background: linear-gradient(
+    90deg,
+    transparent,
+    var(--ifm-color-primary-lightest),
+    transparent
+  );
   opacity: 0.6;
 }
 
@@ -91,15 +99,16 @@
   --ifm-background-color: #0f172a;
   --ifm-card-background-color: #1e293b;
   --ifm-navbar-background-color: #1e293b;
-  --ifm-navbar-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.3), 0 1px 2px 0 rgba(0, 0, 0, 0.2);
-  
+  --ifm-navbar-shadow:
+    0 1px 3px 0 rgba(0, 0, 0, 0.3), 0 1px 2px 0 rgba(0, 0, 0, 0.2);
+
   /* Custom sidebar colors for dark theme */
   --sidebar-bg: linear-gradient(135deg, #1e293b 0%, #0f172a 70%, #020617 100%);
   --sidebar-text-color: #cbd5e1;
   --sidebar-text-hover: #f8fafc;
   --sidebar-bg-hover: rgba(51, 65, 85, 0.4);
   --sidebar-icon-color: #64748b;
-  
+
   /* Enhanced link colors for dark theme */
   --content-link-color: #60a5fa;
   --content-link-hover-color: #93c5fd;
@@ -107,7 +116,8 @@
 }
 
 /* Typography refinements for professional appearance */
-.markdown h1, .theme-doc-markdown h1 {
+.markdown h1,
+.theme-doc-markdown h1 {
   font-size: 2.25rem;
   font-weight: 700;
   line-height: 1.2;
@@ -115,7 +125,8 @@
   letter-spacing: -0.025em;
 }
 
-.markdown h2, .theme-doc-markdown h2 {
+.markdown h2,
+.theme-doc-markdown h2 {
   font-size: 1.875rem;
   font-weight: 600;
   line-height: 1.3;
@@ -123,14 +134,16 @@
   letter-spacing: -0.015em;
 }
 
-.markdown h3, .theme-doc-markdown h3 {
+.markdown h3,
+.theme-doc-markdown h3 {
   font-size: 1.5rem;
   font-weight: 600;
   line-height: 1.35;
   margin-bottom: 1rem;
 }
 
-.markdown h4, .theme-doc-markdown h4 {
+.markdown h4,
+.theme-doc-markdown h4 {
   font-size: 1.25rem;
   font-weight: 500;
   line-height: 1.4;
@@ -163,7 +176,9 @@
 .theme-doc-sidebar-container {
   background: var(--sidebar-bg);
   color: var(--sidebar-text-color);
-  box-shadow: 0 10px 25px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+  box-shadow:
+    0 10px 25px -3px rgba(0, 0, 0, 0.1),
+    0 4px 6px -2px rgba(0, 0, 0, 0.05);
   display: flex;
   flex-direction: column;
   padding-top: 1.5rem;
@@ -192,7 +207,7 @@
 }
 
 /* Professional theme-aware hover states */
-.theme-doc-sidebar-menu a:hover, 
+.theme-doc-sidebar-menu a:hover,
 .theme-doc-sidebar-menu a:focus {
   color: var(--sidebar-text-hover);
   background: var(--sidebar-bg-hover);
@@ -201,37 +216,37 @@
 }
 
 /* Professional theme-aware icons using CSS instead of emojis */
-.theme-doc-sidebar-menu a[href$="intro"]::before {
+.theme-doc-sidebar-menu a[href$='intro']::before {
   content: '◈';
   font-weight: 600;
   color: var(--sidebar-icon-color);
 }
 
-.theme-doc-sidebar-menu a[href*="contributions"]::before {
+.theme-doc-sidebar-menu a[href*='contributions']::before {
   content: '◊';
   font-weight: 600;
   color: var(--sidebar-icon-color);
 }
 
-.theme-doc-sidebar-menu a[href*="automation"]::before {
+.theme-doc-sidebar-menu a[href*='automation']::before {
   content: '▣';
   font-weight: 600;
   color: var(--sidebar-icon-color);
 }
 
-.theme-doc-sidebar-menu a[href*="infrastructure"]::before {
+.theme-doc-sidebar-menu a[href*='infrastructure']::before {
   content: '⬢';
   font-weight: 600;
   color: var(--sidebar-icon-color);
 }
 
-.theme-doc-sidebar-menu a[href*="backend"]::before {
+.theme-doc-sidebar-menu a[href*='backend']::before {
   content: '⬡';
   font-weight: 600;
   color: var(--sidebar-icon-color);
 }
 
-.theme-doc-sidebar-menu a[href*="frontend"]::before {
+.theme-doc-sidebar-menu a[href*='frontend']::before {
   content: '◬';
   font-weight: 600;
   color: var(--sidebar-icon-color);
@@ -247,7 +262,9 @@
 
 /* Main content area styling with improved light theme */
 .theme-doc-main {
-  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+  box-shadow:
+    0 4px 6px -1px rgba(0, 0, 0, 0.1),
+    0 2px 4px -1px rgba(0, 0, 0, 0.06);
   border-radius: 0.75rem;
   background: var(--ifm-card-background-color);
   margin: 1.5rem 0;
@@ -257,7 +274,9 @@
 
 [data-theme='dark'] .theme-doc-main {
   border-color: rgba(71, 85, 105, 0.2);
-  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.2), 0 2px 4px -1px rgba(0, 0, 0, 0.1);
+  box-shadow:
+    0 4px 6px -1px rgba(0, 0, 0, 0.2),
+    0 2px 4px -1px rgba(0, 0, 0, 0.1);
 }
 
 /* Sidebar toggle animation */
@@ -298,16 +317,16 @@
 }
 
 /* Professional button and link styling */
-.button, 
-.navbar__item, 
+.button,
+.navbar__item,
 .navbar__link {
   border-radius: 0.5rem !important;
   transition: all 0.2s ease-in-out;
   font-weight: 500;
 }
 
-.button:hover, 
-.navbar__item:hover, 
+.button:hover,
+.navbar__item:hover,
 .navbar__link:hover {
   background: rgba(7, 15, 41, 0.08);
   color: #ffffff !important;
@@ -350,7 +369,9 @@
   border-radius: 0.5rem;
   width: 44px;
   height: 44px;
-  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+  box-shadow:
+    0 4px 6px -1px rgba(0, 0, 0, 0.1),
+    0 2px 4px -1px rgba(0, 0, 0, 0.06);
   display: none;
   align-items: center;
   justify-content: center;
@@ -372,13 +393,13 @@
 }
 
 @keyframes fadeInUp {
-  from { 
-    opacity: 0; 
-    transform: translateY(20px); 
+  from {
+    opacity: 0;
+    transform: translateY(20px);
   }
-  to { 
-    opacity: 1; 
-    transform: translateY(0); 
+  to {
+    opacity: 1;
+    transform: translateY(0);
   }
 }
 
@@ -431,7 +452,9 @@ article a {
 article a:hover {
   color: var(--content-link-hover-color);
   background: var(--content-link-bg-hover);
-  box-shadow: 0 1px 3px rgba(30, 64, 175, 0.1), 0 1px 2px rgba(30, 64, 175, 0.06);
+  box-shadow:
+    0 1px 3px rgba(30, 64, 175, 0.1),
+    0 1px 2px rgba(30, 64, 175, 0.06);
   transform: translateY(-1px);
 }
 
@@ -439,13 +462,15 @@ article a:hover {
 [data-theme='dark'] .theme-doc-main a:hover,
 [data-theme='dark'] .markdown a:hover,
 [data-theme='dark'] article a:hover {
-  box-shadow: 0 1px 3px rgba(96, 165, 250, 0.15), 0 1px 2px rgba(96, 165, 250, 0.1);
+  box-shadow:
+    0 1px 3px rgba(96, 165, 250, 0.15),
+    0 1px 2px rgba(96, 165, 250, 0.1);
 }
 
 /* Special styling for external links */
-.theme-doc-main a[href^="http"]:not([href*="portfolio.subzerodev.com"])::after,
-.markdown a[href^="http"]:not([href*="portfolio.subzerodev.com"])::after,
-article a[href^="http"]:not([href*="portfolio.subzerodev.com"])::after {
+.theme-doc-main a[href^='http']:not([href*='portfolio.subzerodev.com'])::after,
+.markdown a[href^='http']:not([href*='portfolio.subzerodev.com'])::after,
+article a[href^='http']:not([href*='portfolio.subzerodev.com'])::after {
   content: '↗';
   font-size: 0.75em;
   margin-left: 0.25rem;
@@ -453,9 +478,10 @@ article a[href^="http"]:not([href*="portfolio.subzerodev.com"])::after {
   transition: opacity 0.2s ease-in-out;
 }
 
-.theme-doc-main a[href^="http"]:not([href*="portfolio.subzerodev.com"]):hover::after,
-.markdown a[href^="http"]:not([href*="portfolio.subzerodev.com"]):hover::after,
-article a[href^="http"]:not([href*="portfolio.subzerodev.com"]):hover::after {
+.theme-doc-main
+  a[href^='http']:not([href*='portfolio.subzerodev.com']):hover::after,
+.markdown a[href^='http']:not([href*='portfolio.subzerodev.com']):hover::after,
+article a[href^='http']:not([href*='portfolio.subzerodev.com']):hover::after {
   opacity: 1;
 }
 

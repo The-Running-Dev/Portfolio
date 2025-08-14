@@ -10,13 +10,13 @@ export interface NavBarLinksConfig {
 
   /** Whether to show as dropdown */
   dropdown?: boolean;
-  
+
   /** Custom CSS class */
   className?: string;
 
   /** Dropdown label (only used if dropdown is true) */
   dropdownLabel?: string;
-  
+
   /** Whether to show icons */
   showIcons?: boolean;
 }
@@ -28,22 +28,22 @@ export interface NavBarLinksConfig {
 export interface CustomNavBarLink {
   /** URL for the link */
   href: string;
-  
+
   /** Display label for the link */
   label: string;
-  
+
   /** Position in navbar (usually 'right') */
   position?: 'left' | 'right';
-  
+
   /** Whether to open in new tab */
   target?: '_blank' | '_self';
-  
+
   /** Tooltip text on hover */
   title?: string;
-  
+
   /** Custom CSS class for styling */
   className?: string;
-  
+
   /** FontAwesome icon definition or string icon name for dynamic resolution */
   icon?: IconDefinition | string;
 }
@@ -54,7 +54,7 @@ export interface CustomNavBarLink {
 export interface NavBarLinksProps {
   /** Optional configuration - if not provided, uses default config from file */
   config?: NavBarLinksConfig;
-  
+
   /** Whether the component is enabled - if not provided, uses feature flag */
   enabled?: boolean;
 }

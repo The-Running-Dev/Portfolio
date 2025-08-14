@@ -1,6 +1,6 @@
-import React from "react";
-import { getData } from "../../data";
-import { Features, useFeatureFlag } from "../../config/FeaturesConfig";
+import React from 'react';
+import { getData } from '../../data';
+import { Features, useFeatureFlag } from '../../config/FeaturesConfig';
 
 /**
  * Props for the base feature component
@@ -8,25 +8,25 @@ import { Features, useFeatureFlag } from "../../config/FeaturesConfig";
 export interface FeatureComponentProps<TConfig, TProcessedData> {
   /** Feature flag to check */
   feature: Features;
-  
+
   /** Raw configuration data */
   configData: any;
-  
+
   /** Optional data processor function */
   processor?: (config: TConfig) => TProcessedData;
-  
+
   /** Render function that receives the processed data */
   children: (data: TProcessedData) => React.ReactNode;
 }
 
 /**
  * Base component that handles feature flag checking and data loading
- * 
+ *
  * This component abstracts the common pattern of:
  * 1. Checking if a feature is enabled
  * 2. Loading and optionally processing configuration data
  * 3. Rendering only if the feature is enabled
- * 
+ *
  * @example
  * ```tsx
  * <FeatureComponent
@@ -52,7 +52,9 @@ function FeatureComponent<TConfig = any, TProcessedData = TConfig>({
 
   // Load and optionally process the configuration data
   const data = getData<TConfig>(configData);
-  const processedData = processor ? processor(data) : (data as unknown as TProcessedData);
+  const processedData = processor
+    ? processor(data)
+    : (data as unknown as TProcessedData);
 
   return <>{children(processedData)}</>;
 }

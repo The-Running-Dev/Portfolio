@@ -7,18 +7,20 @@ export default function GitHubConfigPage(): JSX.Element {
   return (
     <Layout
       title="GitHub Configuration Demo"
-      description="Demonstration of dynamic GitHub configuration loading from YAML">
+      description="Demonstration of dynamic GitHub configuration loading from YAML"
+    >
       <div className="container margin-top--lg">
         <div className="row">
           <div className="col col--8 col--offset-2">
             <header>
               <h1>🔧 GitHub Configuration Demo</h1>
               <p>
-                This page demonstrates the new dynamic GitHub configuration system 
-                that loads settings from YAML/JSON files using the enhanced loader system.
+                This page demonstrates the new dynamic GitHub configuration
+                system that loads settings from YAML/JSON files using the
+                enhanced loader system.
               </p>
             </header>
-            
+
             <main>
               <section className="margin-bottom--xl">
                 <h2>📋 Basic YAML Configuration</h2>
@@ -33,7 +35,10 @@ export default function GitHubConfigPage(): JSX.Element {
                 This component uses the new dynamic configuration loader to:
               </p>
               <ul>
-                <li>✅ Load GitHub configuration from <code>config/github.yaml</code></li>
+                <li>
+                  ✅ Load GitHub configuration from{' '}
+                  <code>config/github.yaml</code>
+                </li>
                 <li>✅ Parse YAML content using js-yaml</li>
                 <li>✅ Provide type-safe access to configuration data</li>
                 <li>✅ Support immutable configuration objects</li>

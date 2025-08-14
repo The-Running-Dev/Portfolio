@@ -1,4 +1,4 @@
-import { ProjectStatsProps } from "../models";
+import { ProjectStatsProps } from '../models';
 
 /**
  * ProjectStats component
@@ -8,20 +8,20 @@ export function ProjectStats({ stats }: ProjectStatsProps) {
   const statsArray = [
     {
       number: stats.totalProjects,
-      label: "Total",
+      label: 'Total'
     },
     {
       number: stats.recentProjects,
-      label: "Recent",
+      label: 'Recent'
     },
     {
       number: stats.totalTechnologies,
-      label: stats.totalTechnologies === 1 ? "Technology" : "Technologies",
+      label: stats.totalTechnologies === 1 ? 'Technology' : 'Technologies'
     },
     {
       number: stats.averageAge,
-      label: "Average Age",
-    },
+      label: 'Average Age'
+    }
   ];
 
   return (

@@ -12,7 +12,7 @@ const CVPageLinkNavbarItem: React.FC = () => {
   }
 
   return (
-    <Link 
+    <Link
       to="/cv"
       className="navbar__item navbar__link"
       activeClassName="navbar__link--active"

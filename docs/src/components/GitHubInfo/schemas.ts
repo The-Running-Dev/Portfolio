@@ -71,14 +71,18 @@ export const GitHubFeaturesSchema = z.object({
 });
 
 export const GitHubIntegrationsSchema = z.object({
-  githubActions: z.object({
-    enabled: z.boolean().optional().default(true),
-    workflows: z.array(z.string()).optional().default([])
-  }).optional(),
-  packages: z.object({
-    enabled: z.boolean().optional().default(true),
-    registries: z.array(z.string()).optional().default([])
-  }).optional()
+  githubActions: z
+    .object({
+      enabled: z.boolean().optional().default(true),
+      workflows: z.array(z.string()).optional().default([])
+    })
+    .optional(),
+  packages: z
+    .object({
+      enabled: z.boolean().optional().default(true),
+      registries: z.array(z.string()).optional().default([])
+    })
+    .optional()
 });
 
 export const GitHubComponentConfigSchema = z.object({
@@ -102,18 +106,20 @@ const schemaRegistry: Record<string, z.ZodSchema> = {
 // Function to validate data with appropriate schema
 export function validateData<T = any>(key: string, data: any): T {
   const schema = schemaRegistry[key];
-  
+
   if (!schema) {
     // If no schema is registered, return data as-is
     console.warn(`No Schema Found for Key: ${key}`);
     return data as T;
   }
-  
+
   try {
     return schema.parse(data) as T;
   } catch (error) {
     if (error instanceof z.ZodError) {
-      throw new Error(`Validation Failed for Key "${key}": ${error.issues.map(e => `${e.path.join('.')}: ${e.message}`).join(', ')}`);
+      throw new Error(
+        `Validation Failed for Key "${key}": ${error.issues.map((e) => `${e.path.join('.')}: ${e.message}`).join(', ')}`
+      );
     }
     throw error;
   }

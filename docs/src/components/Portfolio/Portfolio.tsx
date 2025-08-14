@@ -3,23 +3,24 @@ import clsx from 'clsx';
 import useDocusaurusContext from '@docusaurus/core/lib/client/exports/useDocusaurusContext';
 import Heading from '@theme/Heading';
 
-import FeatureComponent from "../FeatureComponent";
-import { Features } from "../../config/FeaturesConfig";
-import { portfolioData as configData } from '../../../data'
+import FeatureComponent from '../FeatureComponent';
+import { Features } from '../../config/FeaturesConfig';
+import { portfolioData as configData } from '../../../data';
 
 import './portfolio.css';
 import './portfolio-reader.css';
 
 export default function Portfolio(): ReactNode {
   return (
-    <FeatureComponent
-      feature={Features.PortfolioPage}
-      configData={configData}
-    >
+    <FeatureComponent feature={Features.PortfolioPage} configData={configData}>
       {(data) => {
         if (!data?.header) {
           // last-resort guard to avoid crashing the page
-          return <div className="portfolio-wrap"><p className="portfolio-muted">No Portfolio data found.</p></div>;
+          return (
+            <div className="portfolio-wrap">
+              <p className="portfolio-muted">No Portfolio data found.</p>
+            </div>
+          );
         }
 
         return (
@@ -47,9 +48,7 @@ function HomepageHeader() {
         <Heading as="h1" className="hero__title">
           {header.title || siteConfig.title}
         </Heading>
-        <p className="heroSubtitle">
-          {header.subtitle}
-        </p>
+        <p className="heroSubtitle">{header.subtitle}</p>
       </div>
     </header>
   );
@@ -93,9 +92,7 @@ function ProjectShowcase() {
               <Heading as="h3" className="projectTitle">
                 {project.title}
               </Heading>
-              <p className="projectDescription">
-                {project.description}
-              </p>
+              <p className="projectDescription">{project.description}</p>
             </a>
           ))}
         </div>

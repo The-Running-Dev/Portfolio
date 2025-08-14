@@ -1,17 +1,21 @@
-import React, { useState, useCallback, useMemo } from "react";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { IconDefinition } from "@fortawesome/fontawesome-svg-core";
-import { faChevronDown, faBars } from "@fortawesome/free-solid-svg-icons";
-import * as solidIcons from "@fortawesome/free-solid-svg-icons";
-import * as brandIcons from "@fortawesome/free-brands-svg-icons";
-import Link from "@docusaurus/Link";
+import React, { useState, useCallback, useMemo } from 'react';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { IconDefinition } from '@fortawesome/fontawesome-svg-core';
+import { faChevronDown, faBars } from '@fortawesome/free-solid-svg-icons';
+import * as solidIcons from '@fortawesome/free-solid-svg-icons';
+import * as brandIcons from '@fortawesome/free-brands-svg-icons';
+import Link from '@docusaurus/Link';
 
-import FeatureComponent from "../FeatureComponent";
-import { Features } from "../../config/FeaturesConfig";
-import { CustomNavBarLink, NavBarLinksConfig, NavBarLinksProps } from "./models";
-import { navBarLinks as configData } from '../../../data'
+import FeatureComponent from '../FeatureComponent';
+import { Features } from '../../config/FeaturesConfig';
+import {
+  CustomNavBarLink,
+  NavBarLinksConfig,
+  NavBarLinksProps
+} from './models';
+import { navBarLinks as configData } from '../../../data';
 
-import "./NavBarLinks.css";
+import './NavBarLinks.css';
 
 /**
  * Determines if a URL is external (requires full page navigation)
@@ -20,12 +24,12 @@ import "./NavBarLinks.css";
  */
 const isExternalUrl = (href: string): boolean => {
   return (
-    href.startsWith("http://") ||
-    href.startsWith("https://") ||
-    href.startsWith("//") ||
-    href.startsWith("mailto:") ||
-    href.startsWith("tel:") ||
-    href.startsWith("ftp://")
+    href.startsWith('http://') ||
+    href.startsWith('https://') ||
+    href.startsWith('//') ||
+    href.startsWith('mailto:') ||
+    href.startsWith('tel:') ||
+    href.startsWith('ftp://')
   );
 };
 
@@ -49,15 +53,14 @@ const isExternalUrl = (href: string): boolean => {
 const NavBarLinks: React.FC<NavBarLinksProps> = ({ config, enabled }) => {
   // If enabled prop is explicitly provided, use traditional logic
   if (enabled !== undefined) {
-    return config ? <NavBarLinksContent config={config} enabled={enabled} /> : null;
+    return config ? (
+      <NavBarLinksContent config={config} enabled={enabled} />
+    ) : null;
   }
 
   // Otherwise use FeatureComponent pattern
   return (
-    <FeatureComponent
-      feature={Features.NavBarLinks}
-      configData={configData}
-    >
+    <FeatureComponent feature={Features.NavBarLinks} configData={configData}>
       {(data) => <NavBarLinksContent config={data} enabled={true} />}
     </FeatureComponent>
   );
@@ -66,7 +69,10 @@ const NavBarLinks: React.FC<NavBarLinksProps> = ({ config, enabled }) => {
 /**
  * Internal component that renders the actual navigation UI
  */
-const NavBarLinksContent: React.FC<{ config: NavBarLinksConfig; enabled: boolean }> = ({ config: activeConfig, enabled }) => {
+const NavBarLinksContent: React.FC<{
+  config: NavBarLinksConfig;
+  enabled: boolean;
+}> = ({ config: activeConfig, enabled }) => {
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
 
   // Early return if not enabled or no links to display
@@ -100,12 +106,12 @@ const NavBarLinksContent: React.FC<{ config: NavBarLinksConfig; enabled: boolean
   const containerClass = useMemo(
     () =>
       [
-        "navbar-links",
-        activeConfig.dropdown && "navbar-links--dropdown",
-        activeConfig.className,
+        'navbar-links',
+        activeConfig.dropdown && 'navbar-links--dropdown',
+        activeConfig.className
       ]
         .filter(Boolean)
-        .join(" "),
+        .join(' '),
     [activeConfig.dropdown, activeConfig.className]
   );
 
@@ -113,7 +119,7 @@ const NavBarLinksContent: React.FC<{ config: NavBarLinksConfig; enabled: boolean
     if (!activeConfig.showIcons || !icon) return null;
 
     // If icon is a string, try to resolve it dynamically
-    const resolvedIcon = typeof icon === "string" ? resolveIcon(icon) : icon;
+    const resolvedIcon = typeof icon === 'string' ? resolveIcon(icon) : icon;
 
     // Only render if we have a valid icon
     if (!resolvedIcon) return null;
@@ -129,11 +135,11 @@ const NavBarLinksContent: React.FC<{ config: NavBarLinksConfig; enabled: boolean
     key?: string
   ) => {
     const linkClass = [
-      isDropdownItem ? "navbar-links__dropdown-item" : "navbar-links__link",
-      link.className,
+      isDropdownItem ? 'navbar-links__dropdown-item' : 'navbar-links__link',
+      link.className
     ]
       .filter(Boolean)
-      .join(" ");
+      .join(' ');
 
     const isExternal = isExternalUrl(link.href);
 
@@ -163,7 +169,7 @@ const NavBarLinksContent: React.FC<{ config: NavBarLinksConfig; enabled: boolean
           href={link.href}
           className={linkClass}
           title={link.title}
-          target={link.target || "_blank"}
+          target={link.target || '_blank'}
           rel="noopener noreferrer"
         >
           {linkContent}
@@ -198,7 +204,7 @@ const NavBarLinksContent: React.FC<{ config: NavBarLinksConfig; enabled: boolean
           aria-haspopup="true"
         >
           <FontAwesomeIcon icon={faBars} className="navbar-links__icon" />
-          <span>{activeConfig.dropdownLabel || "Menu"}</span>
+          <span>{activeConfig.dropdownLabel || 'Menu'}</span>
           <FontAwesomeIcon
             icon={faChevronDown}
             className="navbar-links__icon"

@@ -1,28 +1,28 @@
-import type { ReactNode, RefObject } from "react";
-import { useState, useEffect } from "react";
+import type { ReactNode, RefObject } from 'react';
+import { useState, useEffect } from 'react';
 
-import FeatureComponent from "../FeatureComponent";
-import { Features } from "../../config/FeaturesConfig";
-import { projects as configData } from "../../../data";
-import { type ProcessedCategory, type ProcessedProjectData } from "./models";
-import useConfig from "./hooks/useConfig";
+import FeatureComponent from '../FeatureComponent';
+import { Features } from '../../config/FeaturesConfig';
+import { projects as configData } from '../../../data';
+import { type ProcessedCategory, type ProcessedProjectData } from './models';
+import useConfig from './hooks/useConfig';
 
 // Import custom hooks, components, and utilities
-import { useUrlFilter, useSearch, useScrollRefs } from "./hooks";
+import { useUrlFilter, useSearch, useScrollRefs } from './hooks';
 import {
   FilterButton,
   SearchBox,
   ProjectHeader,
-  ProjectStats,
-} from "./components";
-import { calculateCategoryResults, calculateTechnologyResults } from "./utils";
+  ProjectStats
+} from './components';
+import { calculateCategoryResults, calculateTechnologyResults } from './utils';
 
-import "./projects.css";
-import "./projects-reader.css";
+import './projects.css';
+import './projects-reader.css';
 
 export default function Projects(): ReactNode {
   const [selectedFilter, setSelectedFilter] = useUrlFilter();
-  const [selectedDateRange, setSelectedDateRange] = useState("most-recent");
+  const [selectedDateRange, setSelectedDateRange] = useState('most-recent');
   const [showAllTags, setShowAllTags] = useState(false);
   const { searchTerm, setSearchTerm, searchInputRef, handleClearSearch } =
     useSearch();
@@ -32,9 +32,9 @@ export default function Projects(): ReactNode {
   // Auto-set date range to "all-dates" when searching
   useEffect(() => {
     if (searchTerm) {
-      setSelectedDateRange("all-dates");
+      setSelectedDateRange('all-dates');
     } else {
-      setSelectedDateRange("most-recent");
+      setSelectedDateRange('most-recent');
     }
   }, [searchTerm]);
 
@@ -42,28 +42,28 @@ export default function Projects(): ReactNode {
   useEffect(() => {
     if (
       selectedFilter &&
-      selectedFilter !== "most-recent" &&
-      selectedFilter !== "all" &&
-      selectedFilter !== "all-dates"
+      selectedFilter !== 'most-recent' &&
+      selectedFilter !== 'all' &&
+      selectedFilter !== 'all-dates'
     ) {
-      setSelectedDateRange("all-dates");
+      setSelectedDateRange('all-dates');
     } else if (
       !searchTerm &&
-      (selectedFilter === "most-recent" ||
-        selectedFilter === "all" ||
+      (selectedFilter === 'most-recent' ||
+        selectedFilter === 'all' ||
         !selectedFilter)
     ) {
-      setSelectedDateRange("most-recent");
+      setSelectedDateRange('most-recent');
     }
   }, [selectedFilter, searchTerm]);
 
   // Function to toggle filter selection
   const handleFilterToggle = (filterKey: string) => {
-    console.log("Filter toggled:", filterKey);
+    console.log('Filter toggled:', filterKey);
 
     if (selectedFilter === filterKey) {
       // If clicking the same filter, toggle it off by setting to most-recent default
-      setSelectedFilter("most-recent");
+      setSelectedFilter('most-recent');
     } else {
       // Otherwise select the new filter
       setSelectedFilter(filterKey);
@@ -74,7 +74,7 @@ export default function Projects(): ReactNode {
   const { processedData, loading } = useConfig({
     selectedCategory: selectedFilter,
     selectedDateRange: selectedDateRange,
-    searchTerm: searchTerm,
+    searchTerm: searchTerm
   });
 
   // Correct the filter case once processedData is available
@@ -155,7 +155,7 @@ function ProjectCategories({
   filtersRef,
   projectsRef,
   scrollToProjects,
-  scrollToFilters,
+  scrollToFilters
 }: {
   processedData: ProcessedProjectData;
   searchTerm: string;
@@ -214,10 +214,10 @@ function ProjectCategories({
                   disabled={!!searchTerm}
                   className={`filterButton ${
                     searchTerm
-                      ? "disabled"
+                      ? 'disabled'
                       : selectedDateRange === option.key
-                        ? "active"
-                        : ""
+                        ? 'active'
+                        : ''
                   }`}
                 >
                   {option.label}
@@ -235,7 +235,7 @@ function ProjectCategories({
                   processedData.categories.some(
                     (cat) =>
                       cat.category === option.key.toLowerCase() ||
-                      option.key === "all"
+                      option.key === 'all'
                   );
 
                 const { searchResultCount, totalCategoryProjects } = searchTerm
@@ -249,7 +249,7 @@ function ProjectCategories({
                 const isActive = searchTerm
                   ? hasSearchResults
                   : selectedFilter === option.key ||
-                    selectedFilter.startsWith(option.key + "-");
+                    selectedFilter.startsWith(option.key + '-');
 
                 return (
                   <FilterButton
@@ -278,7 +278,7 @@ function ProjectCategories({
                     cat.subCategories.some(
                       (sub) =>
                         option.key.endsWith(`-${sub.name}`) ||
-                        option.key === "all"
+                        option.key === 'all'
                     )
                   );
 
@@ -319,10 +319,10 @@ function ProjectCategories({
               {(() => {
                 // Separate "All Tags" from individual tag options
                 const allTagsOption = processedData.tagOptions.find(
-                  (option) => option.key === "all-tags"
+                  (option) => option.key === 'all-tags'
                 );
                 const individualTags = processedData.tagOptions.filter(
-                  (option) => option.key !== "all-tags"
+                  (option) => option.key !== 'all-tags'
                 );
 
                 // Determine how many tags to show
@@ -345,10 +345,10 @@ function ProjectCategories({
                         disabled={!!searchTerm}
                         className={`filterButton ${
                           searchTerm
-                            ? "disabled"
+                            ? 'disabled'
                             : selectedFilter === allTagsOption.key
-                              ? "active"
-                              : ""
+                              ? 'active'
+                              : ''
                         }`}
                         data-category="tag"
                       >
@@ -378,7 +378,7 @@ function ProjectCategories({
                               const totalTaggedProjects = labelMatch
                                 ? parseInt(labelMatch[1])
                                 : taggedProjectsCount;
-                              return `${allTagsOption.label.replace(/\s*\(\d+\)$/, "")} (${taggedProjectsCount} of ${totalTaggedProjects})`;
+                              return `${allTagsOption.label.replace(/\s*\(\d+\)$/, '')} (${taggedProjectsCount} of ${totalTaggedProjects})`;
                             }
                           }
                           return allTagsOption.label;
@@ -398,8 +398,8 @@ function ProjectCategories({
                                 project.tags.some(
                                   (tag) =>
                                     option.key ===
-                                      `tag-${tag.toLowerCase().replace(/\s+/g, "-")}` ||
-                                    option.key === "all-tags"
+                                      `tag-${tag.toLowerCase().replace(/\s+/g, '-')}` ||
+                                    option.key === 'all-tags'
                                 )
                             )
                           )
@@ -416,7 +416,7 @@ function ProjectCategories({
                                 project.tags.forEach((tag) => {
                                   const normalizedTag = tag
                                     .toLowerCase()
-                                    .replace(/\s+/g, "-");
+                                    .replace(/\s+/g, '-');
                                   if (normalizedTag === tagKey) {
                                     searchResultCount++;
                                   }
@@ -436,7 +436,7 @@ function ProjectCategories({
                         searchTerm && hasSearchResults
                           ? (() => {
                               // Extract the tag name and original count from the label
-                              const tagName = option.label.split(" (")[0];
+                              const tagName = option.label.split(' (')[0];
                               const labelMatch =
                                 option.label.match(/\((\d+)\)$/);
                               const totalTagProjects = labelMatch
@@ -458,11 +458,11 @@ function ProjectCategories({
                           className={`filterButton ${
                             searchTerm
                               ? hasSearchResults
-                                ? "active disabled"
-                                : "disabled"
+                                ? 'active disabled'
+                                : 'disabled'
                               : isActive
-                                ? "active"
-                                : ""
+                                ? 'active'
+                                : ''
                           }`}
                           data-category="tag"
                         >
@@ -503,7 +503,7 @@ function ProjectCategories({
           {processedData.categories.length === 0 ? (
             <div className="noResults">
               <p>
-                No Projects Found{searchTerm ? ` matching "${searchTerm}"` : ""}
+                No Projects Found{searchTerm ? ` matching "${searchTerm}"` : ''}
               </p>
             </div>
           ) : (
@@ -520,7 +520,7 @@ function ProjectCategories({
 
 function ProjectDisplay({
   categories,
-  scrollToFilters,
+  scrollToFilters
 }: {
   categories: ProcessedCategory[];
   scrollToFilters: () => void;

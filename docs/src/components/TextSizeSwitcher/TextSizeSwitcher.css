@@ -26,7 +26,8 @@
 
 .text-size-switcher__button-icon {
   font-weight: 600;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  font-family:
+    -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
   color: var(--ifm-navbar-link-color);
   display: flex;
   align-items: center;
@@ -146,7 +147,7 @@
 
 .text-size-medium {
   --ifm-font-size-base: 16px;
-  --text-size-scale: 1.0;
+  --text-size-scale: 1;
 }
 
 .text-size-large {
@@ -241,20 +242,20 @@ html.text-size-extra-large .cv-quote {
 }
 
 /* Fallback using CSS custom properties */
-:root[style*="--text-size-scale"] .markdown,
-:root[style*="--text-size-scale"] article,
-:root[style*="--text-size-scale"] .theme-doc-markdown,
-:root[style*="--text-size-scale"] .heroSubtitle,
-:root[style*="--text-size-scale"] .sectionTitle,
-:root[style*="--text-size-scale"] .techName,
-:root[style*="--text-size-scale"] .techCategory,
-:root[style*="--text-size-scale"] .projectTitle,
-:root[style*="--text-size-scale"] .projectDescription,
-:root[style*="--text-size-scale"] .statNumber,
-:root[style*="--text-size-scale"] .statLabel,
-:root[style*="--text-size-scale"] .cv-wrap,
-:root[style*="--text-size-scale"] .cv-muted,
-:root[style*="--text-size-scale"] .cv-chip,
-:root[style*="--text-size-scale"] .cv-quote {
+:root[style*='--text-size-scale'] .markdown,
+:root[style*='--text-size-scale'] article,
+:root[style*='--text-size-scale'] .theme-doc-markdown,
+:root[style*='--text-size-scale'] .heroSubtitle,
+:root[style*='--text-size-scale'] .sectionTitle,
+:root[style*='--text-size-scale'] .techName,
+:root[style*='--text-size-scale'] .techCategory,
+:root[style*='--text-size-scale'] .projectTitle,
+:root[style*='--text-size-scale'] .projectDescription,
+:root[style*='--text-size-scale'] .statNumber,
+:root[style*='--text-size-scale'] .statLabel,
+:root[style*='--text-size-scale'] .cv-wrap,
+:root[style*='--text-size-scale'] .cv-muted,
+:root[style*='--text-size-scale'] .cv-chip,
+:root[style*='--text-size-scale'] .cv-quote {
   font-size: calc(var(--text-size-scale, 1) * 1rem) !important;
 }

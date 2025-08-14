@@ -1,6 +1,6 @@
 /**
  * Cache Manager
- * 
+ *
  * Provides utilities for managing data cache configuration
  * and integrating with the features configuration system.
  */
@@ -11,17 +11,19 @@ import { DataCacheConfig } from './dataLoader';
 /**
  * Initialize cache configuration from features config
  * This should be called during app initialization to sync cache settings
- * 
+ *
  * @param featuresConfig - The loaded features configuration
  */
-export function initializeCacheFromFeatures(featuresConfig: FeaturesConfig): void {
+export function initializeCacheFromFeatures(
+  featuresConfig: FeaturesConfig
+): void {
   DataCacheConfig.setFromFeatures(featuresConfig.dataCaching);
 }
 
 /**
  * Utility function to manually control cache state
  * Useful for testing, debugging, or runtime cache control
- * 
+ *
  * @param enabled - Whether to enable caching
  */
 export function setCacheEnabled(enabled: boolean): void {
@@ -42,7 +44,7 @@ export function getCacheStats() {
 
 /**
  * Clear all cached data and optionally disable caching
- * 
+ *
  * @param disable - Whether to also disable caching after clearing
  */
 export function clearCache(disable = false): void {

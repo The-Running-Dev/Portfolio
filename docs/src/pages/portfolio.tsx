@@ -6,7 +6,8 @@ export default function Portfolio(): React.ReactElement {
   return (
     <Layout
       title="Portfolio"
-      description="Technical portfolio showcasing full-stack development, DevOps, and automation projects">
+      description="Technical portfolio showcasing full-stack development, DevOps, and automation projects"
+    >
       <PortfolioPage />
     </Layout>
   );

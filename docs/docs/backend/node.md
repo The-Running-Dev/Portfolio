@@ -1,9 +1,10 @@
 ---
 sidebar_position: 2
 ---
+
 # NodeJS
 
-## [BarStrad-Bot](https://github.com/The-Running-Dev/BarStrad-Bot) 
+## [BarStrad-Bot](https://github.com/The-Running-Dev/BarStrad-Bot)
 
 A TypeScript-based Discord bot for restaurants and bars, featuring multilingual support, order management, and containerized deployment.
 

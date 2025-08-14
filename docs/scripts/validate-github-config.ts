@@ -1,7 +1,7 @@
 #!/usr/bin/env tsx
 /**
  * Build-time validation script for GitHub Configuration System
- * 
+ *
  * This script validates the GitHub configuration and demonstrates
  * various usage patterns during the build process.
  */
@@ -31,8 +31,9 @@ async function validateConfiguration() {
 
     // 2. Display configuration summary
     const { repo, organization, project } = getRepositoryInfo();
-    const { license, description, topics, defaultBranch } = getProjectMetadata();
-    
+    const { license, description, topics, defaultBranch } =
+      getProjectMetadata();
+
     console.log('\n📋 Configuration Summary:');
     console.log(`   Repository: ${repo}`);
     console.log(`   Organization: ${organization}`);
@@ -45,13 +46,15 @@ async function validateConfiguration() {
     // 3. Validate URLs
     console.log('\n🔗 Validating URLs...');
     const urlValidation = await validateGitHubUrls(config);
-    
+
     if (urlValidation.invalid.length > 0) {
       console.log('❌ Invalid URLs found:');
-      urlValidation.invalid.forEach(invalid => console.log(`   - ${invalid}`));
+      urlValidation.invalid.forEach((invalid) =>
+        console.log(`   - ${invalid}`)
+      );
       process.exit(1);
     }
-    
+
     console.log(`✅ All ${urlValidation.valid.length} URLs are valid`);
 
     // 4. Test URL utilities
@@ -59,7 +62,7 @@ async function validateConfiguration() {
     const { repository, issues, api } = getGitHubUrls();
     const readmeUrl = getRepositoryUrl(`/blob/${defaultBranch}/README.md`);
     const contributorsApi = getApiUrl('/contributors');
-    
+
     console.log(`   Repository: ${repository}`);
     console.log(`   Issues: ${issues}`);
     console.log(`   API: ${api}`);
@@ -75,7 +78,7 @@ async function validateConfiguration() {
       () => Object.isFrozen(config.metadata.topics)
     ];
 
-    const immutableResults = immutabilityTests.map(test => test());
+    const immutableResults = immutabilityTests.map((test) => test());
     if (immutableResults.every(Boolean)) {
       console.log('✅ Configuration is properly immutable');
     } else {
@@ -88,7 +91,7 @@ async function validateConfiguration() {
     console.log(`   Build time: ${new Date().toISOString()}`);
     console.log(`   Configuration version: 1.0.0`);
     console.log(`   Node version: ${process.version}`);
-    
+
     // 7. Generate environment variables for CI/CD
     console.log('\n🌍 Environment Variables for CI/CD:');
     console.log(`export GITHUB_REPOSITORY="${repo}"`);
@@ -98,8 +101,9 @@ async function validateConfiguration() {
     console.log(`export PROJECT_LICENSE="${license}"`);
     console.log(`export PROJECT_DESCRIPTION="${description}"`);
 
-    console.log('\n🎉 GitHub Configuration System validation completed successfully!');
-    
+    console.log(
+      '\n🎉 GitHub Configuration System validation completed successfully!'
+    );
   } catch (error) {
     console.error('\n❌ Configuration validation failed:');
     console.error(error instanceof Error ? error.message : String(error));
@@ -109,7 +113,7 @@ async function validateConfiguration() {
 
 // Run validation if this script is executed directly
 if (require.main === module) {
-  validateConfiguration().catch(error => {
+  validateConfiguration().catch((error) => {
     console.error('Validation script failed:', error);
     process.exit(1);
   });

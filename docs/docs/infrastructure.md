@@ -8,7 +8,7 @@ sidebar_position: 4
 
 **Updated**: July 6, 2025 @ 15:31
 
-A comprehensive collection of reusable Azure DevOps pipeline templates and infrastructure-as-code modules. It enables teams to rapidly build, deploy, and manage cloud-native solutions on Azure using modular, production-ready YAML and ARM templates. The repository covers a wide range of Azure resources and CI/CD scenarios,  providing focused templates and documentation for specific services or deployment patterns. Ideal for DevOps engineers and cloud architects seeking to standardize and accelerate Azure delivery.  
+A comprehensive collection of reusable Azure DevOps pipeline templates and infrastructure-as-code modules. It enables teams to rapidly build, deploy, and manage cloud-native solutions on Azure using modular, production-ready YAML and ARM templates. The repository covers a wide range of Azure resources and CI/CD scenarios, providing focused templates and documentation for specific services or deployment patterns. Ideal for DevOps engineers and cloud architects seeking to standardize and accelerate Azure delivery.
 
 ## [Docker-DNSAtHome](https://github.com/The-Running-Dev/Docker-DNSAtHome)
 
@@ -28,7 +28,7 @@ Pre-configured Docker image designed to serve as a build agent for CI/CD pipelin
 
 A robust, containerized management and automation tool for Docker Compose environments. It automatically keeps your containers up-to-date, monitors their health, and provides a RESTful API for integration with monitoring tools like Uptime Kuma. It is designed for self-hosters and DevOps engineers who want hands-off, reliable, and observable Docker operations.
 
-## TeamCity, AWS Lambda**
+## TeamCity, AWS Lambda\*\*
 
 Used in NetAssure / Image Processor projects.
 
