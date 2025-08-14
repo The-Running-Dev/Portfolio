@@ -5,7 +5,7 @@
     "target": "ES2020",
     "module": "CommonJS",
     "outDir": "./build",
-    "rootDir": ".",
+    "rootDir": "..", // Changed from "." to ".." to allow imports from ../src/
     "sourceMap": true,
     "declaration": false,
     "strict": true,

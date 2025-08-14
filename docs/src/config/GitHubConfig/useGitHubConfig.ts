@@ -1,37 +1,25 @@
 import { useMemo } from "react";
-
-import { getData } from "../../data/dataLoader";
+import { getGitHubConfig } from "./configLoader";
 import type { GitHubConfig } from "./models";
-import { gitHub as configData } from '../../../data';
 
-// GitHub configuration hook
+/**
+ * React hook for accessing GitHub configuration
+ * 
+ * Uses the unified configuration loader to ensure consistency
+ * between app and test environments.
+ * 
+ * @returns {GitHubConfig} Validated GitHub configuration
+ */
 export function useGitHubConfig(): GitHubConfig {
   return useMemo(() => {
     try {
-      const config = getData<GitHubConfig>(configData);
-
-      // Validate required fields
-      if (!config.repo || !config.organization || !config.project) {
-        throw new Error("Missing Required GitHub Configuration Fields");
-      }
-
-      // Ensure immutability
-      return Object.freeze({
-        ...config,
-        urls: Object.freeze(config.urls),
-        metadata: Object.freeze({
-          ...config.metadata,
-          topics: Object.freeze(config.metadata.topics),
-        }),
-        features: config.features ? Object.freeze(config.features) : undefined,
-        integrations: config.integrations
-          ? Object.freeze(config.integrations)
-          : undefined,
-      });
+      // Use the unified configuration loader
+      return getGitHubConfig();
     } catch (error) {
-      console.error("Failed to Load GitHub Configuration:", error);
-
-      throw new Error("GitHub Configuration Failed to Load");
+      console.error('[ERROR] Failed to load GitHub configuration:', error);
+      
+      // Re-throw the error so components can handle it appropriately
+      throw error;
     }
-  }, []);
+  }, []); // Empty dependency array since config is cached internally
 }

@@ -13,12 +13,12 @@ import {
   getProjectMetadata,
   getRepositoryUrl,
   getApiUrl
-} from '../src/config/github';
+} from '../src/config/GitHubConfig/GitHubConfig';
 import {
   validateGitHubConfig,
   validateGitHubUrls,
   assertValidGitHubConfig
-} from '../src/config/github.validation';
+} from '../src/config/GitHubConfig/validation';
 
 async function validateConfiguration() {
   console.log('🔍 Validating GitHub Configuration System...\n');

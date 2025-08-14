@@ -2,14 +2,21 @@
  * Integration Tests for GitHub Configuration System
  * 
  * Tests for configuration loading, validation, and utility functions.
+ * Uses the unified configuration loader to ensure consistency.
  */
 
-import { describe, it, expect, beforeEach } from 'vitest';
+import { describe, it, expect, beforeEach, afterEach } from 'vitest';
 import {
   getGitHubConfig,
   getRepositoryInfo,
   getGitHubUrls,
   getProjectMetadata,
+  resetGitHubConfigCache,
+  isGitHubConfigCached
+} from '../configLoader';
+
+// Import legacy functions for backward compatibility testing
+import {
   getGitHubUrl,
   getRepositoryUrl,
   getApiUrl
@@ -31,7 +38,14 @@ describe('GitHub Configuration System', () => {
   let config: GitHubConfig;
 
   beforeEach(() => {
+    // Reset cache before each test to ensure fresh data
+    resetGitHubConfigCache();
     config = getGitHubConfig();
+  });
+
+  afterEach(() => {
+    // Clean up cache after each test
+    resetGitHubConfigCache();
   });
 
   describe('Configuration Loading', () => {
@@ -62,6 +76,20 @@ describe('GitHub Configuration System', () => {
       expect(metadata.license).toBe('MIT');
       expect(metadata.topics).toContain('docusaurus');
       expect(metadata.description).toContain('Docusaurus');
+    });
+
+    it('should cache configuration after first load', () => {
+      // Reset cache and verify it's not cached
+      resetGitHubConfigCache();
+      expect(isGitHubConfigCached()).toBe(false);
+      
+      // Load configuration and verify caching
+      const config1 = getGitHubConfig();
+      expect(isGitHubConfigCached()).toBe(true);
+      
+      // Subsequent calls should return the same cached object
+      const config2 = getGitHubConfig();
+      expect(config1).toBe(config2); // Same reference due to caching
     });
   });
 

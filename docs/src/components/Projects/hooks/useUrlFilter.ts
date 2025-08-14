@@ -7,27 +7,32 @@ import { useState, useEffect } from "react";
 export function useUrlFilter() {
     const [selectedFilter, setSelectedFilter] = useState("most-recent");
 
-    // Initialize filter from URL on page load
     useEffect(() => {
+        if (typeof window === 'undefined') return;
+
         const urlParams = new URLSearchParams(window.location.search);
         const filterParam = urlParams.get('filter');
-
+        
         if (filterParam) {
             setSelectedFilter(filterParam);
         }
     }, []);
 
-    // Update URL when filter changes
     useEffect(() => {
-        const url = new URL(window.location.href);
-
+        if (typeof window === 'undefined') return;
+        
+        const searchParams = new URLSearchParams(window.location.search);
+        
         if (selectedFilter && selectedFilter !== "most-recent") {
-            url.searchParams.set('filter', selectedFilter);
+            searchParams.set('filter', selectedFilter);
         } else {
-            url.searchParams.delete('filter');
+            searchParams.delete('filter');
         }
-
-        window.history.replaceState(null, '', url.toString());
+        
+        const newSearch = searchParams.toString();
+        const newUrl = window.location.pathname + (newSearch ? '?' + newSearch : '') + window.location.hash;
+        
+        window.history.replaceState(null, '', newUrl);
     }, [selectedFilter]);
 
     return [selectedFilter, setSelectedFilter] as const;

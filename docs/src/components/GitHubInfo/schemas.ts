@@ -81,7 +81,7 @@ export const GitHubIntegrationsSchema = z.object({
   }).optional()
 });
 
-export const GitHubConfigSchema = z.object({
+export const GitHubComponentConfigSchema = z.object({
   repo: z.string().regex(/^[\w.-]+\/[\w.-]+$/, 'Must be in owner/repo format'),
   organization: z.string(),
   project: z.string(),
@@ -96,7 +96,7 @@ const schemaRegistry: Record<string, z.ZodSchema> = {
   themes: ThemesConfigSchema,
   navbarLinks: NavbarLinksSchema,
   badgeConfig: BadgeConfigSchema,
-  github: GitHubConfigSchema
+  github: GitHubComponentConfigSchema
 };
 
 // Function to validate data with appropriate schema

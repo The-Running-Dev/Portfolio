@@ -26,7 +26,9 @@
 .searchInput:focus {
   outline: none;
   border-color: var(--ifm-color-primary);
-  box-shadow: 0 0 0 3px rgba(var(--ifm-color-primary-rgb), 0.1);
+  /* Use fallback if --ifm-color-primary-rgb is unavailable */
+  box-shadow:
+    0 0 0 3px rgba(var(--ifm-color-primary-rgb, 30, 64, 175), 0.1);
 }
 
 .clearButton {
@@ -266,8 +268,8 @@
 }
 
 .projectCard:hover {
-  transform: translateY(-6px);
-  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.15);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.12);
   border-color: var(--ifm-color-primary-light);
 }
 

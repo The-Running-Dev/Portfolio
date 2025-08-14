@@ -98,7 +98,60 @@ export function getApiUrl(endpoint?: string): string {
   const cleanEndpoint = endpoint.startsWith('/') ? endpoint : `/${endpoint}`;
   return `${baseUrl}${cleanEndpoint}`;
 }
+ * @returns Repository name in owner/repo format, organization, and project name
+ */
+export function getRepositoryInfo() {
+  return {
+    repo: gitHubConfig.repo,
+    organization: gitHubConfig.organization,
+    project: gitHubConfig.project
+  };
+}
 
-// Default export for backward compatibility
-const config = getUnifiedConfig();
-export default config;
+/**
+ * Get all GitHub URLs
+ * @returns Object containing all GitHub-related URLs
+ */
+export function getGitHubUrls() {
+  return gitHubConfig.urls;
+}
+
+/**
+ * Get project metadata
+ * @returns Project metadata including branch, license, topics, and description
+ */
+export function getProjectMetadata() {
+  return gitHubConfig.metadata;
+}
+
+/**
+ * Get a specific URL by key
+ * @param urlKey - Key for the URL to retrieve
+ * @returns The requested URL or undefined if not found
+ */
+export function getGitHubUrl(urlKey: keyof GitHubConfig['urls']): string {
+  return gitHubConfig.urls[urlKey];
+}
+
+/**
+ * Get repository URL with optional path
+ * @param path - Optional path to append to repository URL
+ * @returns Full GitHub repository URL with optional path
+ */
+export function getRepositoryUrl(path?: string): string {
+  const baseUrl = gitHubConfig.urls.repository;
+  return path ? `${baseUrl}${path.startsWith('/') ? path : `/${path}`}` : baseUrl;
+}
+
+/**
+ * Get API URL with optional endpoint
+ * @param endpoint - Optional API endpoint to append
+ * @returns Full GitHub API URL with optional endpoint
+ */
+export function getApiUrl(endpoint?: string): string {
+  const baseUrl = gitHubConfig.urls.api;
+  return endpoint ? `${baseUrl}${endpoint.startsWith('/') ? endpoint : `/${endpoint}`}` : baseUrl;
+}
+
+// Default export for convenience
+export default gitHubConfig;

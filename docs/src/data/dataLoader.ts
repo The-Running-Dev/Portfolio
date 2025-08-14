@@ -2,35 +2,31 @@
  * Global Cache Configuration
  * Controls caching behavior across the entire data loading system
  */
-export const DataCacheConfig = {
-  /** Global cache enable/disable flag */
+interface IDataCacheConfig {
+  enabled: boolean;
+  clear(): void;
+  size(): number;
+  setFromFeatures(enableDataCaching: boolean): void;
+  isEnabled(): boolean;
+}
+
+export const DataCacheConfig: IDataCacheConfig = {
   enabled: false,
-  
-  /** Clear all cached data */
   clear(): void {
     dataCache.clear();
   },
-  
-  /** Get current cache size */
   size(): number {
     return dataCache.size;
   },
-  
-  /** 
-   * Set the global cache state from features configuration
-   * This method should be called during app initialization
-   */
   setFromFeatures(enableDataCaching: boolean): void {
     this.enabled = enableDataCaching;
   },
-  
-  /** Check if caching is enabled and environment allows it */
   isEnabled(): boolean {
-    // Disable caching in development for fresh data
     const isDevelopment = process.env.NODE_ENV === 'development';
+    
     return this.enabled && !isDevelopment;
   }
-} as const;
+};
 
 /**
  * Options for on-demand data loading
@@ -74,30 +70,31 @@ export function getData<T = any>(
   rawData: any,
   options: GetDataOptions<T> = {}
 ): T {
-  // Determine if caching should be used:
-  // 1. If cache is explicitly set in options, use that
-  // 2. Otherwise, use global cache configuration
   const shouldCache = options.cache !== undefined 
     ? options.cache 
     : DataCacheConfig.isEnabled();
-    
+
   const { processor } = options;
 
-  // Check cache first if caching is enabled
-  if (shouldCache && dataCache.has(rawData)) {
-    return dataCache.get(rawData) as T;
+  // Derive a stable cache key from content
+  const cacheKey = shouldCache ? JSON.stringify(rawData) : undefined;
+
+  if (shouldCache && cacheKey && dataCache.has(cacheKey)) {
+    return dataCache.get(cacheKey) as T;
   }
 
-  // Process the raw data
   let result: T = rawData as T;
-
   if (processor) {
     result = processor(rawData);
   }
 
-  // Cache the result if caching is enabled
-  if (shouldCache) {
-    dataCache.set(rawData, result);
+  if (shouldCache && cacheKey) {
+    // Freeze to avoid accidental external mutation of cached value
+    const frozen = (typeof result === 'object' && result !== null)
+      ? Object.freeze(result as object)
+      : result;
+    dataCache.set(cacheKey, frozen);
+    return frozen as T;
   }
 
   return result;
