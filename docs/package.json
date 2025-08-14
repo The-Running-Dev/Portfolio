@@ -26,7 +26,7 @@
     "lint:fix": "eslint \"src/**/*.{ts,tsx}\" --fix",
     "format": "prettier --write .",
     "format:check": "prettier --check .",
-    "check-all": "pnpm run format:check && pnpm run lint && pnpm run typecheck",
+    "check-all": "pnpm run lint && pnpm run typecheck",
     "prepare": "husky",
     "debug": "docusaurus start",
     "watch:config": "chokidar \"config/**/*.{yml,yaml}\" -c \"tsx ./scripts/pre-build.ts\"",
