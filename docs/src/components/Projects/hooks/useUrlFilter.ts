@@ -21,21 +21,20 @@ export function useUrlFilter() {
   useEffect(() => {
     if (typeof window === 'undefined') return;
 
-    const searchParams = new URLSearchParams(window.location.search);
+    const url = new URL(window.location.href);
+    const current = url.searchParams.get('filter') ?? null;
+    const desired = selectedFilter && selectedFilter !== 'most-recent' ? selectedFilter : null;
 
-    if (selectedFilter && selectedFilter !== 'most-recent') {
-      searchParams.set('filter', selectedFilter);
+    // No-op if already matches to avoid redundant history updates
+    if (current === desired) return;
+
+    if (desired) {
+      url.searchParams.set('filter', desired);
     } else {
-      searchParams.delete('filter');
+      url.searchParams.delete('filter');
     }
 
-    const newSearch = searchParams.toString();
-    const newUrl =
-      window.location.pathname +
-      (newSearch ? '?' + newSearch : '') +
-      window.location.hash;
-
-    window.history.replaceState(null, '', newUrl);
+    window.history.replaceState(null, '', url.toString());
   }, [selectedFilter]);
 
   return [selectedFilter, setSelectedFilter] as const;

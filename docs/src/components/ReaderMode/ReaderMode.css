@@ -110,7 +110,9 @@ html.reader-mode-active .theme-back-to-top-button {
 /* Keep navbar but maintain consistent positioning */
 html.reader-mode-active .navbar {
   background: var(--ifm-background-color) !important;
-  /* Only change what's necessary, avoid layout shifts */
+  position: sticky !important;
+  top: 0 !important;
+  z-index: 1000; /* ensure navbar stays above main content */
 }
 
 /* Subtle styling for navbar elements in reader mode */

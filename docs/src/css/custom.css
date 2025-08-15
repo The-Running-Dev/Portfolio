@@ -476,9 +476,9 @@ article a:hover {
 }
 
 /* Special styling for external links */
-.theme-doc-main a[href^='http']:not([href*='portfolio.subzerodev.com'])::after,
-.markdown a[href^='http']:not([href*='portfolio.subzerodev.com'])::after,
-article a[href^='http']:not([href*='portfolio.subzerodev.com'])::after {
+.theme-doc-main a[href^='http']:not([data-internal='true'])::after,
+.markdown a[href^='http']:not([data-internal='true'])::after,
+article a[href^='http']:not([data-internal='true'])::after {
   content: '↗';
   font-size: 0.75em;
   margin-left: 0.25rem;
@@ -487,9 +487,9 @@ article a[href^='http']:not([href*='portfolio.subzerodev.com'])::after {
 }
 
 .theme-doc-main
-  a[href^='http']:not([href*='portfolio.subzerodev.com']):hover::after,
-.markdown a[href^='http']:not([href*='portfolio.subzerodev.com']):hover::after,
-article a[href^='http']:not([href*='portfolio.subzerodev.com']):hover::after {
+  a[href^='http']:not([data-internal='true']):hover::after,
+.markdown a[href^='http']:not([data-internal='true']):hover::after,
+article a[href^='http']:not([data-internal='true']):hover::after {
   opacity: 1;
 }
 
