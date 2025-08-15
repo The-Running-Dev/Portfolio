@@ -325,11 +325,17 @@
   font-weight: 500;
 }
 
-.button:hover,
+.button:hover {
+  background: rgba(7, 15, 41, 0.08);
+  color: #ffffff !important;
+  box-shadow: 0 2px 4px -1px rgba(0, 0, 0, 0.1);
+  transform: translateY(-1px);
+}
+
 .navbar__item:hover,
 .navbar__link:hover {
   background: rgba(7, 15, 41, 0.08);
-  color: #ffffff !important;
+  color: var(--ifm-link-color) !important;
   box-shadow: 0 2px 4px -1px rgba(0, 0, 0, 0.1);
   transform: translateY(-1px);
 }
@@ -432,12 +438,14 @@
   border-left-color: var(--ifm-color-primary-light);
 }
 
-/* Professional link styling - remove underlines, add shadows and visual cues */
+/* Professional link styling - restore underlines for accessibility */
 /* Apply only to content area links, not navigation */
 .theme-doc-main a,
 .markdown a,
 article a {
-  text-decoration: none !important;
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 2px;
   color: var(--content-link-color);
   font-weight: 500;
   position: relative;

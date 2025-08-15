@@ -16,21 +16,27 @@ export function useSearch() {
   }, []);
 
   // Handle escape key to clear search
+  const searchTermRef = useRef(searchTerm);
+  
+  useEffect(() => { searchTermRef.current = searchTerm; }, [searchTerm]);
+
   useEffect(() => {
     const handleKeyDown = (event: KeyboardEvent) => {
-      if (event.key === 'Escape' && searchTerm) {
+      if (event.key === 'Escape' && searchTermRef.current) {
         handleClearSearch();
       }
     };
-
+    
     document.addEventListener('keydown', handleKeyDown);
+
     return () => {
       document.removeEventListener('keydown', handleKeyDown);
     };
-  }, [searchTerm]);
+  }, []);
 
   const handleClearSearch = () => {
     setSearchTerm('');
+
     if (searchInputRef.current) {
       searchInputRef.current.focus();
     }

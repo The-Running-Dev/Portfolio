@@ -16,10 +16,17 @@ param([switch]$SkipTemplateSetup)
 $env:DOCKER_CLI_HINTS = "false"
 
 # Find Docusaurus project - check for config file first, then common folders
-$indicator = Get-ChildItem -Recurse | Where-Object {
-    ($_.Name -match '^docusaurus\.config\.(ts|js)$') -or 
-    ($_.PSIsContainer -and $_.Name -match '^(docs|documentation|docusaurus|sidebar)$')
-} | Select-Object -First 1
+$excludeDirs = @('node_modules','.git','.next','dist','build','.turbo','.cache')
+$indicator = Get-ChildItem -Recurse -Directory -Force |
+  Where-Object { $excludeDirs -notcontains $_.Name } |
+  ForEach-Object {
+    Get-ChildItem $_.FullName -File -Force -Filter 'docusaurus.config.*' -ErrorAction SilentlyContinue
+  } | Select-Object -First 1
+if (-not $indicator) {
+  $indicator = Get-ChildItem -Recurse -Directory -Force |
+    Where-Object { $excludeDirs -notcontains $_.Name -and $_.Name -match '^(docs|documentation|docusaurus|sidebar)$' } |
+    Select-Object -First 1
+}
 
 if (-not $indicator) {
     Write-Host "❌ Docusaurus not Found" -ForegroundColor Red
@@ -51,10 +58,13 @@ if (-not $SkipTemplateSetup) {
     }
 
     Write-Host "🔨 Setting up Templates..." -ForegroundColor Cyan
+    $ttyArgs = @()
+    if ($Host.UI.RawUI.KeyAvailable -or $env:TERM) { $ttyArgs += '-it' }
     & docker run `
         --rm `
-        -v ./:/workspace `
-        -it ghcr.io/the-running-dev/build-agent:latest `
+        -v "${PWD}:/workspace" `
+        @ttyArgs `
+        ghcr.io/the-running-dev/build-agent:latest `
         node-template-build `
         -AppDir $appDir `
         -PackageManager pnpm `

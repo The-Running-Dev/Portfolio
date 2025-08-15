@@ -37,9 +37,9 @@ features:
   projectsPage: true
   dataCaching: true
 
-projects:
-  provider: http
-  location: http://localhost:3001/api/v1/projects
+# projects:
+#   provider: http
+#   location: http://localhost:3001/api/v1/projects
 
 # projects:
 #   provider: json # JSON file provider, or 'http' for API
