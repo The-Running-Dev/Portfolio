@@ -10,35 +10,13 @@
     .\docs.ps1                      # Full setup with Docker
     .\docs.ps1 -SkipTemplateSetup   # Skip Docker, just start dev server
 #>
-param([switch]$SkipTemplateSetup)
+param(
+    [string]$appDir = '.',
+    [switch]$SkipTemplateSetup
+)
 
 # Suppress Docker warnings
 $env:DOCKER_CLI_HINTS = "false"
-
-# Find Docusaurus project - check for config file first, then common folders
-$excludeDirs = @('node_modules','.git','.next','dist','build','.turbo','.cache')
-$indicator = Get-ChildItem -Recurse -Directory -Force |
-  Where-Object { $excludeDirs -notcontains $_.Name } |
-  ForEach-Object {
-    Get-ChildItem $_.FullName -File -Force -Filter 'docusaurus.config.*' -ErrorAction SilentlyContinue
-  } | Select-Object -First 1
-if (-not $indicator) {
-  $indicator = Get-ChildItem -Recurse -Directory -Force |
-    Where-Object { $excludeDirs -notcontains $_.Name -and $_.Name -match '^(docs|documentation|docusaurus|sidebar)$' } |
-    Select-Object -First 1
-}
-
-if (-not $indicator) {
-    Write-Host "❌ Docusaurus not Found" -ForegroundColor Red
-
-    exit 1
-}
-
-# Calculate app directory (convert absolute to relative for Docker)
-$appDir = if ($indicator.PSIsContainer) { $indicator.Name } else { 
-    $dir = Split-Path $indicator.FullName -Parent
-    if ($dir -eq (Get-Location)) { "." } else { [System.IO.Path]::GetRelativePath((Get-Location), $dir) }
-}
 
 Write-Host "Using Directory: $appDir" -ForegroundColor Cyan
 
@@ -76,6 +54,19 @@ if (-not $SkipTemplateSetup) {
         exit $LASTEXITCODE
     }
 }
+
+if (-not (Test-Path (Join-Path $appDir 'docs'))) {
+    Write-Host "🔄 Creating Docs Directory..." -ForegroundColor Cyan
+    
+    New-Item -ItemType Directory -Path (Join-Path $appDir 'docs') | Out-Null
+}
+
+if (-not (Test-Path (Join-Path (Join-Path $appDir 'docs') 'index.md'))) {
+    Write-Host "🔄 Creating Docs Directory..." -ForegroundColor Cyan
+
+    New-Item -ItemType File -Path (Join-Path (Join-Path $appDir 'docs') 'index.md') | Out-Null
+}
+
 
 # Phase 2: Start development server in new window
 $appDirPath = if ([System.IO.Path]::IsPathRooted($appDir)) { $appDir } else { 
