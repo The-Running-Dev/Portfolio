@@ -35,9 +35,9 @@ features:
   projectsPage: true
   dataCaching: true
 
-# projects:
-#   provider: http
-#   location: http://localhost:3001/api/v1/projects
+projects:
+  provider: http
+  location: https://the-running-dev.github.io/Data/portfolio/projects.json
 
 # projects:
 #   provider: json # JSON file provider, or 'http' for API
