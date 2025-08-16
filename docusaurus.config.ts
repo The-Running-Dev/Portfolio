@@ -1,119 +1,86 @@
-import {themes as prismThemes} from 'prism-react-renderer';
-import getVersion from './scripts/get-version';
-import type {Config} from '@docusaurus/types';
+import { themes as prismThemes } from 'prism-react-renderer';
+import type { Config } from '@docusaurus/types';
 import type * as Preset from '@docusaurus/preset-classic';
 
-// This runs in Node.js - Don't use client-side code here (browser APIs, JSX...)
-const version = getVersion();
+import { getData } from './src/data';
+import { GlobalConfig } from './src/entities';
+import { globalConfig as configData } from './data/';
+
+const globalConfig = getData<GlobalConfig>(configData);
 const config: Config = {
-  title: 'Portfolio',
-  tagline: 'Technical Projects & Experience',
+  ...globalConfig.site,
+  trailingSlash: false,
   favicon: 'img/favicon.ico',
+  onBrokenLinks: 'warn',
+  onBrokenMarkdownLinks: 'warn',
   markdown: {
-    mermaid: true,
+    mermaid: true
   },
   themes: ['@docusaurus/theme-mermaid'],
-  future: {
-    v4: true,
-  },
-  url: 'https://portfolio.subzerodev.com',
-  baseUrl: '/',
-  trailingSlash: false,
-  organizationName: 'The-Running-Dev',
-  projectName: 'Portfolio',
-  onBrokenLinks: 'throw',
-  onBrokenMarkdownLinks: 'warn',
   i18n: {
     defaultLocale: 'en',
-    locales: ['en'],
+    locales: ['en']
   },
   presets: [
     [
       'classic',
       {
         docs: {
-          sidebarPath: './sidebars.ts',
-        },
-        blog: {
-          showReadingTime: true,
-          feedOptions: {
-            type: ['rss', 'atom'],
-            xslt: true,
-          },
-          onInlineTags: 'warn',
-          onInlineAuthors: 'warn',
-          onUntruncatedBlogPosts: 'warn',
+          sidebarPath: './sidebars.ts'
         },
         theme: {
-          customCss: './src/css/custom.css',
-        },
-      } satisfies Preset.Options,
-    ],
+          customCss: './static/themes/default.css'
+        }
+      } satisfies Preset.Options
+    ]
   ],
   themeConfig: {
+    ...globalConfig.theme,
     image: 'img/docusaurus-social-card.jpg',
     navbar: {
-      title: 'Portfolio',
-      logo: {
-        alt: 'Portfolio',
-        src: 'img/logo.svg',
-      },
+      ...globalConfig?.theme?.navbar,
+      hideOnScroll: false,
       items: [
         {
-          type: 'docSidebar',
-          sidebarId: 'projectsSidebar',
-          position: 'left',
-          label: 'Projects',
+          type: 'custom-Portfolio',
+          position: 'left'
         },
         {
-          type: 'docSidebar',
-          sidebarId: 'guidesSidebar',
-          position: 'left',
-          label: 'Guides',
+          type: 'custom-Projects',
+          position: 'left'
         },
         {
-          type: 'docSidebar',
-          sidebarId: 'resourcesSidebar',
-          position: 'left',
-          label: 'Resources',
+          type: 'custom-CV',
+          position: 'left'
         },
         {
-          type: 'docSidebar',
-          sidebarId: 'booksSidebar',
-          position: 'left',
-          label: 'Books',
+          type: 'custom-VersionDisplay',
+          position: 'right'
         },
-        // {
-        //   type: 'docSidebar',
-        //   sidebarId: 'experienceSidebar',
-        //   position: 'left',
-        //   label: 'Experience',
-        // },
-        // {
-        //   type: 'docSidebar',
-        //   sidebarId: 'aboutSidebar',
-        //   position: 'left',
-        //   label: 'About Me',
-        // },
-        // {
-        //   type: 'docSidebar',
-        //   sidebarId: 'contactSidebar',
-        //   position: 'left',
-        //   label: 'Contact',
-        // },
-        // {to: '/blog', label: 'Blog', position: 'left'},
         {
-          label: `v${version}`,
-          position: 'right',
-          href: '#',
+          type: 'custom-ThemeSwitcher',
+          position: 'right'
         },
-      ],
+        {
+          type: 'custom-TextSizeSwitcher',
+          position: 'right'
+        },
+        {
+          type: 'custom-ReaderMode',
+          position: 'right'
+        }
+      ]
+    },
+    colorMode: {
+      defaultMode: 'dark',
+      disableSwitch: false,
+      respectPrefersColorScheme: false
     },
     prism: {
       theme: prismThemes.github,
-      darkTheme: prismThemes.dracula,
-    },
-  } satisfies Preset.ThemeConfig,
+      darkTheme: prismThemes.dracula
+    }
+  } satisfies Preset.ThemeConfig
 };
 
 export default config;
