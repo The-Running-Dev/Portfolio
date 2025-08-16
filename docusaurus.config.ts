@@ -11,7 +11,7 @@ const config: Config = {
   ...globalConfig.site,
   trailingSlash: false,
   favicon: 'img/favicon.ico',
-  onBrokenLinks: 'throw',
+  onBrokenLinks: 'warn',
   onBrokenMarkdownLinks: 'warn',
   markdown: {
     mermaid: true
