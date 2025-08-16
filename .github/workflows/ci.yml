@@ -101,11 +101,6 @@ jobs:
     name: Build and Lint
     runs-on: ubuntu-latest
 
-    # Set default working directory for all steps in this job
-    defaults:
-      run:
-        working-directory: ./docs
-
     # Use custom build agent container for consistent build environment
     # This container includes Node.js, pnpm, and documentation build tools
     # Image: ghcr.io/the-running-dev/build-agent:latest
@@ -140,45 +135,10 @@ jobs:
           fetch-depth: 0
 
       # ================================================================
-      # STEP 2: INSTALL DEPENDENCIES
+      # STEP 2: BUILD ARTIFACTS
       # ================================================================
-      # Note: Dependency caching is not used with custom build agent containers
-      # as they typically have optimized tooling and pre-configured environments
-      - name: Install Dependencies
-        run: pnpm install --frozen-lockfile
-
-      # ================================================================
-      # STEP 3: CODE QUALITY CHECKS
-      # ================================================================
-      - name: Check Code Formatting
-        run: pnpm run check-all
-
-      # ================================================================
-      # STEP 4: BUILD DOCUSAURUS SITE
-      # ================================================================
-      - name: Build Docusaurus Site
-        run: pnpm run build:prod
-        env:
-          # Ensure proper environment for build
-          NODE_ENV: production
-
-      # ================================================================
-      # STEP 5: SECURITY AUDIT
-      # ================================================================
-      - name: Security Audit
-        run: pnpm audit --audit-level moderate
-        continue-on-error: true
-
-      # ================================================================
-      # STEP 6: BUILD VALIDATION
-      # ================================================================
-      - name: Validate Build Output
-        run: |
-          # Check if artifacts directory exists and contains expected files
-          ls -la ./artifacts/
-          test -f ./artifacts/index.html || (echo "❌ index.html not found in build output" && exit 1)
-          test -d ./artifacts/assets/ || (echo "❌ assets directory not found in build output" && exit 1)
-          echo "✅ Build Validation Completed Successfully"
+      - name: Build from Template
+        run: node-template-build -appDir '.'
 
 # ====================================================================
 # VALIDATION PROCESS
