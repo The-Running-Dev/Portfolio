@@ -97,7 +97,7 @@ $dockerArgs = @(
     "-it"
 )
 $dockerArgs += $volumeMounts
-$dockerArgs += "-v", "./docs:/template/docs" # Mount the local docs directory
+# $dockerArgs += "-v", "./docs:/template/docs" # Mount the local docs directory
 $dockerArgs += "-v", "/template/node_modules" # Anonymous volume to protect node_modules
 $dockerArgs += $imageName
 
