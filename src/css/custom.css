@@ -1,0 +1,243 @@
+/* Center mermaid charts in markdown/docs */
+.center-mermaid {
+  display: flex;
+  justify-content: center;
+  margin-top: 1.5em;
+  margin-bottom: 1.5em;
+}
+/**
+ * Any CSS included here will be global. The classic template
+ * bundles Infima by default. Infima is a CSS framework designed to
+ * work well for content-centric websites.
+ */
+
+/* You can override the default Infima variables here. */
+:root {
+  /* Hero background override for a less bright blue */
+  --hero-primary-bg: #1e40af;
+  --hero-primary-text: #fff;
+  --ifm-color-primary: #2563eb;
+  --ifm-color-primary-dark: #1d4fd7;
+  --ifm-color-primary-darker: #1e40af;
+  --ifm-color-primary-darkest: #172554;
+  --ifm-color-primary-light: #3b82f6;
+  --ifm-color-primary-lighter: #60a5fa;
+  --ifm-color-primary-lightest: #93c5fd;
+  --ifm-code-font-size: 95%;
+  --docusaurus-highlighted-code-line-bg: rgba(0, 0, 0, 0.1);
+}
+
+/* For readability concerns, you should choose a lighter palette in dark mode. */
+[data-theme='dark'] {
+  --ifm-color-primary: #60a5fa;
+  --ifm-color-primary-dark: #3b82f6;
+  --ifm-color-primary-darker: #2563eb;
+  --ifm-color-primary-darkest: #1e40af;
+  --ifm-color-primary-light: #93c5fd;
+  --ifm-color-primary-lighter: #bae6fd;
+  --ifm-color-primary-lightest: #e0f2fe;
+  --docusaurus-highlighted-code-line-bg: rgba(0, 0, 0, 0.3);
+}
+
+/* Reduce font size for markdown-generated headings */
+.markdown h1, .theme-doc-markdown h1 {
+  font-size: 2rem;
+}
+.markdown h2, .theme-doc-markdown h2 {
+  font-size: 1.5rem;
+}
+.markdown h3, .theme-doc-markdown h3 {
+  font-size: 1.2rem;
+}
+.markdown h4, .theme-doc-markdown h4 {
+  font-size: 1.05rem;
+}
+
+/* Sidebar gradient background - more subtle, less bright */
+.theme-doc-sidebar-container {
+  background: linear-gradient(135deg, #3b435a 0%, #040a16 60%, #93c5fd 100%);
+  color: #fff;
+  box-shadow: 0 8px 32px 0 rgba(30, 64, 175, 0.32), 0 3px 12px 0 rgba(0,0,0,0.18);
+  display: flex;
+  flex-direction: column;
+  padding-top: 2.5rem;
+  border-radius: 18px 18px 24px 24px;
+  overflow: hidden;
+}
+
+/* Optional: make sidebar links more readable on gradient */
+.theme-doc-sidebar-menu a {
+  color: #fff;
+  text-shadow: 0 1px 2px rgba(30,64,175,0.2);
+  position: relative;
+  padding-left: 2.3em;
+}
+
+/* Subtle accent color for sidebar link hover/focus */
+.theme-doc-sidebar-menu a:hover, .theme-doc-sidebar-menu a:focus {
+  color: #e1e5e9;
+  background: rgba(121, 154, 194, 0.32); /* brighter subtle blue */
+  border-radius: 8px;
+  box-shadow: 0 2px 8px 0 rgba(37,99,235,0.06);
+  transition: background 0.2s, color 0.2s, box-shadow 0.2s;
+}
+
+/* Fix emoji selector specificity and order for sidebar icons */
+.theme-doc-sidebar-menu a[href$="intro"]::before {
+  content: '🏠'; /* Home/Intro */
+}
+.theme-doc-sidebar-menu a[href*="contributions"]::before {
+  content: '🤝'; /* Contributions */
+}
+.theme-doc-sidebar-menu a[href*="powershell"]::before {
+  content: '💻'; /* Powershell */
+}
+.theme-doc-sidebar-menu a[href*="infrastructure"]::before {
+  content: '🖥️'; /* Infrastructure */
+}
+.theme-doc-sidebar-menu a[href*="backend"]::before {
+  content: '🛠️'; /* Backend */
+}
+.theme-doc-sidebar-menu a[href*="frontend"]::before {
+  content: '⚛️'; /* React/Frontend */
+}
+
+/* Add spacing after emoji icon in sidebar (fix: use padding-right instead of margin-right for absolute icons) */
+.theme-doc-sidebar-menu a::before {
+  position: absolute;
+  left: 0.5em;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 1.1em;
+  width: 1.3em;
+  text-align: center;
+}
+
+.theme-doc-main {
+  box-shadow: 0 8px 32px 0 rgba(30, 64, 175, 0.22), 0 3px 12px 0 rgba(0,0,0,0.12);
+  border-radius: 14px;
+  background: #fff;
+  margin: 2rem 0;
+  padding: 2.5rem;
+}
+
+[data-theme='dark'] .theme-doc-main {
+  background: #181e2a;
+}
+
+/* --- Animate sidebar toggle button --- */
+.theme-doc-sidebar-toggle {
+  transition: transform 0.3s cubic-bezier(0.4,0,0.2,1);
+}
+.theme-doc-sidebar-container--collapsed .theme-doc-sidebar-toggle {
+  transform: rotate(-90deg) scale(1.2);
+}
+
+/* --- Highlight active sidebar item with bold color and animated underline --- */
+.theme-doc-sidebar-menu .menu__link--active {
+  color: #9ad2f0 !important;
+  font-weight: bold;
+  position: relative;
+}
+.theme-doc-sidebar-menu .menu__link--active::after {
+  content: '';
+  position: absolute;
+  left: 1.8em;
+  right: 0.5em;
+  bottom: 0.2em;
+  height: 3px;
+  background: linear-gradient(90deg, #ffe082 40%, #224a7c 100%);
+  border-radius: 2px;
+  opacity: 0.85;
+  transform: scaleX(0);
+  animation: active-underline 0.4s cubic-bezier(0.4,0,0.2,1) forwards;
+}
+@keyframes active-underline {
+  to { transform: scaleX(1); }
+}
+
+/* --- Add logo/avatar at the top of the sidebar --- */
+.theme-doc-sidebar-container::before {
+  content: '';
+  display: block;
+  width: 64px;
+  height: 64px;
+  margin: 1.5rem auto 0 auto;
+  border-radius: 50%;
+  background: url('/img/logo.svg') no-repeat center/cover;
+  box-shadow: 0 2px 12px 0 rgba(30,64,175,0.18);
+}
+
+/* --- Accent colors for hover/focus states on links and buttons --- */
+button, .button, .navbar__item, .navbar__link {
+  border-radius: 8px !important;
+  transition: background 0.2s, color 0.2s, box-shadow 0.2s;
+}
+button:hover, .button:hover, .navbar__item:hover, .navbar__link:hover {
+  background: #2563eb !important;
+  color: #fff !important;
+  box-shadow: 0 2px 8px 0 rgba(37,99,235,0.10);
+}
+
+/* --- Section dividers/headers in sidebar for grouping --- */
+.theme-doc-sidebar-menu .sidebar-section {
+  margin: 1.2em 0 0.5em 0;
+  padding: 0.2em 1em;
+  font-size: 0.95em;
+  font-weight: 700;
+  color: #bae6fd;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  border-bottom: 1.5px solid #2563eb;
+  border-radius: 4px;
+}
+
+/* --- Rounded corners for sidebar and content containers --- */
+.theme-doc-sidebar-container {
+  border-radius: 18px 18px 24px 24px;
+  overflow: hidden;
+}
+.theme-doc-main {
+  border-radius: 18px;
+}
+
+/* --- Back to top floating button with animation --- */
+#back-to-top {
+  position: fixed;
+  bottom: 2.5rem;
+  right: 2.5rem;
+  z-index: 2000;
+  background: linear-gradient(135deg, #2563eb 0%, #93c5fd 100%);
+  color: #fff;
+  border: none;
+  border-radius: 50%;
+  width: 48px;
+  height: 48px;
+  box-shadow: 0 4px 16px 0 rgba(37,99,235,0.18);
+  display: none;
+  align-items: center;
+  justify-content: center;
+  font-size: 2rem;
+  cursor: pointer;
+  opacity: 0.85;
+  transition: opacity 0.2s, transform 0.2s;
+}
+#back-to-top.show {
+  display: flex;
+  animation: fadeInUp 0.4s cubic-bezier(0.4,0,0.2,1);
+}
+#back-to-top:hover {
+  opacity: 1;
+  transform: scale(1.08);
+}
+@keyframes fadeInUp {
+  from { opacity: 0; transform: translateY(30px); }
+  to { opacity: 0.85; transform: translateY(0); }
+}
+
+/* Override the default Docusaurus sidebar padding-top on desktop to remove extra space above the logo and menu */
+@media (min-width: 997px) {
+  .sidebar_OxMC {
+    padding-top: 0 !important;
+  }
+}
