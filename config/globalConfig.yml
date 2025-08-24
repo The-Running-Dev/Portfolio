@@ -35,10 +35,8 @@ features:
   projectsPage: true
   dataCaching: true
 
-projects:
-  provider: http
-  location: https://the-running-dev.github.io/Data/portfolio/projects.json
+projectsPage:
+  source: https://the-running-dev.github.io/Data/portfolio/projects.json
 
-# projects:
-#   provider: json # JSON file provider, or 'http' for API
-#   location: ./data/projects.json # or URL: 'https://api.subzerodev.com/projects'
+portfolioPage:
+  source: https://the-running-dev.github.io/Data/portfolio/portfolioData.json
