@@ -1,0 +1,44 @@
+preBuild:
+  projectRoot: ./
+  overwriteExistingFiles: true
+  copyMarkdownFromProjectRoot: false
+  generateNavBarForPages: false
+  defaultTheme: blue
+
+site:
+  title: Portfolio
+  tagline: Technical Projects & Experience
+  url: https://portfolio.subzerodev.com
+  baseUrl: /
+  organizationName: The-Running-Dev
+  projectName: Portfolio
+
+theme:
+  navbar:
+    title: Portfolio
+    logo:
+      alt: Portfolio
+      src: img/logo.svg
+
+features:
+  giscusComments: false
+  gitHubLinks: false
+  navBarLinks: false
+  badges: false
+  themeSwitcher: false
+  textSizeSwitcher: true
+  readerMode: true
+  versionDisplay: true
+  cvPage: false
+  portfolioPage: true
+  portfolioPageAsIndex: true
+  projectsPage: true
+  dataCaching: true
+
+projects:
+  provider: http
+  location: https://the-running-dev.github.io/Data/portfolio/projects.json
+
+# projects:
+#   provider: json # JSON file provider, or 'http' for API
+#   location: ./data/projects.json # or URL: 'https://api.subzerodev.com/projects'

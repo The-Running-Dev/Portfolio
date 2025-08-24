@@ -24,5 +24,10 @@ npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
 
-web/VERSION.txt
 run-update-dates.ps1
+
+artifacts/
+
+.idea/
+/docs/summaries/
+**/data/*.json
