@@ -29,14 +29,18 @@ features:
   textSizeSwitcher: true
   readerMode: true
   versionDisplay: true
-  cvPage: false
+  cvPage: true
   portfolioPage: true
   portfolioPageAsIndex: true
   projectsPage: true
   dataCaching: true
+  adminUI: false
 
 projectsPage:
   source: https://the-running-dev.github.io/Data/portfolio/projects.json
 
 portfolioPage:
   source: https://the-running-dev.github.io/Data/portfolio/portfolioData.json
+
+cvPage:
+  source: https://the-running-dev.github.io/Data/portfolio/cvData.json
