@@ -138,10 +138,7 @@ jobs:
       # STEP 2: BUILD ARTIFACTS
       # ================================================================
       - name: Build from Template
-        run: |
-          tar -C "$GITHUB_WORKSPACE" --exclude=.git -cf - . | tar -C /app/docs-template -xf -
-          cd /app/docs-template
-          pnpm run build:prod
+        run: node-template-build -appDir '.'
 
 # ====================================================================
 # VALIDATION PROCESS
