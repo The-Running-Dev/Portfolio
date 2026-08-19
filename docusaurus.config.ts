@@ -38,12 +38,13 @@ const config: Config = {
     ...globalConfig.theme,
     image: 'img/docusaurus-social-card.jpg',
     navbar: {
-      ...globalConfig?.theme?.navbar,
       hideOnScroll: false,
       items: [
         {
-          type: 'custom-Portfolio',
-          position: 'left'
+          to: '/',
+          position: 'left',
+          label: 'Portfolio',
+          exact: true
         },
         {
           type: 'custom-Projects',
@@ -54,27 +55,54 @@ const config: Config = {
           position: 'left'
         },
         {
-          type: 'custom-VersionDisplay',
-          position: 'right'
+          href: 'https://subzerodev.com/',
+          position: 'right',
+          label: 'SubZeroDev.com'
         },
         {
-          type: 'custom-ThemeSwitcher',
-          position: 'right'
+          href: 'https://blog.subzerodev.com/',
+          position: 'right',
+          label: 'Blog'
         },
         {
-          type: 'custom-TextSizeSwitcher',
-          position: 'right'
+          href: 'https://github.com/The-Running-Dev?tab=repositories',
+          position: 'right',
+          label: 'Projects'
         },
         {
-          type: 'custom-ReaderMode',
-          position: 'right'
+          href: 'https://portfolio.subzerodev.com/',
+          position: 'right',
+          label: 'Portfolio',
+          className: 'site-masthead__ecosystem-active'
         }
       ]
     },
     colorMode: {
       defaultMode: 'dark',
-      disableSwitch: false,
+      disableSwitch: true,
       respectPrefersColorScheme: false
+    },
+    footer: {
+      style: 'dark',
+      links: [
+        {
+          href: 'https://subzerodev.com/',
+          label: 'SubZeroDev.com'
+        },
+        {
+          href: 'https://blog.subzerodev.com/',
+          label: 'Blog'
+        },
+        {
+          href: 'https://github.com/The-Running-Dev?tab=repositories',
+          label: 'Projects'
+        },
+        {
+          href: 'https://portfolio.subzerodev.com/',
+          label: 'Portfolio',
+          className: 'site-masthead__ecosystem-active'
+        }
+      ]
     },
     prism: {
       theme: prismThemes.github,
