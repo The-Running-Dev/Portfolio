@@ -3,7 +3,7 @@ preBuild:
   overwriteExistingFiles: true
   copyMarkdownFromProjectRoot: false
   generateNavBarForPages: false
-  defaultTheme: blue
+  defaultTheme: portfolio
 
 site:
   title: Portfolio
