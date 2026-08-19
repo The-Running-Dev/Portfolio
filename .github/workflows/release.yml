@@ -145,6 +145,7 @@ jobs:
       - name: Build from Template
         run: |
           tar -C "$GITHUB_WORKSPACE" --exclude=.git -cf - . | tar -C /app/docs-template -xf -
+          rm -f /app/docs-template/src/pages/index.md
           cd /app/docs-template
           pnpm run build:prod
           mkdir -p "$GITHUB_WORKSPACE/artifacts"
